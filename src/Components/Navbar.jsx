@@ -171,6 +171,7 @@ const Navbar = () => {
               whileTap={{ scale: 0.95 }}
               className="mt-4 px-6 py-3 rounded-full font-semibold 
               bg-yellow-500 text-black shadow-lg"
+              onClick={() => setIsOpen(true)}
             >
               Book Consultation
             </motion.button>
