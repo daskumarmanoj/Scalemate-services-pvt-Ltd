@@ -82,15 +82,15 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center gap-2">
             <Image
-              src="/logo.jpg"
-              width={44}
-              height={44}
+              src="/finalLogo.png"
+              width={55}
+              height={55}
               alt="logo"
-              className="rounded-full border border-yellow-500/30"
               priority
             />
-            <span className="font-semibold text-lg hidden sm:block text-yellow-400">
-              MyCompany
+            <span className="font-semibold text-lg hidden sm:block tracking-widest">
+              <span className="text-[lab(78_12.63_63.5)]">SCALE</span>
+              <span className="text-white">MATE</span>
             </span>
           </div>
 
@@ -101,8 +101,8 @@ const Navbar = () => {
                 key={index}
                 onClick={() => scrollToSection(item.id)}
                 className={`text-sm font-medium transition relative ${active === item.id
-                  ? "text-yellow-400"
-                  : "text-gray-300 hover:text-yellow-400"
+                  ? "text-[lab(78_12.63_63.5)]"
+                  : "text-gray-300 hover:text-[lab(78_12.63_63.5)]"
                   }`}
               >
                 {item.name}
@@ -111,7 +111,7 @@ const Navbar = () => {
                 {active === item.id && (
                   <motion.div
                     layoutId="underline"
-                    className="absolute left-0 -bottom-1 w-full h-0.5 bg-yellow-400"
+                    className="absolute left-0 -bottom-1 w-full h-0.5 text-[lab(78_12.63_63.5)]"
                   />
                 )}
               </button>
@@ -125,8 +125,8 @@ const Navbar = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="hidden md:block px-6 py-2 rounded-full text-sm font-semibold 
-              bg-linear-to-r from-yellow-400 via-yellow-500 to-yellow-600 
-              text-black shadow-lg hover:shadow-yellow-500/40 transition"
+              bg-[lab(78_12.63_63.5)] 
+              text-black shadow-lg tracking-wider cursor-pointer hover:shadow-yellow-500/40 transition"
               onClick={() => setIsOpen(true)}
             >
               Book Consultation

@@ -3,6 +3,7 @@ import Services from "@/sections/Services";
 import Process from "@/sections/Process";
 import Testimonials from "@/sections/Testimonials";
 import Contact from "@/sections/Contact";
+import FloatingButtons from "@/Components/FloatingButtons";
 
 export default function Home() {
   return (
@@ -22,6 +23,9 @@ export default function Home() {
       <section id="contact">
         <Contact />
       </section>
+
+      {/* Floating Buttons */}
+      <FloatingButtons />
     </>
   );
 }

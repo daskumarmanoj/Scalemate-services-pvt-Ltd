@@ -2,102 +2,88 @@
 import React, { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import {
-  PhoneCall,
-  ClipboardList,
-  FileSearch,
-  FilePen,
-  Rocket,
-  HeadphonesIcon,
-  CheckCircle2,
+  Compass,
+  FileText,
+  PackageCheck,
   ArrowRight,
+  ChevronRight,
   Sparkles,
+  Star,
+  CheckCircle2,
   Clock,
   Shield,
   Zap,
-  Star,
-  ChevronRight,
+  Users,
+  BadgeCheck,
+  MapPin,
 } from "lucide-react";
 
-/* ─── DATA ─── */
-const STEPS = [
+/* ─── DATA – 3 phases from startupvidhan.com/process ─── */
+const PHASES = [
   {
     number: "01",
-    icon: PhoneCall,
-    title: "Free Consultation",
-    subtitle: "Talk to Our Experts",
+    label: "Phase 01",
+    tag: "Clarity before paperwork",
+    icon: Compass,
+    title: "Discover & Calibrate",
     description:
-      "Schedule a free 30-minute call with our certified professionals. We understand your business needs, goals, and challenges to craft the perfect solution.",
-    duration: "30 mins",
+      "Structured intake on entity, sector, turnover, and capital goals. We map what is on record, what is missing, and which schemes or lenders fit — so you do not chase the wrong window or duplicate filings.",
+    duration: "Day 1",
     color: "#facc15",
-    glow: "rgba(250,204,21,0.2)",
-    checkpoints: ["Business needs analysis", "Goal identification", "Initial roadmap discussion"],
+    glow: "rgba(250,204,21,0.18)",
+    checkpoints: [
+      "Single priority stack: compliance → certifications → funding → scale",
+      "Owner, CA & counsel touchpoints spelled out upfront",
+      "Honest go / no-go before a rupee hits a government portal",
+    ],
   },
   {
     number: "02",
-    icon: ClipboardList,
-    title: "Requirement Gathering",
-    subtitle: "Document & Plan",
+    label: "Phase 02",
+    tag: "Formats banks & portals expect",
+    icon: FileText,
+    title: "Execute & Document",
     description:
-      "Our team collects all necessary documents and details. We create a clear, structured plan tailored specifically to your business type and objectives.",
-    duration: "1–2 Days",
+      "Registrations, certifications, project reports, and decks built in layouts credit teams and scheme guidelines reference. You get drafts, final PDFs, and portal receipts — not vague work in progress.",
+    duration: "3–7 Days",
     color: "#60a5fa",
-    glow: "rgba(96,165,250,0.2)",
-    checkpoints: ["Document checklist shared", "KYC & verification", "Custom plan created"],
+    glow: "rgba(96,165,250,0.18)",
+    checkpoints: [
+      "Submission trail: drafts, final PDFs & acknowledgements",
+      "DPR / CMA / pitch materials aligned to the ask",
+      "Internal QC before anything leaves our desk",
+    ],
   },
   {
     number: "03",
-    icon: FileSearch,
-    title: "Review & Approval",
-    subtitle: "Expert Verification",
+    label: "Phase 03",
+    tag: "You own the file; we stay reachable",
+    icon: PackageCheck,
+    title: "Handover & Scale",
     description:
-      "Our senior CAs and legal experts review every detail meticulously. We ensure 100% accuracy before proceeding to avoid any rejections or delays.",
-    duration: "2–3 Days",
-    color: "#34d399",
-    glow: "rgba(52,211,153,0.2)",
-    checkpoints: ["Legal compliance check", "Document verification", "Expert sign-off"],
-  },
-  {
-    number: "04",
-    icon: FilePen,
-    title: "Filing & Processing",
-    subtitle: "We Handle Everything",
-    description:
-      "We file all applications, forms, and documents on your behalf with the relevant government portals — MCA, GST, MSME, and more.",
-    duration: "3–7 Days",
-    color: "#f472b6",
-    glow: "rgba(244,114,182,0.2)",
-    checkpoints: ["Government portal filing", "Real-time status updates", "Follow-up & tracking"],
-  },
-  {
-    number: "05",
-    icon: Rocket,
-    title: "Delivery & Launch",
-    subtitle: "You're Officially Ready",
-    description:
-      "Receive your certificates, documents, and registrations digitally. We walk you through everything so you're fully prepared to operate.",
+      "A clean handover pack — approvals, licences, and renewal-ready notes — plus optional rhythm for ROC, GST, and the next loan or equity round. Scaling is easier when the paper trail is already investor- and auditor-friendly.",
     duration: "Same Day",
-    color: "#a78bfa",
-    glow: "rgba(167,139,250,0.2)",
-    checkpoints: ["Certificates delivered", "Complete documentation", "Onboarding walkthrough"],
-  },
-  {
-    number: "06",
-    icon: HeadphonesIcon,
-    title: "Ongoing Support",
-    subtitle: "We Stay With You",
-    description:
-      "Our relationship doesn't end at delivery. Get dedicated account management, compliance reminders, and expert support whenever you need it.",
-    duration: "Always On",
-    color: "#fb923c",
-    glow: "rgba(251,146,60,0.2)",
-    checkpoints: ["Dedicated account manager", "Compliance reminders", "24/7 support access"],
+    color: "#34d399",
+    glow: "rgba(52,211,153,0.18)",
+    checkpoints: [
+      "Organised dossier for bankers, investors, or statutory audit",
+      "Renewal & compliance calendar your team can run",
+      "Optional retainers for the next milestone",
+    ],
   },
 ];
 
+const STATS = [
+  { icon: Users, value: "26,000+", label: "Businesses supported" },
+  { icon: BadgeCheck, value: "14,000+", label: "Registrations & certifications" },
+  { icon: MapPin, value: "Pan-India", label: "Delivery model" },
+  { icon: Star, value: "4.9 / 5", label: "Client rating" },
+];
+
 const PILLARS = [
-  { icon: Zap, label: "Fast Turnaround", value: "48hrs avg" },
+  { icon: Zap, label: "Fast Turnaround", value: "48 hrs avg" },
   { icon: Shield, label: "100% Compliant", value: "Zero rejections" },
-  { icon: Clock, label: "Always On Time", value: "On-time guarantee" },
+  { icon: Clock, label: "On-Time Guarantee", value: "Always on time" },
   { icon: Star, label: "Top Rated", value: "4.9 / 5 stars" },
 ];
 
@@ -105,73 +91,67 @@ const PILLARS = [
 function Orb({ x, y, size, color, delay }) {
   return (
     <motion.div
-      animate={{ y: [0, -20, 0], x: [0, 8, 0] }}
-      transition={{ duration: 8 + delay, repeat: Infinity, ease: "easeInOut", delay }}
+      animate={{ y: [0, -18, 0], x: [0, 7, 0] }}
+      transition={{ duration: 9 + delay, repeat: Infinity, ease: "easeInOut", delay }}
+      className="absolute pointer-events-none rounded-full"
       style={{
-        position: "absolute", left: x, top: y,
-        width: size, height: size, borderRadius: "50%",
+        left: x, top: y, width: size, height: size,
         background: `radial-gradient(circle, ${color}, transparent 70%)`,
-        pointerEvents: "none", filter: "blur(1px)",
+        filter: "blur(2px)",
       }}
     />
   );
 }
 
-/* ─── Step Card ─── */
-function StepCard({ step, index, total }) {
+/* ─── Phase Card ─── */
+function PhaseCard({ phase, index, total }) {
   const [hovered, setHovered] = useState(false);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
-  const Icon = step.icon;
+  const Icon = phase.icon;
   const isLast = index === total - 1;
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+      initial={{ opacity: 0, x: index % 2 === 0 ? -48 : 48 }}
       animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{ display: "flex", gap: 0, alignItems: "stretch", position: "relative" }}
+      className="flex gap-0 items-stretch relative"
     >
-      {/* Left: Number + Line */}
-      <div style={{
-        display: "flex", flexDirection: "column", alignItems: "center",
-        width: 64, flexShrink: 0,
-      }}>
-        {/* Number bubble */}
+      {/* Left: number + connector */}
+      <div className="flex flex-col items-center w-14 sm:w-16 shrink-0">
         <motion.div
           animate={hovered
-            ? { scale: 1.15, boxShadow: `0 0 28px ${step.glow}` }
-            : { scale: 1, boxShadow: "0 0 0px transparent" }
+            ? { scale: 1.15, boxShadow: `0 0 28px ${phase.glow}` }
+            : { scale: 1, boxShadow: "none" }
           }
           transition={{ type: "spring", stiffness: 350, damping: 20 }}
+          className="rounded-full flex items-center justify-center text-xs font-bold shrink-0 z-10 relative"
           style={{
-            width: 52, height: 52, borderRadius: "50%",
-            background: hovered ? step.color : "#1a1a1a",
-            border: `2px solid ${hovered ? step.color : "rgba(255,255,255,0.1)"}`,
-            display: "flex", alignItems: "center", justifyContent: "center",
+            width: 50, height: 50,
+            background: hovered ? phase.color : "#1a1a1a",
+            border: `2px solid ${hovered ? phase.color : "rgba(255,255,255,0.1)"}`,
+            color: hovered ? "#0B0B0B" : phase.color,
             fontFamily: "'DM Mono', monospace",
-            fontSize: 13, fontWeight: 700, flexShrink: 0,
-            color: hovered ? "#0B0B0B" : step.color,
+            fontSize: 13,
             transition: "background 0.3s, color 0.3s",
-            zIndex: 2, position: "relative",
           }}
         >
-          {step.number}
+          {phase.number}
         </motion.div>
 
-        {/* Connector line */}
         {!isLast && (
-          <div style={{ flex: 1, width: 2, background: "rgba(255,255,255,0.06)", marginTop: 6, marginBottom: 6, position: "relative" }}>
+          <div className="flex-1 w-0.5 mt-1.5 mb-1.5 relative" style={{ background: "rgba(255,255,255,0.06)" }}>
             <motion.div
-              initial={{ scaleY: 0, originY: 0 }}
+              initial={{ scaleY: 0 }}
               animate={inView ? { scaleY: 1 } : {}}
               transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
+              className="absolute inset-0"
               style={{
-                position: "absolute", inset: 0,
-                background: `linear-gradient(to bottom, ${step.color}99, transparent)`,
+                background: `linear-gradient(to bottom, ${phase.color}99, transparent)`,
                 transformOrigin: "top",
               }}
             />
@@ -182,92 +162,99 @@ function StepCard({ step, index, total }) {
       {/* Right: Card */}
       <motion.div
         animate={{
-          borderColor: hovered ? step.color + "55" : "rgba(255,255,255,0.07)",
-          boxShadow: hovered ? `0 4px 40px ${step.glow}, 0 2px 16px rgba(0,0,0,0.4)` : "0 2px 12px rgba(0,0,0,0.25)",
+          borderColor: hovered ? phase.color + "55" : "rgba(255,255,255,0.07)",
+          boxShadow: hovered
+            ? `0 4px 40px ${phase.glow}, 0 2px 16px rgba(0,0,0,0.4)`
+            : "0 2px 12px rgba(0,0,0,0.25)",
         }}
         transition={{ duration: 0.3 }}
+        className="flex-1 ml-4 sm:ml-6 rounded-2xl p-6 sm:p-7 relative overflow-hidden"
         style={{
-          flex: 1, marginLeft: 20, marginBottom: isLast ? 0 : 28,
+          marginBottom: isLast ? 0 : 28,
           background: "linear-gradient(145deg, #161616, #111)",
           border: "1px solid rgba(255,255,255,0.07)",
-          borderRadius: 20, padding: "1.6rem 1.75rem",
-          position: "relative", overflow: "hidden",
         }}
       >
-        {/* Glow sweep */}
+        {/* Glow overlay */}
         <motion.div
           animate={{ opacity: hovered ? 1 : 0 }}
           transition={{ duration: 0.3 }}
-          style={{
-            position: "absolute", inset: 0,
-            background: `radial-gradient(ellipse at 20% 0%, ${step.glow}, transparent 60%)`,
-            pointerEvents: "none",
-          }}
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: `radial-gradient(ellipse at 20% 0%, ${phase.glow}, transparent 60%)` }}
         />
 
-        {/* Top row */}
-        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "1rem", gap: 12 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <motion.div
-              animate={hovered ? { scale: 1.12, rotate: -8 } : { scale: 1, rotate: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 16 }}
-              style={{
-                padding: 10, borderRadius: 12,
-                background: hovered ? step.color + "28" : step.color + "14",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                transition: "background 0.3s",
-              }}
-            >
-              <Icon size={22} color={step.color} strokeWidth={1.8} />
-            </motion.div>
-            <div>
-              <div style={{ fontSize: 11, fontWeight: 700, color: step.color, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 2 }}>
-                {step.subtitle}
-              </div>
-              <h3 style={{ fontSize: 18, fontWeight: 800, color: "#f0f0f0", lineHeight: 1.1 }}>
-                {step.title}
-              </h3>
-            </div>
+        {/* Phase label + duration */}
+        <div className="flex items-center justify-between mb-3 gap-2 flex-wrap">
+          <span
+            className="text-xs font-bold tracking-widest uppercase"
+            style={{ color: phase.color }}
+          >
+            {phase.label}
+          </span>
+          <div
+            className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap"
+            style={{
+              background: phase.color + "14",
+              border: `1px solid ${phase.color}33`,
+              color: phase.color,
+            }}
+          >
+            <Clock size={10} color={phase.color} />
+            {phase.duration}
           </div>
+        </div>
 
-          {/* Duration badge */}
-          <div style={{
-            flexShrink: 0, padding: "5px 12px", borderRadius: 99,
-            background: step.color + "14", border: `1px solid ${step.color}33`,
-            fontSize: 11, fontWeight: 700, color: step.color,
-            whiteSpace: "nowrap", display: "flex", alignItems: "center", gap: 4,
-          }}>
-            <Clock size={10} color={step.color} />
-            {step.duration}
+        {/* Icon + Title */}
+        <div className="flex items-center gap-3 mb-2">
+          <motion.div
+            animate={hovered ? { scale: 1.12, rotate: -8 } : { scale: 1, rotate: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 16 }}
+            className="rounded-xl p-2.5 flex items-center justify-center shrink-0"
+            style={{
+              background: hovered ? phase.color + "28" : phase.color + "14",
+              transition: "background 0.3s",
+            }}
+          >
+            <Icon size={22} color={phase.color} strokeWidth={1.8} />
+          </motion.div>
+          <div>
+            <p className="text-xs font-semibold mb-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>
+              {phase.tag}
+            </p>
+            <h3 className="text-lg sm:text-xl font-extrabold leading-tight" style={{ color: "#f0f0f0" }}>
+              {phase.title}
+            </h3>
           </div>
         </div>
 
         {/* Description */}
-        <p style={{ color: "#777", fontSize: 13.5, lineHeight: 1.7, marginBottom: "1.1rem" }}>
-          {step.description}
+        <p className="text-sm leading-relaxed mb-4" style={{ color: "#777" }}>
+          {phase.description}
         </p>
 
-        {/* Animated divider */}
+        {/* Divider */}
         <motion.div
           animate={{ scaleX: hovered ? 1 : 0 }}
           transition={{ duration: 0.35, ease: "easeOut" }}
+          className="h-px mb-4"
           style={{
-            height: 1, background: `linear-gradient(90deg, ${step.color}66, transparent)`,
-            marginBottom: "1rem", transformOrigin: "left",
+            background: `linear-gradient(90deg, ${phase.color}66, transparent)`,
+            transformOrigin: "left",
           }}
         />
 
         {/* Checkpoints */}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 14px" }}>
-          {step.checkpoints.map((cp, i) => (
+        <div className="flex flex-col gap-2">
+          {phase.checkpoints.map((cp, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, x: -8 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: 0.2 + i * 0.08 }}
-              style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 12, color: "#aaa" }}
+              className="flex items-start gap-2 text-xs sm:text-sm"
+              style={{ color: "#aaa" }}
             >
-              <CheckCircle2 size={12} color={step.color} strokeWidth={2.5} />
+              <CheckCircle2 size={13} color={phase.color} strokeWidth={2.5} className="shrink-0 mt-0.5" />
               {cp}
             </motion.div>
           ))}
@@ -280,108 +267,213 @@ function StepCard({ step, index, total }) {
 /* ─── MAIN ─── */
 export default function Process() {
   return (
-    <div style={{
-      minHeight: "100vh", background: "#0B0B0B", color: "#fff",
-      paddingTop: "6rem", paddingBottom: "5rem",
-      fontFamily: "'DM Sans', system-ui, sans-serif",
-      position: "relative", overflow: "hidden",
-    }}>
+    <div
+      className="min-h-screen relative overflow-hidden"
+      style={{
+        background: "#0B0B0B",
+        color: "#fff",
+        paddingTop: "5rem",
+        paddingBottom: "5rem",
+        fontFamily: "'DM Sans', system-ui, sans-serif",
+      }}
+    >
       {/* Background orbs */}
-      <Orb x="0%" y="5%" size={340} color="rgba(250,204,21,0.07)" delay={0} />
-      <Orb x="70%" y="20%" size={280} color="rgba(96,165,250,0.06)" delay={2} />
-      <Orb x="30%" y="60%" size={320} color="rgba(167,139,250,0.05)" delay={1} />
-      <Orb x="80%" y="75%" size={240} color="rgba(52,211,153,0.06)" delay={3} />
+      <Orb x="0%" y="4%" size={340} color="rgba(250,204,21,0.07)" delay={0} />
+      <Orb x="68%" y="18%" size={280} color="rgba(96,165,250,0.06)" delay={2} />
+      <Orb x="25%" y="58%" size={320} color="rgba(52,211,153,0.05)" delay={1} />
+      <Orb x="78%" y="74%" size={240} color="rgba(167,139,250,0.05)" delay={3} />
 
-      {/* Dot grid bg */}
-      <div style={{
-        position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px)",
-        backgroundSize: "32px 32px",
-      }} />
+      {/* Dot grid */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
 
-      {/* Diagonal accent line */}
-      <div style={{
-        position: "absolute", top: 0, right: "20%",
-        width: 1, height: "100%",
-        background: "linear-gradient(to bottom, transparent, rgba(250,204,21,0.06) 40%, transparent)",
-        pointerEvents: "none",
-      }} />
+      {/* Diagonal accent */}
+      <div
+        className="absolute top-0 pointer-events-none"
+        style={{
+          right: "22%", width: 1, height: "100%",
+          background: "linear-gradient(to bottom, transparent, rgba(250,204,21,0.05) 40%, transparent)",
+        }}
+      />
 
-      <div style={{ maxWidth: 860, margin: "0 auto", padding: "0 1.25rem", position: "relative" }}>
+      <div className="max-w-3xl mx-auto px-5 sm:px-6 relative">
 
         {/* ─── HERO ─── */}
-        <div style={{ textAlign: "center", marginBottom: "4rem" }}>
+        <div className="text-center mb-16">
+          {/* Badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.85, y: -10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "backOut" }}
+            className="inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 mb-5 text-xs font-bold tracking-widest uppercase"
             style={{
-              display: "inline-flex", alignItems: "center", gap: 6,
-              background: "rgba(250,204,21,0.1)", border: "1px solid rgba(250,204,21,0.3)",
-              borderRadius: 99, padding: "5px 16px", marginBottom: "1.5rem",
-              fontSize: 11.5, fontWeight: 700, letterSpacing: "0.12em",
-              color: "#facc15", textTransform: "uppercase",
+              background: "rgba(250,204,21,0.1)",
+              border: "1px solid rgba(250,204,21,0.3)",
+              color: "#facc15",
             }}
           >
-            <Sparkles size={12} color="#facc15" />
-            Simple · Transparent · Reliable
+            <Sparkles size={11} color="#facc15" />
+            How We Work
           </motion.div>
 
+          {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            style={{ fontSize: "clamp(2.2rem, 6vw, 4rem)", fontWeight: 900, lineHeight: 1.05, marginBottom: "1rem", letterSpacing: "-0.02em" }}
+            className="font-black leading-none mb-4 tracking-tight"
+            style={{ fontSize: "clamp(2rem, 6vw, 3.6rem)", letterSpacing: "-0.02em" }}
           >
-            How We{" "}
-            <span style={{ color: "#facc15", textShadow: "0 0 48px rgba(250,204,21,0.35)" }}>
-              Work
+            Three phases,{" "}
+            <span style={{ color: "#facc15", textShadow: "0 0 48px rgba(250,204,21,0.3)" }}>
+              zero black boxes
             </span>
           </motion.h1>
 
+          {/* Sub */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            style={{ color: "#777", fontSize: 15, maxWidth: 520, margin: "0 auto 2.5rem", lineHeight: 1.75 }}
+            className="text-sm sm:text-base leading-relaxed mb-8 mx-auto max-w-lg"
+            style={{ color: "#777" }}
           >
-            From your first call to ongoing compliance support — our 6-step process is designed for zero stress and maximum speed.
+            Built for Indian startups and MSMEs: know what happens before filings, during execution, and after handover — with documentation you can show to a bank, auditor, or investor without rewriting the story.
           </motion.p>
 
-          {/* Pillars */}
+          {/* CTA buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="flex flex-wrap justify-center gap-3 mb-10"
+          >
+            <motion.button
+              whileHover={{ scale: 1.05, boxShadow: "0 8px 36px rgba(250,204,21,0.4)" }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm cursor-pointer border-none"
+              style={{
+                background: "linear-gradient(135deg, #facc15, #f59e0b)",
+                color: "#0B0B0B",
+                boxShadow: "0 4px 20px rgba(250,204,21,0.22)",
+              }}
+            >
+              Start with a diagnostic call
+              <ArrowRight size={14} />
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.04, borderColor: "rgba(250,204,21,0.4)", color: "#facc15" }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm cursor-pointer"
+              style={{
+                background: "transparent",
+                color: "#999",
+                border: "1px solid rgba(255,255,255,0.14)",
+                transition: "all 0.2s",
+              }}
+            >
+              Review the five pillars
+              <ChevronRight size={14} />
+            </motion.button>
+          </motion.div>
+
+          {/* Pillars strip */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45 }}
-            style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 10 }}
+            transition={{ delay: 0.5 }}
+            className="flex flex-wrap justify-center gap-2"
           >
             {PILLARS.map((p, i) => {
               const Icon = p.icon;
               return (
                 <motion.div
                   key={i}
-                  whileHover={{ y: -4, borderColor: "rgba(250,204,21,0.4)" }}
+                  whileHover={{ y: -3, borderColor: "rgba(250,204,21,0.4)" }}
+                  className="flex items-center gap-2 rounded-xl px-4 py-2"
                   style={{
-                    display: "flex", alignItems: "center", gap: 8,
-                    background: "#161616", border: "1px solid rgba(255,255,255,0.08)",
-                    borderRadius: 12, padding: "8px 16px", transition: "border-color 0.2s",
+                    background: "#161616",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    transition: "border-color 0.2s",
                   }}
                 >
-                  <Icon size={14} color="#facc15" strokeWidth={2} />
-                  <span style={{ fontSize: 12, color: "#aaa" }}>{p.label}</span>
-                  <span style={{ fontSize: 12, fontWeight: 700, color: "#facc15" }}>{p.value}</span>
+                  <Icon size={13} color="#facc15" strokeWidth={2} />
+                  <span className="text-xs" style={{ color: "#aaa" }}>{p.label}</span>
+                  <span className="text-xs font-bold" style={{ color: "#facc15" }}>{p.value}</span>
                 </motion.div>
               );
             })}
           </motion.div>
         </div>
 
-        {/* ─── STEPS ─── */}
-        <div style={{ marginBottom: "4.5rem" }}>
-          {STEPS.map((step, i) => (
-            <StepCard key={i} step={step} index={i} total={STEPS.length} />
+        {/* ─── Section label ─── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3 mb-8"
+        >
+          <div className="h-px flex-1" style={{ background: "rgba(255,255,255,0.07)" }} />
+          <span className="text-xs font-bold tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.3)" }}>
+            The flow
+          </span>
+          <div className="h-px flex-1" style={{ background: "rgba(255,255,255,0.07)" }} />
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center text-lg sm:text-xl font-bold mb-10"
+          style={{ color: "#e0e0e0" }}
+        >
+          From first call to a dossier you can defend
+        </motion.p>
+
+        {/* ─── PHASES ─── */}
+        <div className="mb-16">
+          {PHASES.map((phase, i) => (
+            <PhaseCard key={i} phase={phase} index={i} total={PHASES.length} />
           ))}
         </div>
+
+        {/* ─── STATS ─── */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-14"
+        >
+          {STATS.map((s, i) => {
+            const Icon = s.icon;
+            return (
+              <motion.div
+                key={i}
+                whileHover={{ y: -4, borderColor: "rgba(250,204,21,0.3)" }}
+                className="rounded-2xl p-4 text-center"
+                style={{
+                  background: "#141414",
+                  border: "1px solid rgba(255,255,255,0.07)",
+                  transition: "border-color 0.2s, transform 0.2s",
+                }}
+              >
+                <Icon size={16} color="#facc15" className="mx-auto mb-2" strokeWidth={2} />
+                <div className="text-lg sm:text-2xl font-black mb-0.5" style={{ color: "#facc15" }}>
+                  {s.value}
+                </div>
+                <div className="text-xs leading-tight" style={{ color: "#666" }}>
+                  {s.label}
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
 
         {/* ─── BOTTOM CTA ─── */}
         <motion.div
@@ -389,12 +481,11 @@ export default function Process() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          className="relative overflow-hidden rounded-3xl text-center"
           style={{
-            position: "relative", overflow: "hidden",
             background: "linear-gradient(135deg, rgba(250,204,21,0.09), rgba(250,204,21,0.02) 60%, transparent)",
             border: "1px solid rgba(250,204,21,0.2)",
-            borderRadius: 24, padding: "clamp(1.75rem, 4vw, 3rem)",
-            textAlign: "center",
+            padding: "clamp(1.75rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2.5rem)",
           }}
         >
           {/* Spinning ring accents */}
@@ -403,11 +494,11 @@ export default function Process() {
               key={i}
               animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
               transition={{ duration: 20 + i * 10, repeat: Infinity, ease: "linear" }}
+              className="absolute pointer-events-none rounded-full"
               style={{
-                position: "absolute", top: -(size / 2), right: -(size / 2),
-                width: size, height: size, borderRadius: "50%",
+                top: -(size / 2), right: -(size / 2),
+                width: size, height: size,
                 border: "1px solid rgba(250,204,21,0.08)",
-                pointerEvents: "none",
               }}
             />
           ))}
@@ -417,55 +508,55 @@ export default function Process() {
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, type: "spring", stiffness: 220 }}
+            className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 mb-4 text-xs font-bold uppercase tracking-widest"
             style={{
-              display: "inline-flex", alignItems: "center", gap: 5,
-              background: "rgba(250,204,21,0.12)", border: "1px solid rgba(250,204,21,0.3)",
-              borderRadius: 99, padding: "4px 14px", marginBottom: "1rem",
-              fontSize: 11, fontWeight: 700, color: "#facc15", textTransform: "uppercase", letterSpacing: "0.1em",
+              background: "rgba(250,204,21,0.12)",
+              border: "1px solid rgba(250,204,21,0.3)",
+              color: "#facc15",
             }}
           >
             <Star size={11} color="#facc15" fill="#facc15" />
             Get Started Today
           </motion.div>
 
-          <h2 style={{ fontSize: "clamp(1.4rem, 3.5vw, 2.2rem)", fontWeight: 800, marginBottom: "0.75rem" }}>
-            Ready to Begin Your Journey?
+          <h2
+            className="font-extrabold mb-3"
+            style={{ fontSize: "clamp(1.3rem, 3.5vw, 2rem)" }}
+          >
+            Tell us where you are stuck
           </h2>
-          <p style={{ color: "#888", fontSize: 14, maxWidth: 420, margin: "0 auto 2rem", lineHeight: 1.7 }}>
-            Start with a free consultation. No commitments, no hidden fees — just expert guidance from day one.
+          <p className="text-sm leading-relaxed max-w-md mx-auto mb-7" style={{ color: "#888" }}>
+            Portal errors, branch returns, DPIIT RTR, thin DPR — we have seen the patterns. One diagnostic call to align the right phase and pillar.
           </p>
 
-          <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
+          <div className="flex flex-wrap justify-center gap-3">
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: "0 8px 36px rgba(250,204,21,0.4)" }}
               whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm border-none cursor-pointer"
               style={{
-                display: "inline-flex", alignItems: "center", gap: 8,
-                padding: "13px 30px",
                 background: "linear-gradient(135deg, #facc15, #f59e0b)",
-                color: "#0B0B0B", borderRadius: 99,
-                fontWeight: 800, fontSize: 14, border: "none", cursor: "pointer",
+                color: "#0B0B0B",
                 boxShadow: "0 4px 20px rgba(250,204,21,0.22)",
               }}
             >
-              Start Your Process
-              <ArrowRight size={15} />
+              Schedule your call
+              <ArrowRight size={14} />
             </motion.button>
 
             <motion.button
               whileHover={{ scale: 1.04, borderColor: "rgba(250,204,21,0.4)", color: "#facc15" }}
               whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-sm cursor-pointer"
               style={{
-                display: "inline-flex", alignItems: "center", gap: 7,
-                padding: "13px 26px",
-                background: "transparent", color: "#999",
-                borderRadius: 99, fontSize: 14, fontWeight: 600,
-                border: "1px solid rgba(255,255,255,0.14)", cursor: "pointer",
+                background: "transparent",
+                color: "#999",
+                border: "1px solid rgba(255,255,255,0.14)",
                 transition: "all 0.2s",
               }}
             >
-              View All Services
-              <ChevronRight size={15} />
+              Scheme & process FAQs
+              <ChevronRight size={14} />
             </motion.button>
           </div>
         </motion.div>

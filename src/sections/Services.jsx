@@ -1,123 +1,271 @@
 /* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 import React, { useRef, useEffect, useState } from "react";
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import {
-  Briefcase, FileText, Landmark, TrendingUp, Shield, Users,
-  CheckCircle2, Globe, DollarSign, BookOpen, BarChart3, Rocket,
+  FileText, Landmark, TrendingUp, Shield, Globe,
+  CheckCircle2, DollarSign, BookOpen, BarChart3,
   ArrowRight, Star, Zap, Award, HeartHandshake, Sparkles,
-  BadgeCheck, ChevronRight, Phone,
+  BadgeCheck, ChevronRight, Phone, Users, X,
 } from "lucide-react";
+import Modal from "@/Components/Ui/Modal";
+
+const YELLOW = "lab(78_12.63_63.5)";
 
 const SERVICES = [
   {
-    icon: Briefcase,
-    title: "Company Registration",
-    tag: "Most Popular",
-    color: "#facc15",
-    glow: "rgba(250,204,21,0.18)",
-    description: "Complete assistance for Pvt Ltd, LLP, OPC, and Partnership registration with MCA compliance.",
-    features: ["Private Limited Company", "Limited Liability Partnership", "One Person Company", "Name Approval & DSC"],
-  },
-  {
+    id: "registration",
     icon: FileText,
-    title: "Legal Compliance",
-    tag: "Essential",
-    color: "#34d399",
-    glow: "rgba(52,211,153,0.15)",
-    description: "End-to-end compliance management including ROC filings, annual returns, and statutory audits.",
-    features: ["ROC Annual Filing", "Income Tax Returns", "GST Registration & Filing", "Trademark Registration"],
+    title: "Legal Compliances & Registration",
+    tag: "Most Popular",
+    color: YELLOW,
+    twColor: "text-[lab(78_12.63_63.5)]",
+    twBg: "bg-[lab(78_12.63_63.5)]",
+    twBorder: "border-[lab(78_12.63_63.5)]",
+    twRing: "ring-[lab(78_12.63_63.5)]",
+    description:
+      "End-to-end business registration for Pvt Ltd, LLP, OPC, Partnership & more with complete MCA compliance.",
+    features: [
+      "Private Limited Company",
+      "LLP & OPC Registration",
+      "Startup India (DPIIT)",
+      "MSME / Udyam Registration",
+    ],
+    detail: {
+      subheadline:
+        "Turn your idea into a legally recognized business with expert guidance and hassle-free registration support. We handle the entire process so you can focus on building your vision.",
+      tableHead: ["Registration Type", "Description"],
+      tableRows: [
+        ["Private Limited Company", "Complete incorporation with MCA compliance and documentation."],
+        ["Limited Liability Partnership (LLP)", "Flexible business structure with limited liability protection."],
+        ["One Person Company (OPC)", "Ideal structure for solo founders with corporate benefits."],
+        ["Partnership Firm", "Traditional partnership registration with legal agreement."],
+        ["Sole Proprietorship", "Simple and quick registration for small businesses."],
+        ["Startup India Registration", "DPIIT recognition for startup benefits and tax exemptions."],
+        ["MSME (Udyam) Registration", "Government registration for MSME benefits and schemes."],
+        ["Firm Registration", "Legal registration of firms under applicable laws."],
+      ],
+      extras: [
+        "GST Registration & Filing",
+        "Income Tax Returns",
+        "ROC Annual Filing",
+        "Trademark Registration",
+        "Name Approval & DSC",
+        "MCA Compliance",
+      ],
+      ctaLabel: "Start Your Registration",
+      ctaUrl: "https://leostartsservices.com/contacts/",
+    },
   },
   {
-    icon: Landmark,
-    title: "Funding & Loans",
+    id: "funding",
+    icon: DollarSign,
+    title: "Fund Raising",
     tag: "High Demand",
     color: "#60a5fa",
-    glow: "rgba(96,165,250,0.15)",
-    description: "Expert guidance for startup funding, business loans, and government subsidy schemes.",
-    features: ["Business Loan Assistance", "Startup Funding Support", "MSME Loans & Subsidies", "Investor Pitch Deck"],
+    twColor: "text-blue-400",
+    twBg: "bg-blue-400",
+    twBorder: "border-blue-400",
+    twRing: "ring-blue-400",
+    description:
+      "Strategic guidance and end-to-end support to help startups & MSMEs secure government grants, angel funding, and loans.",
+    features: [
+      "Grant Funding ₹5L – ₹50Cr",
+      "Angel Funding ₹25L – ₹10Cr",
+      "MSME Loans ₹50K – ₹50L",
+      "Government Grants Support",
+    ],
+    detail: {
+      subheadline:
+        "Access the funding you need to scale, innovate, and expand. We provide strategic guidance and end-to-end support from pitch to disbursal.",
+      tableHead: ["Funding Type", "Amount", "Who Can Apply"],
+      tableRows: [
+        ["Grant Funding Support", "₹5L – ₹50Cr*", "Startups & MSMEs meeting government grant criteria"],
+        ["MSME Loans", "₹50,000 – ₹50L*", "MSME-registered businesses with financial records"],
+        ["Angel Funding", "₹25L – ₹10Cr*", "Early-stage startups with scalable business ideas"],
+        ["Government Grants", "₹10L – ₹20Cr*", "DPIIT-recognized startups in eligible sectors"],
+        ["Debt Funding", "₹5L – ₹25Cr*", "Revenue-generating businesses with repayment capacity"],
+      ],
+      extras: [
+        "NAIFF Loans (₹2 Cr)",
+        "Collateral Free Loans (₹5 Cr)",
+        "Startup Seed Support (₹1 Cr)",
+        "PMEGP (₹2 Cr)",
+        "Seed Fund (₹20L)",
+        "Investor Pitch Deck",
+      ],
+      ctaLabel: "Apply for Funding",
+      ctaUrl: "https://leostartsservices.com/contacts/",
+    },
   },
   {
-    icon: TrendingUp,
-    title: "Growth Strategy",
-    tag: "Strategic",
-    color: "#f472b6",
-    glow: "rgba(244,114,182,0.15)",
-    description: "Strategic planning for business expansion, market entry, and digital transformation.",
-    features: ["Business Plan Development", "Market Research & Analysis", "Digital Marketing Strategy", "Sales & Distribution"],
+    id: "certifications",
+    icon: BadgeCheck,
+    title: "Certifications",
+    tag: "Protect & Grow",
+    color: "#34d399",
+    twColor: "text-emerald-400",
+    twBg: "bg-emerald-400",
+    twBorder: "border-emerald-400",
+    twRing: "ring-emerald-400",
+    description:
+      "Build trust and legal credibility with government-backed certifications — from Startup India to ISO, FSSAI, and Trademark.",
+    features: [
+      "Startup India Certificate",
+      "MSME (Udyam) Certificate",
+      "ISO Certification",
+      "Trademark Certificate",
+    ],
+    detail: {
+      subheadline:
+        "Our certifications demonstrate commitment to compliance, transparency, and industry best practices. Each credential reflects the highest professional and regulatory standards.",
+      tableHead: ["Certification", "Description"],
+      tableRows: [
+        ["Startup India Certificate", "DPIIT recognition for startup benefits, tax exemptions, and funding support."],
+        ["State Startup Registration", "State-level startup recognition for local incentives and schemes."],
+        ["MSME (Udyam) Certificate", "Government MSME registration to avail subsidies and business benefits."],
+        ["IEC Certificate", "Import Export Code registration for international trade."],
+        ["ISO Certification", "Quality management certification to build trust and compliance."],
+        ["ZED Certification", "Zero Defect Zero Effect certification for manufacturing excellence."],
+        ["Tax Exemption Certificate", "Certification to avail income tax benefits for eligible startups."],
+        ["GST Certificate", "GST registration certificate for legal tax compliance."],
+        ["FSSAI Certificate", "License required for legal food manufacturing and sale."],
+        ["Trademark Certificate", "Legal protection for unique brand name, logo, and slogan."],
+      ],
+      extras: [
+        "Copyright Registration",
+        "Patent Filing",
+        "Design Registration",
+        "Drug License",
+        "Shop & Establishment Act",
+        "Professional Tax Registration",
+      ],
+      ctaLabel: "Apply for Certification",
+      ctaUrl: "https://leostartsservices.com/contacts/",
+    },
   },
   {
-    icon: Shield,
-    title: "Intellectual Property",
-    tag: "Protect",
-    color: "#a78bfa",
-    glow: "rgba(167,139,250,0.15)",
-    description: "Protect your brand and innovations with trademark, copyright, and patent registration.",
-    features: ["Trademark Registration", "Copyright Protection", "Patent Filing", "Design Registration"],
-  },
-  {
-    icon: Users,
-    title: "HR & Payroll",
-    tag: "Team",
-    color: "#fb923c",
-    glow: "rgba(251,146,60,0.15)",
-    description: "Complete HR solutions including payroll management, PF/ESI registration, and labor compliance.",
-    features: ["Payroll Processing", "PF & ESI Registration", "Labor Law Compliance", "Employee Contracts"],
-  },
-  {
-    icon: BookOpen,
-    title: "Accounting Services",
-    tag: "Finance",
-    color: "#2dd4bf",
-    glow: "rgba(45,212,191,0.15)",
-    description: "Professional bookkeeping, financial reporting, and tax planning for growing businesses.",
-    features: ["Bookkeeping & Accounting", "Financial Statements", "Tax Planning & Advisory", "MIS Reporting"],
-  },
-  {
-    icon: BarChart3,
-    title: "Business Consulting",
-    tag: "Advisory",
-    color: "#e879f9",
-    glow: "rgba(232,121,249,0.15)",
-    description: "Expert advisory for business restructuring, valuation, due diligence, and mergers.",
-    features: ["Business Restructuring", "Valuation Services", "Due Diligence", "M&A Advisory"],
-  },
-  {
+    id: "digital",
     icon: Globe,
-    title: "Import Export",
-    tag: "Global",
-    color: "#f87171",
-    glow: "rgba(248,113,113,0.15)",
-    description: "Complete support for IEC license, FSSAI, customs clearance, and international trade.",
-    features: ["IEC License", "FSSAI Registration", "Customs Documentation", "Export Compliance"],
+    title: "Digital Marketing",
+    tag: "Grow Online",
+    color: "#e879f9",
+    twColor: "text-fuchsia-400",
+    twBg: "bg-fuchsia-400",
+    twBorder: "border-fuchsia-400",
+    twRing: "ring-fuchsia-400",
+    description:
+      "Powerful digital strategies to attract, engage, and convert — SEO, social media, website development, app creation, and more.",
+    features: [
+      "Website Development",
+      "SEO & Google Ads / PPC",
+      "Social Media Management",
+      "Application Development",
+    ],
+    detail: {
+      subheadline:
+        "In today's digital world, your online presence defines your success. We create powerful digital strategies that attract, engage, and convert your target audience.",
+      tableHead: ["Service", "Description"],
+      tableRows: [
+        ["Letter Head Design", "Professional and creative letterhead designs to enhance your business branding."],
+        ["Application Development", "Custom mobile and web application development solutions tailored to your business."],
+        ["Social Media Management", "Complete management of accounts, content posting, and audience engagement strategies."],
+        ["Website Development", "Modern, responsive, and SEO-friendly website development for businesses and startups."],
+        ["Search Engine Optimization (SEO)", "Improve website rankings and increase organic traffic through advanced SEO strategies."],
+        ["Social Media Marketing", "Promote your brand across Instagram, Facebook, and LinkedIn."],
+        ["Google Ads / PPC", "Drive instant traffic and quality leads with highly targeted paid advertising campaigns."],
+        ["Content Marketing", "Create engaging blogs, articles, and promotional content to attract customers."],
+        ["Email Marketing", "Reach your audience directly with personalized email campaigns and automation."],
+        ["Website Analytics", "Track user behavior, campaign performance, and business growth insights."],
+        ["Brand Strategy", "Develop strong online branding and positioning for long-term market growth."],
+        ["Lead Generation", "Generate high-quality business leads through strategic digital campaigns."],
+      ],
+      extras: [
+        "Flyers & Poster Design",
+        "Brochure Design",
+        "Logo Designing",
+        "Corporate Video",
+        "Influencer Marketing",
+        "WhatsApp Marketing",
+      ],
+      ctaLabel: "Start Your Campaign",
+      ctaUrl: "https://leostartsservices.com/contacts/",
+    },
+  },
+  {
+    id: "profiling",
+    icon: BookOpen,
+    title: "Company Profiling",
+    tag: "Brand Identity",
+    color: "#fb923c",
+    twColor: "text-orange-400",
+    twBg: "bg-orange-400",
+    twBorder: "border-orange-400",
+    twRing: "ring-orange-400",
+    description:
+      "Craft a powerful business identity with investor-ready pitch decks, DPRs, logo design, brochures, and financial projections.",
+    features: [
+      "Pitch Deck Design",
+      "Detailed Project Report (DPR)",
+      "Logo & Brand Design",
+      "Financial Projections",
+    ],
+    detail: {
+      subheadline:
+        "Your company profile is more than a document — it's your brand story, credibility statement, and investor introduction. We craft professional profiles that build trust and attract opportunities.",
+      tableHead: ["Service", "Description"],
+      tableRows: [
+        ["Company Profile Creation", "Professionally structured profiles for branding, investors, and stakeholders."],
+        ["Pitch Deck Design", "Clean, concise, and investor-focused pitch decks for funding presentations."],
+        ["Investor Deck", "Strategic decks highlighting growth, traction, and financial performance."],
+        ["Business Brochure", "Premium corporate brochures for digital and print branding."],
+        ["Flyers & Creatives", "Minimalist creatives aligned with corporate and startup branding."],
+        ["Logo Designing", "Timeless logo designs that reflect brand identity and values."],
+        ["Detailed Project Report", "End-to-end DPR covering feasibility, costing, compliance, and execution strategy."],
+        ["Fund Utilization Planning", "Structured allocation plans ensuring transparent and efficient use of funds."],
+        ["Financial Projections", "Data-driven forecasts including revenue, expenses, cash flow, and profitability."],
+      ],
+      extras: [
+        "Business Plan Development",
+        "Market Research & Analysis",
+        "SWOT Analysis",
+        "Feasibility Report",
+        "MIS Reporting",
+        "Corporate Presentations",
+      ],
+      ctaLabel: "Consult Our Experts",
+      ctaUrl: "https://leostartsservices.com/contacts/",
+    },
   },
 ];
 
 const WHY_US = [
-  { icon: Award, title: "Expert Team", description: "Certified CAs, CS, and legal professionals with 10+ years experience" },
+  { icon: Award, title: "Expert Team", description: "Certified CAs, CS & legal professionals with 10+ years of startup consulting experience" },
   { icon: Zap, title: "Fast Processing", description: "Quick turnaround with 100% online documentation and real-time tracking" },
-  { icon: DollarSign, title: "Transparent Pricing", description: "Competitive rates with no hidden charges or surprise fees" },
-  { icon: HeartHandshake, title: "Guaranteed Support", description: "Dedicated account manager and 24/7 customer support" },
+  { icon: DollarSign, title: "Transparent Pricing", description: "Competitive rates with no hidden charges or surprise fees — ever" },
+  { icon: HeartHandshake, title: "Dedicated Support", description: "Dedicated account manager & 24/7 support via WhatsApp, call & email" },
+  { icon: Users, title: "Pan-India Network", description: "Serving Maharashtra, Gujarat, Delhi, Karnataka & all major states across India" },
+  { icon: Shield, title: "Government Backed", description: "Expert assistance with DPIIT, MSME, NAIFF, PMEGP & other govt. schemes" },
 ];
 
 const STATS = [
-  { value: "5000+", label: "Businesses Served" },
+  { value: "500+", label: "Businesses Served" },
   { value: "10+", label: "Years Experience" },
   { value: "98%", label: "Satisfaction Rate" },
   { value: "24/7", label: "Support Available" },
 ];
 
-/* ─── Animated counter ─── */
+/* ─── Animated Counter ─── */
 function Counter({ value }) {
   const [display, setDisplay] = useState("0");
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
+
   useEffect(() => {
     if (!inView) return;
     const numeric = parseInt(value.replace(/\D/g, ""), 10);
     if (isNaN(numeric)) { setDisplay(value); return; }
-    const suffix = value.replace(/[\d]/g, "");
+    const suffix = value.replace(/\d/g, "");
     let start = 0;
     const step = Math.ceil(numeric / 40);
     const timer = setInterval(() => {
@@ -127,27 +275,23 @@ function Counter({ value }) {
     }, 35);
     return () => clearInterval(timer);
   }, [inView, value]);
+
   return <span ref={ref}>{display}</span>;
 }
 
-/* ─── Floating orb bg ─── */
-function Orb({ x, y, size, color, delay }) {
+/* ─── Floating Orb ─── */
+function Orb({ className, delay }) {
   return (
     <motion.div
       animate={{ y: [0, -22, 0], x: [0, 10, 0] }}
       transition={{ duration: 7 + delay, repeat: Infinity, ease: "easeInOut", delay }}
-      style={{
-        position: "absolute", left: x, top: y,
-        width: size, height: size, borderRadius: "50%",
-        background: `radial-gradient(circle, ${color} 0%, transparent 70%)`,
-        pointerEvents: "none", filter: "blur(2px)",
-      }}
+      className={`absolute rounded-full pointer-events-none blur-sm ${className}`}
     />
   );
 }
 
 /* ─── Service Card ─── */
-function ServiceCard({ service, index }) {
+function ServiceCard({ service, index, onOpen }) {
   const [hovered, setHovered] = useState(false);
   const Icon = service.icon;
   const ref = useRef(null);
@@ -161,33 +305,28 @@ function ServiceCard({ service, index }) {
       transition={{ duration: 0.55, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{
-        position: "relative", background: "linear-gradient(145deg,#161616,#101010)",
-        border: `1px solid ${hovered ? service.color + "55" : "rgba(255,255,255,0.07)"}`,
-        borderRadius: 20, padding: "1.75rem", cursor: "pointer",
-        overflow: "hidden", transition: "border-color 0.3s",
-        boxShadow: hovered ? `0 0 32px ${service.glow}, 0 8px 32px rgba(0,0,0,0.5)` : "0 2px 12px rgba(0,0,0,0.3)",
-      }}
+      onClick={() => onOpen(service)}
+      className="relative rounded-[20px] p-7 cursor-pointer overflow-hidden transition-all duration-300 bg-gradient-to-br from-[#161616] to-[#101010] border border-white/[0.07] hover:border-white/20 hover:-translate-y-1 hover:shadow-2xl"
     >
-      {/* Glow bg sweep */}
+      {/* Glow sweep */}
       <motion.div
         animate={{ opacity: hovered ? 1 : 0 }}
         transition={{ duration: 0.3 }}
+        className="absolute inset-0 pointer-events-none"
         style={{
-          position: "absolute", inset: 0,
-          background: `radial-gradient(ellipse at 30% 0%, ${service.glow}, transparent 65%)`,
-          pointerEvents: "none",
+          background: `radial-gradient(ellipse at 30% 0%, ${service.color}28, transparent 65%)`,
         }}
       />
 
-      {/* Tag pill */}
-      <div style={{
-        display: "inline-block", fontSize: 10, fontWeight: 700,
-        letterSpacing: "0.08em", padding: "3px 10px", borderRadius: 99,
-        background: service.color + "22", color: service.color,
-        border: `1px solid ${service.color}44`,
-        marginBottom: "1rem", textTransform: "uppercase",
-      }}>
+      {/* Tag */}
+      <div
+        className="inline-block text-[10px] font-bold tracking-widest px-3 py-1 rounded-full uppercase mb-4 border"
+        style={{
+          background: `${service.color}22`,
+          color: service.color,
+          borderColor: `${service.color}44`,
+        }}
+      >
         {service.tag}
       </div>
 
@@ -195,10 +334,8 @@ function ServiceCard({ service, index }) {
       <motion.div
         animate={hovered ? { scale: 1.12, rotate: -6 } : { scale: 1, rotate: 0 }}
         transition={{ type: "spring", stiffness: 350, damping: 18 }}
-        style={{
-          display: "inline-flex", padding: 12, borderRadius: 14,
-          background: service.color + "18", marginBottom: "1rem",
-        }}
+        className="inline-flex p-3 rounded-xl mb-4"
+        style={{ background: `${service.color}18` }}
       >
         <Icon size={26} color={service.color} strokeWidth={1.8} />
       </motion.div>
@@ -207,45 +344,53 @@ function ServiceCard({ service, index }) {
       <motion.h3
         animate={{ color: hovered ? service.color : "#e5e5e5" }}
         transition={{ duration: 0.2 }}
-        style={{ fontSize: 16, fontWeight: 700, marginBottom: "0.5rem" }}
+        className="text-base font-bold mb-2"
       >
         {service.title}
       </motion.h3>
 
       {/* Description */}
-      <p style={{ color: "#777", fontSize: 13, lineHeight: 1.6, marginBottom: "1rem" }}>
+      <p className="text-[#777] text-[13px] leading-relaxed mb-4">
         {service.description}
       </p>
 
       {/* Divider */}
       <motion.div
-        animate={{ scaleX: hovered ? 1 : 0, originX: 0 }}
+        animate={{ scaleX: hovered ? 1 : 0 }}
         transition={{ duration: 0.35 }}
-        style={{ height: 1, background: service.color + "44", marginBottom: "1rem", transformOrigin: "left" }}
+        className="h-px mb-4 origin-left"
+        style={{ background: `${service.color}44` }}
       />
 
       {/* Features */}
-      <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 6 }}>
+      <ul className="flex flex-col gap-1.5">
         {service.features.map((f, i) => (
           <motion.li
             key={i}
             initial={{ opacity: 0, x: -8 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: index * 0.07 + i * 0.05 + 0.2 }}
-            style={{ display: "flex", alignItems: "flex-start", gap: 7, fontSize: 12.5, color: "#aaa" }}
+            className="flex items-start gap-2 text-[12.5px] text-[#aaa]"
           >
-            <CheckCircle2 size={13} color={service.color} style={{ flexShrink: 0, marginTop: 2 }} />
+            <CheckCircle2
+              size={13}
+              color={service.color}
+              className="flex-shrink-0 mt-0.5"
+            />
             {f}
           </motion.li>
         ))}
       </ul>
 
-      {/* Learn more */}
+      {/* View Details */}
       <motion.div
         animate={{ gap: hovered ? 10 : 5 }}
-        style={{ display: "flex", alignItems: "center", gap: 5, marginTop: "1.25rem" }}
+        className="flex items-center mt-5"
+        style={{ gap: 5 }}
       >
-        <span style={{ fontSize: 12.5, fontWeight: 700, color: service.color }}>Learn More</span>
+        <span className="text-[12.5px] font-bold" style={{ color: service.color }}>
+          View Details
+        </span>
         <motion.div animate={{ x: hovered ? 4 : 0 }} transition={{ type: "spring", stiffness: 400 }}>
           <ChevronRight size={14} color={service.color} />
         </motion.div>
@@ -254,9 +399,8 @@ function ServiceCard({ service, index }) {
   );
 }
 
-/* ─── Why card ─── */
+/* ─── Why Card ─── */
 function WhyCard({ item, index }) {
-  const [hovered, setHovered] = useState(false);
   const Icon = item.icon;
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-50px" });
@@ -267,99 +411,292 @@ function WhyCard({ item, index }) {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={inView ? { opacity: 1, scale: 1 } : {}}
       transition={{ duration: 0.45, delay: index * 0.1, ease: "backOut" }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        background: "#131313",
-        border: `1px solid ${hovered ? "rgba(250,204,21,0.35)" : "rgba(255,255,255,0.07)"}`,
-        borderRadius: 16, padding: "1.5rem",
-        boxShadow: hovered ? "0 0 24px rgba(250,204,21,0.12)" : "none",
-        transition: "all 0.25s",
-        transform: hovered ? "translateY(-4px)" : "none",
-      }}
+      className="group bg-[#131313] border border-white/[0.07] rounded-2xl p-6 transition-all duration-300 hover:border-[lab(78_12.63_63.5)]/40 hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(250,204,21,0.1)]"
     >
-      <motion.div
-        animate={hovered ? { rotate: [0, -8, 8, 0] } : {}}
-        transition={{ duration: 0.4 }}
+      <h3 className="text-[#e5e5e5] text-[15px] font-bold mb-1.5">{item.title}</h3>
+      <p className="text-[#666] text-[13px] leading-relaxed">{item.description}</p>
+    </motion.div>
+  );
+}
+
+/* ─── Detail Page ─── */
+function DetailPage({ service, onClose }) {
+  const { detail, color, tag } = service;
+  const Icon = service.icon;
+  const isThreeCol = detail.tableHead.length === 3;
+
+  const [isOpen, setIsOpen] = useState(false);
+
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, []);
+
+
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      className="fixed inset-0 bg-[#0B0B0B] z-[200] overflow-y-auto font-sans"
+    >
+      {/* Grid bg */}
+      <div
+        className="fixed inset-0 pointer-events-none"
         style={{
-          display: "inline-flex", padding: 10, borderRadius: 12,
-          background: hovered ? "rgba(250,204,21,0.18)" : "rgba(250,204,21,0.09)",
-          marginBottom: "0.85rem", transition: "background 0.25s",
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)
+          `,
+          backgroundSize: "60px 60px",
         }}
-      >
-        <Icon size={22} color="#facc15" strokeWidth={1.8} />
-      </motion.div>
-      <h3 style={{ color: "#e5e5e5", fontSize: 15, fontWeight: 700, marginBottom: "0.4rem" }}>{item.title}</h3>
-      <p style={{ color: "#666", fontSize: 13, lineHeight: 1.6 }}>{item.description}</p>
+      />
+
+      <div className="max-w-[920px] mx-auto px-5 pt-8 pb-20 relative z-10">
+
+        {/* Back Button */}
+        <motion.button
+          initial={{ opacity: 0, x: -12 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.1 }}
+          onClick={onClose}
+          className="inline-flex items-center gap-2 text-[#888] text-[13px] cursor-pointer mb-8 px-4 py-2 border border-white/10 rounded-full bg-transparent transition-all duration-200 hover:text-[lab(78_12.63_63.5)] hover:border-[lab(78_12.63_63.5)]/40"
+        >
+          <ArrowRight size={13} className="rotate-180" />
+          Back to Services
+        </motion.button>
+
+        {/* Hero */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15, duration: 0.5 }}
+          className="flex items-start gap-6 mb-10 flex-wrap"
+        >
+          <div
+            className="inline-flex p-[18px] rounded-[20px] flex-shrink-0"
+            style={{ background: `${color}18` }}
+          >
+            <Icon size={36} color={color} strokeWidth={1.7} />
+          </div>
+          <div>
+            <div
+              className="inline-block text-[11px] font-bold tracking-[0.07em] px-3 py-1 rounded-full uppercase mb-3.5 border"
+              style={{
+                background: `${color}18`,
+                color: color,
+                borderColor: `${color}35`,
+              }}
+            >
+              {tag}
+            </div>
+            <h1 className="text-white text-[clamp(1.6rem,4vw,2.4rem)] font-extrabold mb-2.5 leading-tight">
+              {service.title}
+            </h1>
+            <p className="text-[#888] text-[14.5px] leading-relaxed max-w-[580px]">
+              {detail.subheadline}
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Table */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25 }}
+        >
+          <p className="text-[13px] font-bold text-[#e5e5e5] mb-4 pb-2.5 border-b border-white/[0.07] tracking-wide">
+            Service Overview
+          </p>
+          <div className="overflow-x-auto mb-10">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr>
+                  {detail.tableHead.map((h, i) => (
+                    <th
+                      key={i}
+                      className="text-left px-4 py-3 text-[11.5px] font-bold tracking-widest uppercase text-[#555] border-b border-white/[0.08]"
+                    >
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {detail.tableRows.map((row, ri) => (
+                  <tr
+                    key={ri}
+                    className="transition-colors duration-150 hover:bg-white/[0.025]"
+                  >
+                    {row.map((cell, ci) => (
+                      <td
+                        key={ci}
+                        className={`px-4 py-3.5 text-[13.5px] border-b border-white/[0.05] align-top leading-relaxed
+                          ${ci === 0
+                            ? "text-[#e0e0e0] font-semibold whitespace-nowrap"
+                            : isThreeCol && ci === 1
+                              ? "font-bold"
+                              : "text-[#888]"
+                          }`}
+                        style={
+                          isThreeCol && ci === 1
+                            ? { color: color }
+                            : {}
+                        }
+                      >
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </motion.div>
+
+        {/* Additional Services */}
+        {detail.extras && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35 }}
+            className="mb-10"
+          >
+            <p className="text-[13px] font-bold text-[#e5e5e5] mb-4 pb-2.5 border-b border-white/[0.07]">
+              Additional Services
+            </p>
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-2.5">
+              {detail.extras.map((e, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.35 + i * 0.04 }}
+                  className="bg-[#131313] border border-white/[0.07] rounded-xl px-4 py-3.5 flex items-start gap-2.5"
+                >
+                  <div
+                    className="w-[7px] h-[7px] rounded-full flex-shrink-0 mt-[5px]"
+                    style={{ background: color }}
+                  />
+                  <span className="text-[13px] text-[#aaa] leading-relaxed">{e}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+
+        {/* CTA Strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.45 }}
+          className="rounded-[20px] p-8 text-center border"
+          style={{
+            background: `linear-gradient(135deg, ${color}10, transparent)`,
+            borderColor: `${color}25`,
+          }}
+        >
+          <h3 className="text-white text-[20px] font-extrabold mb-2">
+            Ready to Get Started?
+          </h3>
+          <p className="text-[#888] text-[13.5px] mb-6 leading-relaxed">
+            Our experts will guide you through every step. Book a free consultation today.
+          </p>
+          <div className="flex gap-3 justify-center flex-wrap">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
+              onClick={() => setIsOpen(true)}
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-[13.5px] border-none cursor-pointer text-[#0B0B0B]"
+              style={{
+                background: `linear-gradient(135deg, ${color}, ${color}bb)`,
+                boxShadow: `0 4px 20px ${color}28`,
+              }}
+            >
+              {detail.ctaLabel}
+              <ArrowRight size={15} />
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
+              onClick={() => window.open("https://wa.me/+919898408689", "_blank")}
+              className="inline-flex items-center gap-2 px-6 py-3.5 bg-transparent text-[#bbb] rounded-full font-semibold text-[13.5px] border border-white/[0.14] cursor-pointer transition-all duration-200 hover:border-[lab(78_12.63_63.5)]/50 hover:text-[lab(78_12.63_63.5)]"
+            >
+              <Phone size={14} />
+              WhatsApp: +91 98984 08689
+            </motion.button>
+          </div>
+        </motion.div>
+
+      </div>
+
+      {/* Modal */}
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </motion.div>
   );
 }
 
 /* ─── Main Component ─── */
 export default function Services() {
+  const [activeService, setActiveService] = useState(null);
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
   const heroY = useTransform(scrollYProgress, [0, 0.15], [0, -40]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0.3]);
+
+
+  const [isOpen, setIsOpen] = useState(false);
+
 
   return (
     <div
       ref={containerRef}
-      style={{
-        minHeight: "100vh", background: "#0B0B0B", color: "#fff",
-        paddingTop: "6rem", paddingBottom: "5rem",
-        fontFamily: "'Inter', system-ui, sans-serif",
-        position: "relative", overflow: "hidden",
-      }}
+      className="min-h-screen bg-[#0B0B0B] text-white pt-24 pb-20 font-sans relative overflow-hidden"
     >
       {/* Background orbs */}
-      <Orb x="5%" y="8%" size={320} color="rgba(250,204,21,0.07)" delay={0} />
-      <Orb x="75%" y="15%" size={260} color="rgba(96,165,250,0.06)" delay={1.5} />
-      <Orb x="50%" y="55%" size={380} color="rgba(167,139,250,0.05)" delay={2.5} />
-      <Orb x="10%" y="75%" size={220} color="rgba(52,211,153,0.06)" delay={1} />
-      <Orb x="80%" y="80%" size={280} color="rgba(244,114,182,0.06)" delay={3} />
+      <Orb className="left-[5%] top-[8%] w-80 h-80 bg-[lab(78_12.63_63.5)]/[0.07]" delay={0} />
+      <Orb className="left-[75%] top-[15%] w-64 h-64 bg-blue-400/[0.06]" delay={1.5} />
+      <Orb className="left-[50%] top-[55%] w-96 h-96 bg-purple-400/[0.05]" delay={2.5} />
+      <Orb className="left-[10%] top-[75%] w-56 h-56 bg-emerald-400/[0.06]" delay={1} />
+      <Orb className="left-[80%] top-[80%] w-72 h-72 bg-pink-400/[0.06]" delay={3} />
 
-      {/* Subtle grid pattern */}
-      <div style={{
-        position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: `
-          linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)
-        `,
-        backgroundSize: "60px 60px",
-      }} />
+      {/* Grid pattern */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)
+          `,
+          backgroundSize: "60px 60px",
+        }}
+      />
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.25rem", position: "relative" }}>
+      <div className="max-w-[1200px] mx-auto px-5 relative z-10">
 
         {/* ─── HERO ─── */}
-        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="text-center mb-20">
+        <motion.div style={{ y: heroY }} className="text-center mb-20">
+
           <motion.div
             initial={{ opacity: 0, y: -16, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.6, ease: "backOut" }}
-            style={{
-              display: "inline-flex", alignItems: "center", gap: 6,
-              background: "rgba(250,204,21,0.1)", border: "1px solid rgba(250,204,21,0.3)",
-              borderRadius: 99, padding: "5px 16px", marginBottom: "1.5rem",
-              fontSize: 12, fontWeight: 600, letterSpacing: "0.1em", color: "#facc15",
-              textTransform: "uppercase",
-            }}
+            className="inline-flex items-center gap-1.5 bg-[lab(78_12.63_63.5)]/10 border border-[lab(78_12.63_63.5)]/30 rounded-full px-4 py-1.5 mb-6 text-[12px] font-semibold tracking-widest text-[lab(78_12.63_63.5)] uppercase"
           >
-            <Sparkles size={13} color="#facc15" />
-            Trusted by 5000+ Businesses Across India
+            <Sparkles size={13} color={YELLOW} />
+            India's Leading Startup & Business Consultant
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            style={{ fontSize: "clamp(2.2rem, 5.5vw, 4rem)", fontWeight: 800, lineHeight: 1.1, marginBottom: "1.25rem" }}
+            className="text-[clamp(2.2rem,5.5vw,4rem)] font-extrabold leading-[1.1] mb-5"
           >
             Our{" "}
-            <span style={{
-              color: "#facc15",
-              textShadow: "0 0 40px rgba(250,204,21,0.4)",
-            }}>
+            <span className="text-[lab(78_12.63_63.5)] [text-shadow:0_0_40px_lab(78_12.63_63.5)]">
               Services
             </span>
           </motion.h1>
@@ -368,10 +705,10 @@ export default function Services() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            style={{ color: "#888", fontSize: 16, maxWidth: 560, margin: "0 auto 2.5rem", lineHeight: 1.7 }}
+            className="text-[#888] text-base max-w-140 mx-auto mb-10 leading-relaxed"
           >
-            Comprehensive business solutions for startups, MSMEs, and entrepreneurs.
-            From company registration to growth strategy — we've got you covered.
+            Comprehensive business solutions for startups, MSMEs & entrepreneurs.
+            From company registration to digital growth — we've got you covered.
           </motion.p>
 
           {/* Stat pills */}
@@ -379,67 +716,66 @@ export default function Services() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.45 }}
-            style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12 }}
+            className="flex flex-wrap justify-center gap-3"
           >
             {STATS.map((s, i) => (
               <motion.div
                 key={i}
                 whileHover={{ y: -3, borderColor: "rgba(250,204,21,0.45)" }}
-                style={{
-                  background: "#161616", border: "1px solid rgba(255,255,255,0.1)",
-                  borderRadius: 12, padding: "10px 20px", textAlign: "center",
-                  transition: "border-color 0.2s",
-                }}
+                className="bg-[#161616] border border-white/10 rounded-xl px-5 py-2.5 text-center transition-colors duration-200"
               >
-                <div style={{ fontSize: 20, fontWeight: 800, color: "#facc15" }}>
+                <div className="text-xl font-extrabold text-[lab(78_12.63_63.5)]">
                   <Counter value={s.value} />
                 </div>
-                <div style={{ fontSize: 11.5, color: "#666", marginTop: 2 }}>{s.label}</div>
+                <div className="text-[11.5px] text-[#666] mt-0.5">{s.label}</div>
               </motion.div>
             ))}
           </motion.div>
         </motion.div>
 
         {/* ─── SERVICES GRID ─── */}
-        <div style={{ marginBottom: "5rem" }}>
+        <div className="mb-20">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            style={{ textAlign: "center", marginBottom: "2.5rem" }}
+            className="text-center mb-10"
           >
-            <h2 style={{ fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)", fontWeight: 800, marginBottom: "0.5rem" }}>
-              What We <span style={{ color: "#facc15" }}>Offer</span>
+            <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-extrabold mb-2">
+              What We <span className="text-[lab(78_12.63_63.5)]">Offer</span>
             </h2>
-            <p style={{ color: "#666", fontSize: 14 }}>9 comprehensive service areas for your business</p>
+            <p className="text-[#666] text-[14px]">
+              5 comprehensive service categories — click any card to explore full details
+            </p>
           </motion.div>
 
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: 18,
-          }}>
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-[18px]">
             {SERVICES.map((service, i) => (
-              <ServiceCard key={i} service={service} index={i} />
+              <ServiceCard
+                key={service.id}
+                service={service}
+                index={i}
+                onOpen={setActiveService}
+              />
             ))}
           </div>
         </div>
 
-        {/* ─── WHY SCALEMATE ─── */}
-        <div style={{ marginBottom: "5rem" }}>
+        {/* ─── WHY LEOSTARTS ─── */}
+        <div className="mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            style={{ textAlign: "center", marginBottom: "2rem" }}
+            className="text-center mb-8"
           >
-            <h2 style={{ fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)", fontWeight: 800, marginBottom: "0.5rem" }}>
-              Why Choose <span style={{ color: "#facc15" }}>Scalemate</span>?
+            <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-extrabold mb-2">
+              Why Choose <span className="text-[lab(78_12.63_63.5)]">LeoStarts</span>?
             </h2>
-            <p style={{ color: "#666", fontSize: 14 }}>Your trusted partner for business growth and compliance</p>
+            <p className="text-[#666] text-[14px]">Your trusted partner for startup success across India</p>
           </motion.div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 14 }}>
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-3.5">
             {WHY_US.map((item, i) => (
               <WhyCard key={i} item={item} index={i} />
             ))}
@@ -452,34 +788,18 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          style={{
-            position: "relative", overflow: "hidden",
-            background: "linear-gradient(135deg, rgba(250,204,21,0.1), rgba(250,204,21,0.03) 60%, transparent)",
-            border: "1px solid rgba(250,204,21,0.22)",
-            borderRadius: 28, padding: "clamp(2rem, 5vw, 4rem)",
-            textAlign: "center",
-          }}
+          className="relative overflow-hidden bg-gradient-to-br from-[lab(78_12.63_63.5)]/10 via-[lab(78_12.63_63.5)]/[0.03] to-transparent border border-[lab(78_12.63_63.5)]/[0.22] rounded-[28px] p-[clamp(2rem,5vw,4rem)] text-center"
         >
-          {/* Animated corner accent */}
+          {/* Rotating rings */}
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            style={{
-              position: "absolute", top: -60, right: -60,
-              width: 200, height: 200, borderRadius: "50%",
-              border: "1px solid rgba(250,204,21,0.1)",
-              pointerEvents: "none",
-            }}
+            className="absolute -top-[60px] -right-[60px] w-[200px] h-[200px] rounded-full border border-[lab(78_12.63_63.5)]/10 pointer-events-none"
           />
           <motion.div
             animate={{ rotate: -360 }}
             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-            style={{
-              position: "absolute", top: -30, right: -30,
-              width: 120, height: 120, borderRadius: "50%",
-              border: "1px solid rgba(250,204,21,0.08)",
-              pointerEvents: "none",
-            }}
+            className="absolute -top-[30px] -right-[30px] w-[120px] h-[120px] rounded-full border border-[lab(78_12.63_63.5)]/[0.08] pointer-events-none"
           />
 
           <motion.div
@@ -487,72 +807,52 @@ export default function Services() {
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            style={{
-              display: "inline-flex", padding: "10px 20px", borderRadius: 99,
-              background: "rgba(250,204,21,0.12)", border: "1px solid rgba(250,204,21,0.3)",
-              color: "#facc15", fontSize: 12, fontWeight: 700,
-              letterSpacing: "0.1em", textTransform: "uppercase",
-              marginBottom: "1.25rem", alignItems: "center", gap: 6,
-            }}
+            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[lab(78_12.63_63.5)]/[0.12] border border-[lab(78_12.63_63.5)]/30 text-[lab(78_12.63_63.5)] text-[12px] font-bold tracking-widest uppercase mb-5"
           >
-            <Star size={12} color="#facc15" fill="#facc15" />
+            <Star size={12} color={YELLOW} fill={YELLOW} />
             Free Consultation Available
           </motion.div>
 
-          <h2 style={{ fontSize: "clamp(1.5rem, 4vw, 2.75rem)", fontWeight: 800, marginBottom: "1rem" }}>
+          <h2 className="text-[clamp(1.5rem,4vw,2.75rem)] font-extrabold mb-4">
             Ready to Scale Your Business?
           </h2>
-          <p style={{ color: "#999", fontSize: 15, maxWidth: 480, margin: "0 auto 2rem", lineHeight: 1.7 }}>
-            Book a free consultation with our experts and discover how we can help you achieve your business goals faster.
+          <p className="text-[#999] text-[15px] max-w-[480px] mx-auto mb-8 leading-relaxed">
+            Book a free consultation with our experts and discover how LeoStarts can help
+            you achieve your business goals faster.
           </p>
 
-          <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+          <div className="flex gap-3 justify-center flex-wrap mb-8">
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: "0 8px 40px rgba(250,204,21,0.45)" }}
               whileTap={{ scale: 0.96 }}
-              style={{
-                display: "inline-flex", alignItems: "center", gap: 8,
-                padding: "14px 32px",
-                background: "linear-gradient(135deg, #facc15, #f59e0b)",
-                color: "#0B0B0B", borderRadius: 99,
-                fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer",
-                boxShadow: "0 4px 20px rgba(250,204,21,0.25)",
-                transition: "box-shadow 0.25s",
-              }}
+              onClick={() => setIsOpen(true)}
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-linear-to-r from-[lab(78_12.63_63.5)] to-amber-400 text-[#0B0B0B] rounded-full font-bold text-[14px] border-none cursor-pointer shadow-[0_4px_20px_rgba(250,204,21,0.25)] transition-shadow duration-300"
             >
               Book Free Consultation
               <ArrowRight size={16} />
             </motion.button>
 
             <motion.button
-              whileHover={{ scale: 1.05, borderColor: "rgba(250,204,21,0.5)", color: "#facc15" }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
-              style={{
-                display: "inline-flex", alignItems: "center", gap: 8,
-                padding: "14px 28px",
-                background: "transparent",
-                color: "#bbb", borderRadius: 99,
-                fontWeight: 600, fontSize: 14,
-                border: "1px solid rgba(255,255,255,0.15)", cursor: "pointer",
-                transition: "all 0.2s",
-              }}
+              onClick={() => window.open("https://wa.me/+919898408689", "_blank")}
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-transparent text-[#bbb] rounded-full font-semibold text-[14px] border border-white/15 cursor-pointer transition-all duration-200 hover:border-[lab(78_12.63_63.5)]/50 hover:text-[lab(78_12.63_63.5)]"
             >
               <Phone size={15} />
               Talk to an Expert
             </motion.button>
           </div>
 
-          {/* Trust badges */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5 }}
-            style={{ display: "flex", justifyContent: "center", gap: 24, marginTop: "2rem", flexWrap: "wrap" }}
+            className="flex justify-center gap-6 flex-wrap"
           >
-            {["MCA Registered", "ISO Certified", "100% Secure"].map((b, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 12, color: "#666" }}>
-                <BadgeCheck size={14} color="#facc15" />
+            {["DPIIT Recognized", "Pan-India Network", "100% Online Process"].map((b, i) => (
+              <div key={i} className="flex items-center gap-1.5 text-[12px] text-[#666]">
+                <BadgeCheck size={14} color={YELLOW} />
                 {b}
               </div>
             ))}
@@ -560,6 +860,20 @@ export default function Services() {
         </motion.div>
 
       </div>
+
+      {/* ─── DETAIL PAGE OVERLAY ─── */}
+      <AnimatePresence>
+        {activeService && (
+          <DetailPage
+            service={activeService}
+            onClose={() => setActiveService(null)}
+          />
+        )}
+      </AnimatePresence>
+
+
+      {/* Modal */}
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </div>
   );
 }
