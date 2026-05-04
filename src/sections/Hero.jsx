@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Briefcase,
@@ -22,7 +22,8 @@ import Modal from "@/Components/Ui/Modal";
 const slides = [
   {
     id: 0,
-    bg: "/herobg-2.jpg",
+    bg: "/bg-1.jpg",
+    eyebrow: "Trusted by 1000+ Businesses",
     heading: (
       <>
         Grow Your Business with <br /> Expert Consultancy
@@ -37,13 +38,14 @@ const slides = [
       { icon: TrendingUp, title: "Growth Strategy" },
     ],
     ctaLabel: "Book Consultation",
-    accentColor: "#F5C518", // amber-yellow
+    accentColor: "#F5C518",
     glowLeft: "bg-blue-500",
     glowRight: "bg-purple-500",
   },
   {
     id: 1,
-    bg: "/herobg-2.jpg", // replace with your slide 2 bg
+    bg: "/bg2.jpg",
+    eyebrow: "100% Regulatory Coverage",
     heading: (
       <>
         Stay Compliant, <br /> Stay Protected
@@ -58,13 +60,14 @@ const slides = [
       { icon: Globe, title: "Import / Export" },
     ],
     ctaLabel: "Get Compliance Audit",
-    accentColor: "#4ADE80", // green
+    accentColor: "#4ADE80",
     glowLeft: "bg-green-500",
     glowRight: "bg-teal-500",
   },
   {
     id: 2,
-    bg: "/herobg-2.jpg", // replace with your slide 3 bg
+    bg: "/bg-3.jpg",
+    eyebrow: "Strategy That Delivers Results",
     heading: (
       <>
         Turn Vision Into <br /> Measurable Growth
@@ -79,28 +82,30 @@ const slides = [
       { icon: Award, title: "Brand Positioning" },
     ],
     ctaLabel: "Start Growing Today",
-    accentColor: "#818CF8", // indigo
+    accentColor: "#818CF8",
     glowLeft: "bg-indigo-500",
     glowRight: "bg-pink-500",
   },
 ];
 
 // ─── Slide variants ───────────────────────────────────────────────────────────
+// Key fix: opacity stays at 1 throughout — only X translates.
+// This eliminates the white flash caused by both slides going transparent simultaneously.
 
 const slideVariants = {
   enter: (dir) => ({
     x: dir > 0 ? "100%" : "-100%",
-    opacity: 0,
+    opacity: 1,
   }),
   center: {
     x: 0,
     opacity: 1,
-    transition: { duration: 0.65, ease: [0.32, 0.72, 0, 1] },
+    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
   },
   exit: (dir) => ({
     x: dir > 0 ? "-100%" : "100%",
-    opacity: 0,
-    transition: { duration: 0.55, ease: [0.32, 0.72, 0, 1] },
+    opacity: 1,
+    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
   }),
 };
 
@@ -120,33 +125,35 @@ const Hero = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
-  const timerRef = useRef(null);
+  const [sliding, setSliding] = useState(false);
 
   const goTo = (index, dir) => {
+    if (sliding) return;
+    setSliding(true);
     setDirection(dir);
     setCurrent(index);
-    resetTimer();
+    setTimeout(() => setSliding(false), 700); // matches transition duration
   };
 
   const next = () => goTo((current + 1) % slides.length, 1);
   const prev = () => goTo((current - 1 + slides.length) % slides.length, -1);
 
-  const resetTimer = () => {
-    clearInterval(timerRef.current);
-    timerRef.current = setInterval(next, 3000);
-  };
-
+  // Preload next slide image to prevent flash on slow connections
   useEffect(() => {
-    timerRef.current = setInterval(next, 3000);
-    return () => clearInterval(timerRef.current);
+    const nextIndex = (current + 1) % slides.length;
+    const img = new Image();
+    img.src = slides[nextIndex].bg;
   }, [current]);
 
   const slide = slides[current];
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden">
+    // ← FIXED: bg-black on wrapper is the safety net for any gap between slides
+    <div className="relative min-h-screen w-full overflow-hidden bg-black">
+
       {/* ── Slides ── */}
-      <AnimatePresence initial={false} custom={direction}>
+      {/* ← FIXED: mode="sync" ensures exit and enter animate simultaneously (push effect) */}
+      <AnimatePresence initial={false} custom={direction} mode="sync">
         <motion.div
           key={current}
           custom={direction}
@@ -158,9 +165,10 @@ const Hero = () => {
         >
           {/* Background */}
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url('${slide.bg}')` }}
           />
+          {/* Dark overlay */}
           <div className="absolute inset-0 bg-black/80" />
 
           {/* Ambient glows */}
@@ -172,27 +180,18 @@ const Hero = () => {
           />
 
           {/* Content */}
-          <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 text-center py-16">
+          <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-5 sm:px-8 text-center pt-24 pb-28 sm:py-20">
             <motion.div
               key={`content-${current}`}
               variants={contentVariants}
               initial="hidden"
               animate="visible"
-              className="flex flex-col items-center"
+              className="flex flex-col items-center w-full max-w-4xl mx-auto mt-15"
             >
-              {/* Eyebrow */}
-              <motion.p
-                variants={itemVariant}
-                className="text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase mb-4"
-                style={{ color: slide.accentColor }}
-              >
-                {slide.eyebrow}
-              </motion.p>
-
               {/* Heading */}
               <motion.h1
                 variants={itemVariant}
-                className="text-white font-extrabold text-4xl sm:text-5xl md:text-7xl leading-tight"
+                className="text-white font-extrabold text-3xl sm:text-5xl md:text-7xl leading-tight"
               >
                 {slide.heading}
               </motion.h1>
@@ -200,7 +199,7 @@ const Hero = () => {
               {/* Subtext */}
               <motion.p
                 variants={itemVariant}
-                className="mt-6 max-w-2xl text-gray-300 text-lg"
+                className="mt-4 sm:mt-6 max-w-2xl text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed px-2 sm:px-0"
               >
                 {slide.subtext}
               </motion.p>
@@ -208,7 +207,7 @@ const Hero = () => {
               {/* Service Icons */}
               <motion.div
                 variants={itemVariant}
-                className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6"
+                className="mt-7 sm:mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 w-full"
               >
                 {slide.services.map((item, i) => {
                   const Icon = item.icon;
@@ -216,22 +215,22 @@ const Hero = () => {
                     <motion.div
                       key={i}
                       whileHover={{ scale: 1.08 }}
-                      className="flex flex-col items-center gap-2 bg-white/10 backdrop-blur-md px-6 py-4 rounded-xl border border-white/20 shadow-lg"
+                      className="flex flex-col items-center gap-2 bg-white/10 backdrop-blur-md px-3 sm:px-6 py-3 sm:py-4 rounded-xl border border-white/20 shadow-lg"
                     >
-                      <Icon size={28} style={{ color: slide.accentColor }} />
-                      <p className="text-sm text-gray-200">{item.title}</p>
+                      <Icon size={22} style={{ color: slide.accentColor }} />
+                      <p className="text-xs sm:text-sm text-gray-200 text-center">{item.title}</p>
                     </motion.div>
                   );
                 })}
               </motion.div>
 
               {/* CTA */}
-              <motion.div variants={itemVariant} className="mt-12">
+              <motion.div variants={itemVariant} className="mt-8 sm:mt-12">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setIsOpen(true)}
-                  className="px-10 py-4 rounded-full font-semibold tracking-widest cursor-pointer text-black shadow-xl transition"
+                  className="px-8 sm:px-10 py-3 sm:py-4 rounded-full font-semibold tracking-widest cursor-pointer text-black text-sm sm:text-base shadow-xl transition"
                   style={{
                     backgroundColor: slide.accentColor,
                     boxShadow: `0 8px 30px ${slide.accentColor}55`,
@@ -248,21 +247,23 @@ const Hero = () => {
       {/* ── Arrow Controls ── */}
       <button
         onClick={prev}
+        disabled={sliding}
         aria-label="Previous slide"
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/10 border border-white/20 text-white flex items-center justify-center hover:bg-white/20 transition"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/10 border border-white/20 text-white flex items-center justify-center hover:bg-white/20 disabled:opacity-40 disabled:cursor-not-allowed transition text-xl"
       >
         ‹
       </button>
       <button
         onClick={next}
+        disabled={sliding}
         aria-label="Next slide"
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/10 border border-white/20 text-white flex items-center justify-center hover:bg-white/20 transition"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/10 border border-white/20 text-white flex items-center justify-center hover:bg-white/20 disabled:opacity-40 disabled:cursor-not-allowed transition text-xl"
       >
         ›
       </button>
 
       {/* ── Dot Indicators ── */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
+      <div className="absolute bottom-5 sm:bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
         {slides.map((s, i) => (
           <button
             key={i}
@@ -272,26 +273,18 @@ const Hero = () => {
             style={{
               width: i === current ? 28 : 8,
               backgroundColor:
-                i === current ? slides[current].accentColor : "rgba(255,255,255,0.35)",
+                i === current
+                  ? slides[current].accentColor
+                  : "rgba(255,255,255,0.35)",
             }}
           />
         ))}
       </div>
 
       {/* ── Slide Counter ── */}
-      <div className="absolute bottom-8 right-6 z-20 text-white/40 text-xs tracking-widest font-mono">
+      <div className="absolute bottom-5 sm:bottom-8 right-6 z-20 text-white/40 text-xs tracking-widest font-mono">
         0{current + 1} / 0{slides.length}
       </div>
-
-      {/* ── Progress Bar ── */}
-      <motion.div
-        key={`bar-${current}`}
-        className="absolute bottom-0 left-0 h-[3px] z-20"
-        style={{ backgroundColor: slide.accentColor }}
-        initial={{ width: "0%" }}
-        animate={{ width: "100%" }}
-        transition={{ duration: 3, ease: "linear" }}
-      />
 
       {/* ── Modal ── */}
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} />

@@ -108,8 +108,8 @@ const SOCIALS = [
 ];
 
 const STATS = [
-  { value: "500+", label: "Businesses Served" },
-  { value: "10+", label: "Years Experience" },
+  { value: "1000+", label: "Businesses Served" },
+  { value: "6+", label: "Years Experience" },
   { value: "98%", label: "Client Satisfaction" },
   { value: "24/7", label: "Support Available" },
 ];

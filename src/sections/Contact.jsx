@@ -256,7 +256,7 @@ export default function Contact() {
             }}
           >
             <Sparkles size={12} color="#facc15" />
-            Free Consultation — No Commitment
+            Take the First Step — We Handle the Rest
           </motion.div>
 
           <motion.h1
@@ -663,7 +663,7 @@ export default function Contact() {
             display: "flex", justifyContent: "center", gap: "2rem", flexWrap: "wrap",
           }}
         >
-          {["No spam, ever", "Free first consultation", "Reply in 30 mins", "5000+ businesses served"].map((t, i) => (
+          {["No spam, ever", "Free first consultation", "Reply in 30 mins", "1000+ businesses served"].map((t, i) => (
             <div key={i} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12.5, color: "#555" }}>
               <CheckCircle2 size={13} color="#facc15" />
               {t}
