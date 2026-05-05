@@ -1,12 +1,34 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 import React, { useRef, useEffect, useState } from "react";
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import {
-  FileText, Landmark, TrendingUp, Shield, Globe,
-  CheckCircle2, DollarSign, BookOpen, BarChart3,
-  ArrowRight, Star, Zap, Award, HeartHandshake, Sparkles,
-  BadgeCheck, ChevronRight, Phone, Users, X,
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
+import {
+  FileText,
+  Landmark,
+  TrendingUp,
+  Shield,
+  Globe,
+  CheckCircle2,
+  DollarSign,
+  BookOpen,
+  BarChart3,
+  ArrowRight,
+  Star,
+  Zap,
+  Award,
+  HeartHandshake,
+  Sparkles,
+  BadgeCheck,
+  ChevronRight,
+  Phone,
+  Users,
+  X,
 } from "lucide-react";
 import Modal from "@/Components/Ui/Modal";
 
@@ -68,8 +90,7 @@ const SERVICES = [
       ctaLabel: "Learn More",
       ctaUrl: "https://leostartsservices.com/contacts/",
     },
-  }
-  ,
+  },
   {
     id: "registration",
     icon: FileText,
@@ -93,14 +114,38 @@ const SERVICES = [
         "Turn your idea into a legally recognized business with expert guidance and hassle-free registration support. We handle the entire process so you can focus on building your vision.",
       tableHead: ["Registration Type", "Description"],
       tableRows: [
-        ["Private Limited Company", "Complete incorporation with MCA compliance and documentation."],
-        ["Limited Liability Partnership (LLP)", "Flexible business structure with limited liability protection."],
-        ["One Person Company (OPC)", "Ideal structure for solo founders with corporate benefits."],
-        ["Partnership Firm", "Traditional partnership registration with legal agreement."],
-        ["Sole Proprietorship", "Simple and quick registration for small businesses."],
-        ["Startup India Registration", "DPIIT recognition for startup benefits and tax exemptions."],
-        ["MSME (Udyam) Registration", "Government registration for MSME benefits and schemes."],
-        ["Firm Registration", "Legal registration of firms under applicable laws."],
+        [
+          "Private Limited Company",
+          "Complete incorporation with MCA compliance and documentation.",
+        ],
+        [
+          "Limited Liability Partnership (LLP)",
+          "Flexible business structure with limited liability protection.",
+        ],
+        [
+          "One Person Company (OPC)",
+          "Ideal structure for solo founders with corporate benefits.",
+        ],
+        [
+          "Partnership Firm",
+          "Traditional partnership registration with legal agreement.",
+        ],
+        [
+          "Sole Proprietorship",
+          "Simple and quick registration for small businesses.",
+        ],
+        [
+          "Startup India Registration",
+          "DPIIT recognition for startup benefits and tax exemptions.",
+        ],
+        [
+          "MSME (Udyam) Registration",
+          "Government registration for MSME benefits and schemes.",
+        ],
+        [
+          "Firm Registration",
+          "Legal registration of firms under applicable laws.",
+        ],
       ],
       extras: [
         "GST Registration & Filing",
@@ -127,21 +172,41 @@ const SERVICES = [
     description:
       "Strategic guidance and end-to-end support to help startups & MSMEs secure government grants, angel funding, and loans.",
     features: [
-      "Grant Funding ₹5L – ₹50Cr",
-      "Angel Funding ₹25L – ₹10Cr",
-      "MSME Loans ₹50K – ₹50L",
-      "Government Grants Support",
+      "Grant funding support ₹10L – ₹10Cr",
+      "Angel Funding ₹5Cr – ₹500Cr",
+      "MSME Loans ₹1Cr – ₹15Cr",
+      "Government Grants ₹10L – ₹20Cr ",
     ],
     detail: {
       subheadline:
         "Access the funding you need to scale, innovate, and expand. We provide strategic guidance and end-to-end support from pitch to disbursal.",
       tableHead: ["Funding Type", "Amount", "Who Can Apply"],
       tableRows: [
-        ["Grant Funding Support", "₹5L – ₹50Cr*", "Startups & MSMEs meeting government grant criteria"],
-        ["MSME Loans", "₹50,000 – ₹50L*", "MSME-registered businesses with financial records"],
-        ["Angel Funding", "₹25L – ₹10Cr*", "Early-stage startups with scalable business ideas"],
-        ["Government Grants", "₹10L – ₹20Cr*", "DPIIT-recognized startups in eligible sectors"],
-        ["Debt Funding", "₹5L – ₹25Cr*", "Revenue-generating businesses with repayment capacity"],
+        [
+          "Grant Funding Support",
+          "₹10L – ₹10Crr*",
+          "Startups & MSMEs meeting government grant criteria",
+        ],
+        [
+          "MSME Loans",
+          "₹1Cr – ₹15Cr*",
+          "MSME-registered businesses with financial records",
+        ],
+        [
+          "Angel Funding",
+          "₹5Cr – ₹500Cr*",
+          "Early-stage startups with scalable business ideas",
+        ],
+        [
+          "Government Grants",
+          "₹10L – ₹20Cr*",
+          "DPIIT-recognized startups in eligible sectors",
+        ],
+        [
+          "Debt Funding",
+          "₹10L – ₹20Cr*",
+          "Revenue-generating businesses with repayment capacity",
+        ],
       ],
       extras: [
         "NAIFF Loans (₹2 Cr)",
@@ -178,16 +243,46 @@ const SERVICES = [
         "Our certifications demonstrate commitment to compliance, transparency, and industry best practices. Each credential reflects the highest professional and regulatory standards.",
       tableHead: ["Certification", "Description"],
       tableRows: [
-        ["Startup India Certificate", "DPIIT recognition for startup benefits, tax exemptions, and funding support."],
-        ["State Startup Registration", "State-level startup recognition for local incentives and schemes."],
-        ["MSME (Udyam) Certificate", "Government MSME registration to avail subsidies and business benefits."],
-        ["IEC Certificate", "Import Export Code registration for international trade."],
-        ["ISO Certification", "Quality management certification to build trust and compliance."],
-        ["ZED Certification", "Zero Defect Zero Effect certification for manufacturing excellence."],
-        ["Tax Exemption Certificate", "Certification to avail income tax benefits for eligible startups."],
-        ["GST Certificate", "GST registration certificate for legal tax compliance."],
-        ["FSSAI Certificate", "License required for legal food manufacturing and sale."],
-        ["Trademark Certificate", "Legal protection for unique brand name, logo, and slogan."],
+        [
+          "Startup India Certificate",
+          "DPIIT recognition for startup benefits, tax exemptions, and funding support.",
+        ],
+        [
+          "State Startup Registration",
+          "State-level startup recognition for local incentives and schemes.",
+        ],
+        [
+          "MSME (Udyam) Certificate",
+          "Government MSME registration to avail subsidies and business benefits.",
+        ],
+        [
+          "IEC Certificate",
+          "Import Export Code registration for international trade.",
+        ],
+        [
+          "ISO Certification",
+          "Quality management certification to build trust and compliance.",
+        ],
+        [
+          "ZED Certification",
+          "Zero Defect Zero Effect certification for manufacturing excellence.",
+        ],
+        [
+          "Tax Exemption Certificate",
+          "Certification to avail income tax benefits for eligible startups.",
+        ],
+        [
+          "GST Certificate",
+          "GST registration certificate for legal tax compliance.",
+        ],
+        [
+          "FSSAI Certificate",
+          "License required for legal food manufacturing and sale.",
+        ],
+        [
+          "Trademark Certificate",
+          "Legal protection for unique brand name, logo, and slogan.",
+        ],
       ],
       extras: [
         "Copyright Registration",
@@ -224,18 +319,54 @@ const SERVICES = [
         "In today's digital world, your online presence defines your success. We create powerful digital strategies that attract, engage, and convert your target audience.",
       tableHead: ["Service", "Description"],
       tableRows: [
-        ["Letter Head Design", "Professional and creative letterhead designs to enhance your business branding."],
-        ["Application Development", "Custom mobile and web application development solutions tailored to your business."],
-        ["Social Media Management", "Complete management of accounts, content posting, and audience engagement strategies."],
-        ["Website Development", "Modern, responsive, and SEO-friendly website development for businesses and startups."],
-        ["Search Engine Optimization (SEO)", "Improve website rankings and increase organic traffic through advanced SEO strategies."],
-        ["Social Media Marketing", "Promote your brand across Instagram, Facebook, and LinkedIn."],
-        ["Google Ads / PPC", "Drive instant traffic and quality leads with highly targeted paid advertising campaigns."],
-        ["Content Marketing", "Create engaging blogs, articles, and promotional content to attract customers."],
-        ["Email Marketing", "Reach your audience directly with personalized email campaigns and automation."],
-        ["Website Analytics", "Track user behavior, campaign performance, and business growth insights."],
-        ["Brand Strategy", "Develop strong online branding and positioning for long-term market growth."],
-        ["Lead Generation", "Generate high-quality business leads through strategic digital campaigns."],
+        [
+          "Letter Head Design",
+          "Professional and creative letterhead designs to enhance your business branding.",
+        ],
+        [
+          "Application Development",
+          "Custom mobile and web application development solutions tailored to your business.",
+        ],
+        [
+          "Social Media Management",
+          "Complete management of accounts, content posting, and audience engagement strategies.",
+        ],
+        [
+          "Website Development",
+          "Modern, responsive, and SEO-friendly website development for businesses and startups.",
+        ],
+        [
+          "Search Engine Optimization (SEO)",
+          "Improve website rankings and increase organic traffic through advanced SEO strategies.",
+        ],
+        [
+          "Social Media Marketing",
+          "Promote your brand across Instagram, Facebook, and LinkedIn.",
+        ],
+        [
+          "Google Ads / PPC",
+          "Drive instant traffic and quality leads with highly targeted paid advertising campaigns.",
+        ],
+        [
+          "Content Marketing",
+          "Create engaging blogs, articles, and promotional content to attract customers.",
+        ],
+        [
+          "Email Marketing",
+          "Reach your audience directly with personalized email campaigns and automation.",
+        ],
+        [
+          "Website Analytics",
+          "Track user behavior, campaign performance, and business growth insights.",
+        ],
+        [
+          "Brand Strategy",
+          "Develop strong online branding and positioning for long-term market growth.",
+        ],
+        [
+          "Lead Generation",
+          "Generate high-quality business leads through strategic digital campaigns.",
+        ],
       ],
       extras: [
         "Flyers & Poster Design",
@@ -272,15 +403,42 @@ const SERVICES = [
         "Your company profile is more than a document — it's your brand story, credibility statement, and investor introduction. We craft professional profiles that build trust and attract opportunities.",
       tableHead: ["Service", "Description"],
       tableRows: [
-        ["Company Profile Creation", "Professionally structured profiles for branding, investors, and stakeholders."],
-        ["Pitch Deck Design", "Clean, concise, and investor-focused pitch decks for funding presentations."],
-        ["Investor Deck", "Strategic decks highlighting growth, traction, and financial performance."],
-        ["Business Brochure", "Premium corporate brochures for digital and print branding."],
-        ["Flyers & Creatives", "Minimalist creatives aligned with corporate and startup branding."],
-        ["Logo Designing", "Timeless logo designs that reflect brand identity and values."],
-        ["Detailed Project Report", "End-to-end DPR covering feasibility, costing, compliance, and execution strategy."],
-        ["Fund Utilization Planning", "Structured allocation plans ensuring transparent and efficient use of funds."],
-        ["Financial Projections", "Data-driven forecasts including revenue, expenses, cash flow, and profitability."],
+        [
+          "Company Profile Creation",
+          "Professionally structured profiles for branding, investors, and stakeholders.",
+        ],
+        [
+          "Pitch Deck Design",
+          "Clean, concise, and investor-focused pitch decks for funding presentations.",
+        ],
+        [
+          "Investor Deck",
+          "Strategic decks highlighting growth, traction, and financial performance.",
+        ],
+        [
+          "Business Brochure",
+          "Premium corporate brochures for digital and print branding.",
+        ],
+        [
+          "Flyers & Creatives",
+          "Minimalist creatives aligned with corporate and startup branding.",
+        ],
+        [
+          "Logo Designing",
+          "Timeless logo designs that reflect brand identity and values.",
+        ],
+        [
+          "Detailed Project Report",
+          "End-to-end DPR covering feasibility, costing, compliance, and execution strategy.",
+        ],
+        [
+          "Fund Utilization Planning",
+          "Structured allocation plans ensuring transparent and efficient use of funds.",
+        ],
+        [
+          "Financial Projections",
+          "Data-driven forecasts including revenue, expenses, cash flow, and profitability.",
+        ],
       ],
       extras: [
         "Business Plan Development",
@@ -297,23 +455,52 @@ const SERVICES = [
 ];
 
 const WHY_US = [
-  { icon: Award, title: "Expert Team", description: "Certified CAs, CS & legal professionals with 10+ years of startup consulting experience" },
-  { icon: Zap, title: "Fast Processing", description: "Quick turnaround with 100% online documentation and real-time tracking" },
-  { icon: DollarSign, title: "Transparent Pricing", description: "Competitive rates with no hidden charges or surprise fees — ever" },
-  { icon: HeartHandshake, title: "Dedicated Support", description: "Dedicated account manager & 24/7 support via WhatsApp, call & email" },
-  { icon: Users, title: "Pan-India Network", description: "Serving Maharashtra, Gujarat, Delhi, Karnataka & all major states across India" },
-  { icon: Shield, title: "Government Backed", description: "Expert assistance with DPIIT, MSME, NAIFF, PMEGP & other govt. schemes" },
+  {
+    icon: Award,
+    title: "Expert Team",
+    description:
+      "Certified CAs, CS & legal professionals with 10+ years of startup consulting experience",
+  },
+  {
+    icon: Zap,
+    title: "Fast Processing",
+    description:
+      "Quick turnaround with 100% online documentation and real-time tracking",
+  },
+  {
+    icon: DollarSign,
+    title: "Transparent Pricing",
+    description:
+      "Competitive rates with no hidden charges or surprise fees — ever",
+  },
+  {
+    icon: HeartHandshake,
+    title: "Dedicated Support",
+    description:
+      "Dedicated account manager & 24/7 support via WhatsApp, call & email",
+  },
+  {
+    icon: Users,
+    title: "Pan-India Network",
+    description:
+      "Serving Maharashtra, Gujarat, Delhi, Karnataka & all major states across India",
+  },
+  {
+    icon: Shield,
+    title: "Government Backed",
+    description:
+      "Expert assistance with DPIIT, MSME, NAIFF, PMEGP & other govt. schemes",
+  },
 ];
 
 const STATS = [
-  { value: "1000+", label: "Businesses Served" },
+  { value: "20000+", label: "Businesses Served" },
   { value: "6+", label: "Years Experience" },
   { value: "98%", label: "Satisfaction Rate" },
   { value: "24/7", label: "Support Available" },
   { value: "100cr ", label: "Funding Secured" },
-  { value: "500+", label: "Business Registered" },
+  { value: "10000+", label: "Business Registered" },
   { value: "50+", label: "Industry serveed" },
-
 ];
 
 /* ─── Animated Counter ─── */
@@ -325,7 +512,10 @@ function Counter({ value }) {
   useEffect(() => {
     if (!inView) return;
     const numeric = parseInt(value.replace(/\D/g, ""), 10);
-    if (isNaN(numeric)) { setDisplay(value); return; }
+    if (isNaN(numeric)) {
+      setDisplay(value);
+      return;
+    }
     const suffix = value.replace(/\d/g, "");
     let start = 0;
     const step = Math.ceil(numeric / 40);
@@ -345,7 +535,12 @@ function Orb({ className, delay }) {
   return (
     <motion.div
       animate={{ y: [0, -22, 0], x: [0, 10, 0] }}
-      transition={{ duration: 7 + delay, repeat: Infinity, ease: "easeInOut", delay }}
+      transition={{
+        duration: 7 + delay,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay,
+      }}
       className={`absolute rounded-full pointer-events-none blur-sm ${className}`}
     />
   );
@@ -363,7 +558,11 @@ function ServiceCard({ service, index, onOpen }) {
       ref={ref}
       initial={{ opacity: 0, y: 48 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.55, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
+      transition={{
+        duration: 0.55,
+        delay: index * 0.07,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={() => onOpen(service)}
@@ -393,7 +592,9 @@ function ServiceCard({ service, index, onOpen }) {
 
       {/* Icon */}
       <motion.div
-        animate={hovered ? { scale: 1.12, rotate: -6 } : { scale: 1, rotate: 0 }}
+        animate={
+          hovered ? { scale: 1.12, rotate: -6 } : { scale: 1, rotate: 0 }
+        }
         transition={{ type: "spring", stiffness: 350, damping: 18 }}
         className="inline-flex p-3 rounded-xl mb-4"
         style={{ background: `${service.color}18` }}
@@ -449,10 +650,16 @@ function ServiceCard({ service, index, onOpen }) {
         className="flex items-center mt-5"
         style={{ gap: 5 }}
       >
-        <span className="text-[12.5px] font-bold" style={{ color: service.color }}>
+        <span
+          className="text-[12.5px] font-bold"
+          style={{ color: service.color }}
+        >
           View Details
         </span>
-        <motion.div animate={{ x: hovered ? 4 : 0 }} transition={{ type: "spring", stiffness: 400 }}>
+        <motion.div
+          animate={{ x: hovered ? 4 : 0 }}
+          transition={{ type: "spring", stiffness: 400 }}
+        >
           <ChevronRight size={14} color={service.color} />
         </motion.div>
       </motion.div>
@@ -474,8 +681,12 @@ function WhyCard({ item, index }) {
       transition={{ duration: 0.45, delay: index * 0.1, ease: "backOut" }}
       className="group bg-[#131313] border border-white/[0.07] rounded-2xl p-6 transition-all duration-300 hover:border-[lab(78_12.63_63.5)]/40 hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(250,204,21,0.1)]"
     >
-      <h3 className="text-[#e5e5e5] text-[15px] font-bold mb-1.5">{item.title}</h3>
-      <p className="text-[#666] text-[13px] leading-relaxed">{item.description}</p>
+      <h3 className="text-[#e5e5e5] text-[15px] font-bold mb-1.5">
+        {item.title}
+      </h3>
+      <p className="text-[#666] text-[13px] leading-relaxed">
+        {item.description}
+      </p>
     </motion.div>
   );
 }
@@ -488,13 +699,12 @@ function DetailPage({ service, onClose }) {
 
   const [isOpen, setIsOpen] = useState(false);
 
-
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, []);
-
-
 
   return (
     <motion.div
@@ -517,7 +727,6 @@ function DetailPage({ service, onClose }) {
       />
 
       <div className="max-w-[920px] mx-auto px-5 pt-8 pb-20 relative z-10">
-
         {/* Back Button */}
         <motion.button
           initial={{ opacity: 0, x: -12 }}
@@ -596,17 +805,14 @@ function DetailPage({ service, onClose }) {
                       <td
                         key={ci}
                         className={`px-4 py-3.5 text-[13.5px] border-b border-white/[0.05] align-top leading-relaxed
-                          ${ci === 0
-                            ? "text-[#e0e0e0] font-semibold whitespace-nowrap"
-                            : isThreeCol && ci === 1
-                              ? "font-bold"
-                              : "text-[#888]"
+                          ${
+                            ci === 0
+                              ? "text-[#e0e0e0] font-semibold whitespace-nowrap"
+                              : isThreeCol && ci === 1
+                                ? "font-bold"
+                                : "text-[#888]"
                           }`}
-                        style={
-                          isThreeCol && ci === 1
-                            ? { color: color }
-                            : {}
-                        }
+                        style={isThreeCol && ci === 1 ? { color: color } : {}}
                       >
                         {cell}
                       </td>
@@ -642,7 +848,9 @@ function DetailPage({ service, onClose }) {
                     className="w-[7px] h-[7px] rounded-full flex-shrink-0 mt-[5px]"
                     style={{ background: color }}
                   />
-                  <span className="text-[13px] text-[#aaa] leading-relaxed">{e}</span>
+                  <span className="text-[13px] text-[#aaa] leading-relaxed">
+                    {e}
+                  </span>
                 </motion.div>
               ))}
             </div>
@@ -664,7 +872,8 @@ function DetailPage({ service, onClose }) {
             Ready to Get Started?
           </h3>
           <p className="text-[#888] text-[13.5px] mb-6 leading-relaxed">
-            Our experts will guide you through every step. Book a free consultation today.
+            Our experts will guide you through every step. Book a free
+            consultation today.
           </p>
           <div className="flex gap-3 justify-center flex-wrap">
             <motion.button
@@ -683,7 +892,9 @@ function DetailPage({ service, onClose }) {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
-              onClick={() => window.open("https://wa.me/+919898408689", "_blank")}
+              onClick={() =>
+                window.open("https://wa.me/+919898408689", "_blank")
+              }
               className="inline-flex items-center gap-2 px-6 py-3.5 bg-transparent text-[#bbb] rounded-full font-semibold text-[13.5px] border border-white/[0.14] cursor-pointer transition-all duration-200 hover:border-[lab(78_12.63_63.5)]/50 hover:text-[lab(78_12.63_63.5)]"
             >
               <Phone size={14} />
@@ -691,7 +902,6 @@ function DetailPage({ service, onClose }) {
             </motion.button>
           </div>
         </motion.div>
-
       </div>
 
       {/* Modal */}
@@ -707,9 +917,7 @@ export default function Services() {
   const { scrollYProgress } = useScroll({ target: containerRef });
   const heroY = useTransform(scrollYProgress, [0, 0.15], [0, -40]);
 
-
   const [isOpen, setIsOpen] = useState(false);
-
 
   return (
     <div
@@ -717,11 +925,26 @@ export default function Services() {
       className="min-h-screen bg-[#0B0B0B] text-white pt-24 pb-20 font-sans relative overflow-hidden"
     >
       {/* Background orbs */}
-      <Orb className="left-[5%] top-[8%] w-80 h-80 bg-[lab(78_12.63_63.5)]/[0.07]" delay={0} />
-      <Orb className="left-[75%] top-[15%] w-64 h-64 bg-blue-400/[0.06]" delay={1.5} />
-      <Orb className="left-[50%] top-[55%] w-96 h-96 bg-purple-400/[0.05]" delay={2.5} />
-      <Orb className="left-[10%] top-[75%] w-56 h-56 bg-emerald-400/[0.06]" delay={1} />
-      <Orb className="left-[80%] top-[80%] w-72 h-72 bg-pink-400/[0.06]" delay={3} />
+      <Orb
+        className="left-[5%] top-[8%] w-80 h-80 bg-[lab(78_12.63_63.5)]/[0.07]"
+        delay={0}
+      />
+      <Orb
+        className="left-[75%] top-[15%] w-64 h-64 bg-blue-400/[0.06]"
+        delay={1.5}
+      />
+      <Orb
+        className="left-[50%] top-[55%] w-96 h-96 bg-purple-400/[0.05]"
+        delay={2.5}
+      />
+      <Orb
+        className="left-[10%] top-[75%] w-56 h-56 bg-emerald-400/[0.06]"
+        delay={1}
+      />
+      <Orb
+        className="left-[80%] top-[80%] w-72 h-72 bg-pink-400/[0.06]"
+        delay={3}
+      />
 
       {/* Grid pattern */}
       <div
@@ -736,10 +959,8 @@ export default function Services() {
       />
 
       <div className="max-w-[1200px] mx-auto px-5 relative z-10">
-
         {/* ─── HERO ─── */}
         <motion.div style={{ y: heroY }} className="text-center mb-20">
-
           <motion.div
             initial={{ opacity: 0, y: -16, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -768,8 +989,9 @@ export default function Services() {
             transition={{ delay: 0.3 }}
             className="text-[#888] text-base max-w-140 mx-auto mb-10 leading-relaxed"
           >
-            Comprehensive business solutions for startups, MSMEs & entrepreneurs.
-            From company registration to digital growth — we've got you covered.
+            Comprehensive business solutions for startups, MSMEs &
+            entrepreneurs. From company registration to digital growth — we've
+            got you covered.
           </motion.p>
 
           {/* Stat pills */}
@@ -788,7 +1010,9 @@ export default function Services() {
                 <div className="text-xl font-extrabold text-[lab(78_12.63_63.5)]">
                   <Counter value={s.value} />
                 </div>
-                <div className="text-[11.5px] text-[#666] mt-0.5">{s.label}</div>
+                <div className="text-[11.5px] text-[#666] mt-0.5">
+                  {s.label}
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -806,7 +1030,8 @@ export default function Services() {
               What We <span className="text-[lab(78_12.63_63.5)]">Offer</span>
             </h2>
             <p className="text-[#666] text-[14px]">
-              5 comprehensive service categories — click any card to explore full details
+              5 comprehensive service categories — click any card to explore
+              full details
             </p>
           </motion.div>
 
@@ -831,9 +1056,12 @@ export default function Services() {
             className="text-center mb-8"
           >
             <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-extrabold mb-2">
-              Why Choose <span className="text-[lab(78_12.63_63.5)]">LeoStarts</span>?
+              Why Choose{" "}
+              <span className="text-[lab(78_12.63_63.5)]">LeoStarts</span>?
             </h2>
-            <p className="text-[#666] text-[14px]">Your trusted partner for startup success across India</p>
+            <p className="text-[#666] text-[14px]">
+              Your trusted partner for startup success across India
+            </p>
           </motion.div>
 
           <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-3.5">
@@ -878,13 +1106,16 @@ export default function Services() {
             Ready to Scale Your Business?
           </h2>
           <p className="text-[#999] text-[15px] max-w-[480px] mx-auto mb-8 leading-relaxed">
-            Book a free consultation with our experts and discover how LeoStarts can help
-            you achieve your business goals faster.
+            Book a free consultation with our experts and discover how LeoStarts
+            can help you achieve your business goals faster.
           </p>
 
           <div className="flex gap-3 justify-center flex-wrap mb-8">
             <motion.button
-              whileHover={{ scale: 1.05, boxShadow: "0 8px 40px rgba(250,204,21,0.45)" }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 8px 40px rgba(250,204,21,0.45)",
+              }}
               whileTap={{ scale: 0.96 }}
               onClick={() => setIsOpen(true)}
               className="inline-flex items-center gap-2 px-8 py-3.5 bg-linear-to-r from-[lab(78_12.63_63.5)] to-amber-400 text-[#0B0B0B] rounded-full font-bold text-[14px] border-none cursor-pointer shadow-[0_4px_20px_rgba(250,204,21,0.25)] transition-shadow duration-300"
@@ -896,7 +1127,9 @@ export default function Services() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
-              onClick={() => window.open("https://wa.me/+919898408689", "_blank")}
+              onClick={() =>
+                window.open("https://wa.me/+919898408689", "_blank")
+              }
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-transparent text-[#bbb] rounded-full font-semibold text-[14px] border border-white/15 cursor-pointer transition-all duration-200 hover:border-[lab(78_12.63_63.5)]/50 hover:text-[lab(78_12.63_63.5)]"
             >
               <Phone size={15} />
@@ -911,15 +1144,21 @@ export default function Services() {
             transition={{ delay: 0.5 }}
             className="flex justify-center gap-6 flex-wrap"
           >
-            {["DPIIT Recognized", "Pan-India Network", "100% Online Process"].map((b, i) => (
-              <div key={i} className="flex items-center gap-1.5 text-[12px] text-[#666]">
+            {[
+              "DPIIT Recognized",
+              "Pan-India Network",
+              "100% Online Process",
+            ].map((b, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-1.5 text-[12px] text-[#666]"
+              >
                 <BadgeCheck size={14} color={YELLOW} />
                 {b}
               </div>
             ))}
           </motion.div>
         </motion.div>
-
       </div>
 
       {/* ─── DETAIL PAGE OVERLAY ─── */}
@@ -931,7 +1170,6 @@ export default function Services() {
           />
         )}
       </AnimatePresence>
-
 
       {/* Modal */}
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} />

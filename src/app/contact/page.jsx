@@ -24,10 +24,9 @@ import {
 /* ─────────────────────────────────────────────
    🔧 CONFIGURATION — update these two values
 ──────────────────────────────────────────────*/
-const WHATSAPP_NUMBER = "916371287364"; // Your WhatsApp number with country code (no +)
-const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"; // Your Apps Script Web App URL
+const WHATSAPP_NUMBER = "916371287364";
+const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
 
-/* ─── OPTIONS ─── */
 const SERVICES = [
   "Company Registration",
   "Legal Compliance",
@@ -50,66 +49,34 @@ const BUDGETS = [
 ];
 
 const INFO_CARDS = [
-  {
-    icon: Phone,
-    label: "Call Us",
-    value: "+91 98765 43210",
-    sub: "Mon–Sat, 9am–7pm",
-    color: "#facc15",
-  },
-  {
-    icon: Mail,
-    label: "Email Us",
-    value: "hello@scalemate.in",
-    sub: "Reply within 2 hours",
-    color: "#60a5fa",
-  },
-  {
-    icon: MapPin,
-    label: "Office",
-    value: "Bengaluru, Karnataka",
-    sub: "India — Pan India services",
-    color: "#34d399",
-  },
-  {
-    icon: Clock,
-    label: "Support",
-    value: "24/7 Available",
-    sub: "Always here for you",
-    color: "#f472b6",
-  },
+  { icon: Phone,  label: "Call Us",  value: "+91 98765 43210",    sub: "Mon–Sat, 9am–7pm",         color: "text-yellow-400",  bg: "bg-yellow-400/10",  border: "hover:border-yellow-400/40" },
+  { icon: Mail,   label: "Email Us", value: "hello@scalemate.in", sub: "Reply within 2 hours",      color: "text-blue-400",    bg: "bg-blue-400/10",    border: "hover:border-blue-400/40"   },
+  { icon: MapPin, label: "Office",   value: "Bengaluru, KA",      sub: "Pan India services",        color: "text-emerald-400", bg: "bg-emerald-400/10", border: "hover:border-emerald-400/40"},
+  { icon: Clock,  label: "Support",  value: "24/7 Available",     sub: "Always here for you",       color: "text-pink-400",    bg: "bg-pink-400/10",    border: "hover:border-pink-400/40"  },
 ];
 
 const TRUST = [
-  { icon: Star, text: "4.9/5 Rating" },
-  { icon: Shield, text: "100% Secure" },
-  { icon: Zap, text: "Fast Response" },
-  { icon: HeadphonesIcon, text: "24/7 Support" },
+  { icon: Star,           text: "4.9/5 Rating"  },
+  { icon: Shield,         text: "100% Secure"   },
+  { icon: Zap,            text: "Fast Response" },
+  { icon: HeadphonesIcon, text: "24/7 Support"  },
 ];
 
 /* ─── Floating Orb ─── */
-function Orb({ x, y, size, color, delay }) {
+function Orb({ className }) {
   return (
-    <motion.div
-      animate={{ y: [0, -18, 0], x: [0, 8, 0] }}
-      transition={{ duration: 9 + delay, repeat: Infinity, ease: "easeInOut", delay }}
-      style={{
-        position: "absolute", left: x, top: y,
-        width: size, height: size, borderRadius: "50%",
-        background: `radial-gradient(circle, ${color}, transparent 70%)`,
-        pointerEvents: "none", filter: "blur(2px)",
-      }}
-    />
+    <div className={`absolute rounded-full blur-3xl pointer-events-none ${className}`} />
   );
 }
 
-/* ─── Styled Input ─── */
+/* ─── Field Wrapper ─── */
 function Field({ label, icon: Icon, error, children, required }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-      <label style={{ fontSize: 12, fontWeight: 700, color: "#aaa", letterSpacing: "0.06em", textTransform: "uppercase", display: "flex", alignItems: "center", gap: 4 }}>
-        {Icon && <Icon size={11} color="#facc15" />}
-        {label} {required && <span style={{ color: "#facc15" }}>*</span>}
+    <div className="flex flex-col gap-1.5">
+      <label className="text-[11px] font-bold text-neutral-400 tracking-widest uppercase flex items-center gap-1">
+        {Icon && <Icon size={11} className="text-yellow-400" />}
+        {label}
+        {required && <span className="text-yellow-400">*</span>}
       </label>
       {children}
       <AnimatePresence>
@@ -118,7 +85,7 @@ function Field({ label, icon: Icon, error, children, required }) {
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            style={{ fontSize: 11.5, color: "#f87171", margin: 0 }}
+            className="text-[11.5px] text-red-400 m-0"
           >
             {error}
           </motion.p>
@@ -128,36 +95,18 @@ function Field({ label, icon: Icon, error, children, required }) {
   );
 }
 
-const inputStyle = (focused, error) => ({
-  width: "100%",
-  background: "#111",
-  border: `1px solid ${error ? "#f87171" : focused ? "rgba(250,204,21,0.5)" : "rgba(255,255,255,0.1)"}`,
-  borderRadius: 12,
-  padding: "12px 14px",
-  color: "#f0f0f0",
-  fontSize: 14,
-  outline: "none",
-  transition: "border-color 0.25s, box-shadow 0.25s",
-  boxShadow: focused && !error ? "0 0 0 3px rgba(250,204,21,0.08)" : "none",
-  boxSizing: "border-box",
-  fontFamily: "inherit",
-});
-
 /* ─── MAIN COMPONENT ─── */
 export default function Contact() {
   const formRef = useRef(null);
   const inView = useInView(formRef, { once: true, margin: "-60px" });
 
-  const [form, setForm] = useState({
-    name: "", phone: "", email: "", service: "", budget: "", message: "",
-  });
-  const [errors, setErrors] = useState({});
-  const [focused, setFocused] = useState("");
-  const [status, setStatus] = useState("idle"); // idle | loading | success | error
+  const [form, setForm] = useState({ name: "", phone: "", email: "", service: "", budget: "", message: "" });
+  const [errors, setErrors]     = useState({});
+  const [focused, setFocused]   = useState("");
+  const [status, setStatus]     = useState("idle");
   const [serviceOpen, setServiceOpen] = useState(false);
-  const [budgetOpen, setBudgetOpen] = useState(false);
+  const [budgetOpen, setBudgetOpen]   = useState(false);
 
-  /* ── Validation ── */
   const validate = () => {
     const e = {};
     if (!form.name.trim()) e.name = "Name is required";
@@ -169,46 +118,31 @@ export default function Contact() {
     return e;
   };
 
-  /* ── Send to Google Sheets ── */
   const sendToSheets = async () => {
     const payload = new FormData();
     Object.entries(form).forEach(([k, v]) => payload.append(k, v));
     payload.append("timestamp", new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }));
-
     await fetch(GOOGLE_SHEET_URL, { method: "POST", body: payload });
   };
 
-  /* ── Open WhatsApp ── */
   const openWhatsApp = () => {
     const msg = encodeURIComponent(
-      `Hello Scalemate! 👋\n\n` +
-      `*Name:* ${form.name}\n` +
-      `*Phone:* ${form.phone}\n` +
-      `*Email:* ${form.email || "N/A"}\n` +
-      `*Service Needed:* ${form.service}\n` +
-      `*Budget:* ${form.budget || "Not specified"}\n\n` +
-      `*Message:*\n${form.message}\n\n` +
-      `_Sent from Scalemate Contact Form_`
+      `Hello Scalemate! 👋\n\n*Name:* ${form.name}\n*Phone:* ${form.phone}\n*Email:* ${form.email || "N/A"}\n*Service Needed:* ${form.service}\n*Budget:* ${form.budget || "Not specified"}\n\n*Message:*\n${form.message}\n\n_Sent from Scalemate Contact Form_`
     );
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank");
   };
 
-  /* ── Submit Handler ── */
   const handleSubmit = async () => {
     const e = validate();
     if (Object.keys(e).length > 0) { setErrors(e); return; }
     setErrors({});
     setStatus("loading");
-
     try {
-      // 1️⃣ Send to Google Sheets
       await sendToSheets();
-      // 2️⃣ Open WhatsApp with pre-filled message
       openWhatsApp();
       setStatus("success");
       setForm({ name: "", phone: "", email: "", service: "", budget: "", message: "" });
     } catch {
-      // Even if Sheets fails, open WhatsApp
       openWhatsApp();
       setStatus("success");
     }
@@ -219,43 +153,36 @@ export default function Contact() {
     if (errors[k]) setErrors((p) => ({ ...p, [k]: undefined }));
   };
 
+  /* ── Shared input class builder ── */
+  const inputCls = (key) =>
+    `w-full bg-neutral-900 rounded-xl px-3.5 py-3 text-[14px] text-neutral-100 outline-none transition-all duration-200 font-[inherit]
+     border ${errors[key] ? "border-red-400 shadow-none" : focused === key ? "border-yellow-400/50 shadow-[0_0_0_3px_rgba(250,204,21,0.08)]" : "border-white/10"}`;
+
   return (
-    <div style={{
-      minHeight: "100vh", background: "#0B0B0B", color: "#fff",
-      paddingTop: "6rem", paddingBottom: "5rem",
-      fontFamily: "'DM Sans', system-ui, sans-serif",
-      position: "relative", overflow: "hidden",
-    }}>
-      {/* Orbs */}
-      <Orb x="0%" y="5%" size={360} color="rgba(250,204,21,0.07)" delay={0} />
-      <Orb x="65%" y="15%" size={280} color="rgba(96,165,250,0.06)" delay={2} />
-      <Orb x="80%" y="70%" size={300} color="rgba(52,211,153,0.05)" delay={1.5} />
-      <Orb x="5%" y="70%" size={220} color="rgba(244,114,182,0.06)" delay={3} />
+    <div className="min-h-screen bg-[#0B0B0B] text-white pt-20 sm:pt-24 pb-16 sm:pb-20 relative overflow-hidden"
+      style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}>
+
+      {/* ── Background Orbs ── */}
+      <Orb className="w-[360px] h-[360px] left-0 top-[5%] bg-yellow-400/5" />
+      <Orb className="w-[280px] h-[280px] right-[5%] top-[15%] bg-blue-400/5" />
+      <Orb className="w-[300px] h-[300px] right-[10%] bottom-[10%] bg-emerald-400/4" />
+      <Orb className="w-[220px] h-[220px] left-[2%] bottom-[20%] bg-pink-400/5" />
 
       {/* Dot grid */}
-      <div style={{
-        position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
-        backgroundSize: "30px 30px",
-      }} />
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ backgroundImage: "radial-gradient(rgba(255,255,255,0.03) 1px,transparent 1px)", backgroundSize: "30px 30px" }} />
 
-      <div style={{ maxWidth: 1160, margin: "0 auto", padding: "0 1.25rem", position: "relative" }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
 
         {/* ─── HERO ─── */}
-        <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
+        <div className="text-center mb-10 sm:mb-14">
           <motion.div
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.55, ease: "backOut" }}
-            style={{
-              display: "inline-flex", alignItems: "center", gap: 6,
-              background: "rgba(250,204,21,0.1)", border: "1px solid rgba(250,204,21,0.3)",
-              borderRadius: 99, padding: "5px 16px", marginBottom: "1.25rem",
-              fontSize: 11.5, fontWeight: 700, letterSpacing: "0.1em",
-              color: "#facc15", textTransform: "uppercase",
-            }}
+            className="inline-flex items-center gap-1.5 bg-yellow-400/10 border border-yellow-400/30 rounded-full px-4 py-1.5 mb-5 text-[11px] sm:text-[11.5px] font-bold tracking-[0.1em] text-yellow-400 uppercase"
           >
-            <Sparkles size={12} color="#facc15" />
+            <Sparkles size={12} className="text-yellow-400" />
             Take the First Step — We Handle the Rest
           </motion.div>
 
@@ -263,17 +190,19 @@ export default function Contact() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.65 }}
-            style={{ fontSize: "clamp(2.2rem, 5.5vw, 3.8rem)", fontWeight: 900, lineHeight: 1.08, marginBottom: "1rem", letterSpacing: "-0.02em" }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.08] mb-4 tracking-tight"
           >
             Let's{" "}
-            <span style={{ color: "#facc15", textShadow: "0 0 48px rgba(250,204,21,0.35)" }}>Connect</span>
+            <span className="text-yellow-400" style={{ textShadow: "0 0 48px rgba(250,204,21,0.35)" }}>
+              Connect
+            </span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            style={{ color: "#777", fontSize: 15, maxWidth: 500, margin: "0 auto", lineHeight: 1.75 }}
+            className="text-neutral-500 text-sm sm:text-[15px] max-w-[480px] mx-auto leading-relaxed px-2"
           >
             Fill the form below — your details go straight to our WhatsApp and our team will reach out within 30 minutes.
           </motion.p>
@@ -284,57 +213,41 @@ export default function Contact() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 10, marginBottom: "3.5rem" }}
+          className="flex justify-center flex-wrap gap-2 sm:gap-2.5 mb-10 sm:mb-14"
         >
           {TRUST.map((t, i) => {
             const Icon = t.icon;
             return (
-              <div key={i} style={{
-                display: "flex", alignItems: "center", gap: 6,
-                background: "#161616", border: "1px solid rgba(255,255,255,0.08)",
-                borderRadius: 99, padding: "6px 14px",
-                fontSize: 12, color: "#aaa",
-              }}>
-                <Icon size={13} color="#facc15" strokeWidth={2} />
+              <div key={i} className="flex items-center gap-1.5 bg-neutral-900 border border-white/8 rounded-full px-3 sm:px-3.5 py-1.5 text-[11px] sm:text-xs text-neutral-400">
+                <Icon size={12} className="text-yellow-400" strokeWidth={2} />
                 {t.text}
               </div>
             );
           })}
         </motion.div>
 
-        {/* ─── MAIN GRID ─── */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 400px", gap: 24, alignItems: "start" }}>
+        {/* ─── MAIN GRID: stacks on mobile, 2-col on lg ─── */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-5 lg:gap-6 items-start">
 
-          {/* ── FORM PANEL ── */}
+          {/* ══ FORM PANEL ══ */}
           <motion.div
             ref={formRef}
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-            style={{
-              background: "linear-gradient(145deg, #161616, #101010)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              borderRadius: 24, padding: "2.25rem",
-              position: "relative", overflow: "hidden",
-            }}
+            className="relative bg-gradient-to-br from-neutral-900 to-neutral-950 border border-white/8 rounded-2xl sm:rounded-3xl p-5 sm:p-8 overflow-hidden order-1"
           >
             {/* Corner glow */}
-            <div style={{
-              position: "absolute", top: 0, left: 0,
-              width: 200, height: 200,
-              background: "radial-gradient(circle at 0% 0%, rgba(250,204,21,0.07), transparent 70%)",
-              pointerEvents: "none",
-            }} />
+            <div className="absolute top-0 left-0 w-48 h-48 bg-gradient-radial from-yellow-400/7 to-transparent pointer-events-none rounded-3xl" />
 
-            <div style={{ position: "relative" }}>
-              <h2 style={{ fontSize: 22, fontWeight: 800, marginBottom: "0.35rem" }}>
-                Send Us a Message
-              </h2>
-              <p style={{ fontSize: 13, color: "#666", marginBottom: "2rem" }}>
+            <div className="relative">
+              <h2 className="text-xl sm:text-2xl font-extrabold mb-1">Send Us a Message</h2>
+              <p className="text-[13px] text-neutral-600 mb-6">
                 Submitting will open WhatsApp with your details pre-filled ✓
               </p>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+              {/* ── Form Grid: 1-col on mobile, 2-col on sm+ ── */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                 {/* Name */}
                 <Field label="Full Name" icon={User} error={errors.name} required>
@@ -344,7 +257,7 @@ export default function Contact() {
                     onFocus={() => setFocused("name")}
                     onBlur={() => setFocused("")}
                     placeholder="Rahul Sharma"
-                    style={inputStyle(focused === "name", errors.name)}
+                    className={inputCls("name")}
                   />
                 </Field>
 
@@ -356,7 +269,8 @@ export default function Contact() {
                     onFocus={() => setFocused("phone")}
                     onBlur={() => setFocused("")}
                     placeholder="+91 98765 43210"
-                    style={inputStyle(focused === "phone", errors.phone)}
+                    className={inputCls("phone")}
+                    inputMode="tel"
                   />
                 </Field>
 
@@ -368,25 +282,22 @@ export default function Contact() {
                     onFocus={() => setFocused("email")}
                     onBlur={() => setFocused("")}
                     placeholder="rahul@company.com"
-                    style={inputStyle(focused === "email", errors.email)}
+                    className={inputCls("email")}
+                    inputMode="email"
                   />
                 </Field>
 
                 {/* Budget */}
                 <Field label="Budget Range" icon={Briefcase} error={errors.budget}>
-                  <div style={{ position: "relative" }}>
+                  <div className="relative">
                     <button
+                      type="button"
                       onClick={() => { setBudgetOpen((p) => !p); setServiceOpen(false); }}
-                      style={{
-                        ...inputStyle(budgetOpen, errors.budget),
-                        display: "flex", alignItems: "center", justifyContent: "space-between",
-                        cursor: "pointer", textAlign: "left",
-                        color: form.budget ? "#f0f0f0" : "#555",
-                      }}
+                      className={`${inputCls("budget")} flex items-center justify-between cursor-pointer text-left ${!form.budget ? "text-neutral-600" : ""}`}
                     >
                       {form.budget || "Select budget"}
                       <motion.div animate={{ rotate: budgetOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
-                        <ChevronDown size={15} color="#666" />
+                        <ChevronDown size={15} className="text-neutral-600 flex-shrink-0" />
                       </motion.div>
                     </button>
                     <AnimatePresence>
@@ -395,26 +306,15 @@ export default function Contact() {
                           initial={{ opacity: 0, y: -6, scaleY: 0.92 }}
                           animate={{ opacity: 1, y: 0, scaleY: 1 }}
                           exit={{ opacity: 0, y: -6, scaleY: 0.92 }}
-                          style={{
-                            position: "absolute", top: "calc(100% + 6px)", left: 0, right: 0,
-                            background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.1)",
-                            borderRadius: 12, overflow: "hidden", zIndex: 50,
-                            boxShadow: "0 12px 36px rgba(0,0,0,0.6)",
-                            transformOrigin: "top",
-                          }}
+                          className="absolute top-[calc(100%+6px)] left-0 right-0 bg-neutral-900 border border-white/10 rounded-xl overflow-hidden z-50 shadow-2xl"
+                          style={{ transformOrigin: "top" }}
                         >
                           {BUDGETS.map((b) => (
                             <div
                               key={b}
                               onClick={() => { set("budget")(b); setBudgetOpen(false); }}
-                              style={{
-                                padding: "10px 14px", fontSize: 13.5, cursor: "pointer",
-                                color: form.budget === b ? "#facc15" : "#ccc",
-                                background: form.budget === b ? "rgba(250,204,21,0.08)" : "transparent",
-                                transition: "background 0.15s",
-                              }}
-                              onMouseEnter={(e) => e.currentTarget.style.background = "rgba(255,255,255,0.05)"}
-                              onMouseLeave={(e) => e.currentTarget.style.background = form.budget === b ? "rgba(250,204,21,0.08)" : "transparent"}
+                              className={`px-3.5 py-2.5 text-[13.5px] cursor-pointer transition-colors duration-150
+                                ${form.budget === b ? "text-yellow-400 bg-yellow-400/8" : "text-neutral-300 hover:bg-white/5"}`}
                             >
                               {b}
                             </div>
@@ -426,21 +326,17 @@ export default function Contact() {
                 </Field>
 
                 {/* Service — full width */}
-                <div style={{ gridColumn: "1 / -1" }}>
+                <div className="col-span-1 sm:col-span-2">
                   <Field label="Service Required" icon={Briefcase} error={errors.service} required>
-                    <div style={{ position: "relative" }}>
+                    <div className="relative">
                       <button
+                        type="button"
                         onClick={() => { setServiceOpen((p) => !p); setBudgetOpen(false); }}
-                        style={{
-                          ...inputStyle(serviceOpen, errors.service),
-                          display: "flex", alignItems: "center", justifyContent: "space-between",
-                          cursor: "pointer", textAlign: "left",
-                          color: form.service ? "#f0f0f0" : "#555",
-                        }}
+                        className={`${inputCls("service")} flex items-center justify-between cursor-pointer text-left ${!form.service ? "text-neutral-600" : ""}`}
                       >
                         {form.service || "Select a service"}
                         <motion.div animate={{ rotate: serviceOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
-                          <ChevronDown size={15} color="#666" />
+                          <ChevronDown size={15} className="text-neutral-600 flex-shrink-0" />
                         </motion.div>
                       </button>
                       <AnimatePresence>
@@ -449,33 +345,23 @@ export default function Contact() {
                             initial={{ opacity: 0, y: -6, scaleY: 0.92 }}
                             animate={{ opacity: 1, y: 0, scaleY: 1 }}
                             exit={{ opacity: 0, y: -6, scaleY: 0.92 }}
-                            style={{
-                              position: "absolute", top: "calc(100% + 6px)", left: 0, right: 0,
-                              background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.1)",
-                              borderRadius: 12, overflow: "hidden", zIndex: 50,
-                              boxShadow: "0 12px 36px rgba(0,0,0,0.6)",
-                              display: "grid", gridTemplateColumns: "1fr 1fr",
-                              transformOrigin: "top",
-                            }}
+                            className="absolute top-[calc(100%+6px)] left-0 right-0 bg-neutral-900 border border-white/10 rounded-xl overflow-hidden z-50 shadow-2xl"
+                            style={{ transformOrigin: "top" }}
                           >
-                            {SERVICES.map((s) => (
-                              <div
-                                key={s}
-                                onClick={() => { set("service")(s); setServiceOpen(false); }}
-                                style={{
-                                  padding: "10px 14px", fontSize: 13.5, cursor: "pointer",
-                                  color: form.service === s ? "#facc15" : "#ccc",
-                                  background: form.service === s ? "rgba(250,204,21,0.08)" : "transparent",
-                                  transition: "background 0.15s",
-                                  display: "flex", alignItems: "center", gap: 6,
-                                }}
-                                onMouseEnter={(e) => e.currentTarget.style.background = "rgba(255,255,255,0.05)"}
-                                onMouseLeave={(e) => e.currentTarget.style.background = form.service === s ? "rgba(250,204,21,0.08)" : "transparent"}
-                              >
-                                {form.service === s && <CheckCircle2 size={12} color="#facc15" />}
-                                {s}
-                              </div>
-                            ))}
+                            {/* 1-col on mobile, 2-col on sm+ */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2">
+                              {SERVICES.map((s) => (
+                                <div
+                                  key={s}
+                                  onClick={() => { set("service")(s); setServiceOpen(false); }}
+                                  className={`px-3.5 py-2.5 text-[13.5px] cursor-pointer transition-colors duration-150 flex items-center gap-1.5
+                                    ${form.service === s ? "text-yellow-400 bg-yellow-400/8" : "text-neutral-300 hover:bg-white/5"}`}
+                                >
+                                  {form.service === s && <CheckCircle2 size={12} className="text-yellow-400 flex-shrink-0" />}
+                                  {s}
+                                </div>
+                              ))}
+                            </div>
                           </motion.div>
                         )}
                       </AnimatePresence>
@@ -484,7 +370,7 @@ export default function Contact() {
                 </div>
 
                 {/* Message — full width */}
-                <div style={{ gridColumn: "1 / -1" }}>
+                <div className="col-span-1 sm:col-span-2">
                   <Field label="Your Message" icon={MessageCircle} error={errors.message} required>
                     <textarea
                       value={form.message}
@@ -493,36 +379,32 @@ export default function Contact() {
                       onBlur={() => setFocused("")}
                       placeholder="Tell us about your business, what you need, and any questions you have..."
                       rows={4}
-                      style={{ ...inputStyle(focused === "message", errors.message), resize: "vertical", minHeight: 110 }}
+                      className={`${inputCls("message")} resize-y min-h-[110px]`}
                     />
                   </Field>
                 </div>
               </div>
 
-              {/* Submit */}
-              <div style={{ marginTop: "1.75rem", display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
+              {/* ── Submit Row ── */}
+              <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:items-center">
                 <motion.button
+                  type="button"
                   onClick={handleSubmit}
                   disabled={status === "loading"}
                   whileHover={{ scale: 1.04, boxShadow: "0 8px 36px rgba(250,204,21,0.38)" }}
                   whileTap={{ scale: 0.97 }}
-                  style={{
-                    display: "inline-flex", alignItems: "center", gap: 8,
-                    padding: "13px 28px",
-                    background: "linear-gradient(135deg, #facc15, #f59e0b)",
-                    color: "#0B0B0B", borderRadius: 99,
-                    fontWeight: 800, fontSize: 14, border: "none", cursor: "pointer",
-                    boxShadow: "0 4px 20px rgba(250,204,21,0.22)",
-                    opacity: status === "loading" ? 0.7 : 1,
-                    transition: "opacity 0.2s",
-                  }}
+                  className={`inline-flex items-center justify-center gap-2 px-6 py-3.5 w-full sm:w-auto
+                    bg-gradient-to-r from-yellow-400 to-amber-400 text-neutral-950 rounded-full
+                    font-extrabold text-[14px] border-none cursor-pointer
+                    shadow-[0_4px_20px_rgba(250,204,21,0.22)] transition-opacity duration-200
+                    ${status === "loading" ? "opacity-70 cursor-not-allowed" : ""}`}
                 >
                   {status === "loading" ? (
                     <>
                       <motion.div
                         animate={{ rotate: 360 }}
                         transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-                        style={{ width: 15, height: 15, border: "2px solid #0B0B0B", borderTopColor: "transparent", borderRadius: "50%" }}
+                        className="w-4 h-4 border-2 border-neutral-950 border-t-transparent rounded-full"
                       />
                       Sending…
                     </>
@@ -541,81 +423,68 @@ export default function Contact() {
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0 }}
-                      style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 13, color: "#34d399", fontWeight: 600 }}
+                      className="flex items-center gap-1.5 text-[13px] text-emerald-400 font-semibold"
                     >
-                      <CheckCircle2 size={15} color="#34d399" />
+                      <CheckCircle2 size={15} className="text-emerald-400" />
                       Sent! WhatsApp opened ✓
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
 
-              <p style={{ fontSize: 11.5, color: "#555", marginTop: "1rem" }}>
+              <p className="text-[11.5px] text-neutral-700 mt-3">
                 🔒 Your data is saved to our secure records and sent directly to our WhatsApp. We never share your info.
               </p>
             </div>
           </motion.div>
 
-          {/* ── RIGHT PANEL ── */}
+          {/* ══ RIGHT PANEL ══ */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            style={{ display: "flex", flexDirection: "column", gap: 14 }}
+            className="flex flex-col gap-3 order-2"
           >
-            {/* Info cards */}
-            {INFO_CARDS.map((card, i) => {
-              const Icon = card.icon;
-              return (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.2 + i * 0.08 }}
-                  whileHover={{ y: -3, borderColor: card.color + "55" }}
-                  style={{
-                    background: "#131313",
-                    border: "1px solid rgba(255,255,255,0.07)",
-                    borderRadius: 16, padding: "1rem 1.25rem",
-                    display: "flex", alignItems: "center", gap: 14,
-                    transition: "border-color 0.25s, box-shadow 0.25s",
-                  }}
-                >
-                  <div style={{
-                    width: 42, height: 42, borderRadius: 12, flexShrink: 0,
-                    background: card.color + "14",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                  }}>
-                    <Icon size={19} color={card.color} strokeWidth={1.8} />
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 11, color: "#666", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em" }}>
-                      {card.label}
+            {/* Info Cards — 2-col grid on mobile/tablet, 1-col on lg */}
+            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-1 gap-3">
+              {INFO_CARDS.map((card, i) => {
+                const Icon = card.icon;
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.2 + i * 0.08 }}
+                    whileHover={{ y: -2 }}
+                    className={`bg-neutral-950 border border-white/7 rounded-2xl p-4 flex items-center gap-3.5 transition-all duration-250 ${card.border}`}
+                  >
+                    <div className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex-shrink-0 ${card.bg} flex items-center justify-center`}>
+                      <Icon size={18} className={card.color} strokeWidth={1.8} />
                     </div>
-                    <div style={{ fontSize: 14, fontWeight: 700, color: "#e5e5e5", marginTop: 2 }}>
-                      {card.value}
+                    <div className="min-w-0">
+                      <div className="text-[10px] sm:text-[11px] text-neutral-600 font-semibold uppercase tracking-widest">
+                        {card.label}
+                      </div>
+                      <div className="text-[13px] sm:text-[14px] font-bold text-neutral-200 mt-0.5 truncate">
+                        {card.value}
+                      </div>
+                      <div className="text-[11px] text-neutral-600 mt-0.5">{card.sub}</div>
                     </div>
-                    <div style={{ fontSize: 11.5, color: "#666", marginTop: 1 }}>{card.sub}</div>
-                  </div>
-                </motion.div>
-              );
-            })}
+                  </motion.div>
+                );
+              })}
+            </div>
 
-            {/* WhatsApp direct CTA */}
+            {/* WhatsApp CTA */}
             <motion.a
               href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello Scalemate! I'd like to know more about your services.")}`}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.03, boxShadow: "0 8px 36px rgba(37,211,102,0.35)" }}
               whileTap={{ scale: 0.97 }}
-              style={{
-                display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
-                padding: "13px 20px",
-                background: "linear-gradient(135deg, #25d366, #128c7e)",
-                borderRadius: 16, textDecoration: "none",
-                color: "#fff", fontWeight: 700, fontSize: 14,
-                boxShadow: "0 4px 18px rgba(37,211,102,0.2)",
-              }}
+              className="flex items-center justify-center gap-2.5 px-5 py-3.5
+                bg-gradient-to-r from-[#25d366] to-[#128c7e] rounded-2xl no-underline
+                text-white font-bold text-[14px] shadow-[0_4px_18px_rgba(37,211,102,0.2)]"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
@@ -628,23 +497,18 @@ export default function Contact() {
               initial={{ opacity: 0 }}
               animate={inView ? { opacity: 1 } : {}}
               transition={{ delay: 0.55 }}
-              style={{
-                background: "rgba(250,204,21,0.06)",
-                border: "1px solid rgba(250,204,21,0.18)",
-                borderRadius: 16, padding: "1rem 1.25rem",
-                display: "flex", alignItems: "center", gap: 10,
-              }}
+              className="bg-yellow-400/6 border border-yellow-400/18 rounded-2xl p-4 flex items-center gap-3"
             >
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
-                style={{ width: 10, height: 10, borderRadius: "50%", background: "#facc15", flexShrink: 0 }}
+                className="w-2.5 h-2.5 rounded-full bg-yellow-400 flex-shrink-0"
               />
               <div>
-                <div style={{ fontSize: 13, fontWeight: 700, color: "#facc15" }}>
+                <div className="text-[13px] font-bold text-yellow-400">
                   Average response: 28 minutes
                 </div>
-                <div style={{ fontSize: 11.5, color: "#666", marginTop: 2 }}>
+                <div className="text-[11.5px] text-neutral-600 mt-0.5">
                   Our team is online Mon–Sat 9AM–7PM IST
                 </div>
               </div>
@@ -658,14 +522,11 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55 }}
-          style={{
-            marginTop: "3rem", textAlign: "center",
-            display: "flex", justifyContent: "center", gap: "2rem", flexWrap: "wrap",
-          }}
+          className="mt-10 sm:mt-12 flex flex-wrap justify-center gap-4 sm:gap-8"
         >
           {["No spam, ever", "Free first consultation", "Reply in 30 mins", "1000+ businesses served"].map((t, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12.5, color: "#555" }}>
-              <CheckCircle2 size={13} color="#facc15" />
+            <div key={i} className="flex items-center gap-1.5 text-[12px] sm:text-[12.5px] text-neutral-600">
+              <CheckCircle2 size={13} className="text-yellow-400 flex-shrink-0" />
               {t}
             </div>
           ))}

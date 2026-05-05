@@ -1,6 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+
 import {
   Compass,
   FileText,
@@ -23,6 +24,7 @@ import {
   Rocket,
   Headphones,
 } from "lucide-react";
+import Link from "next/link";
 
 /* ─── DATA – 6 steps for the startup process ─── */
 const STEPS = [
@@ -36,7 +38,11 @@ const STEPS = [
     duration: "30 mins",
     color: "#facc15",
     glow: "rgba(250,204,21,0.2)",
-    checkpoints: ["Business needs analysis", "Goal identification", "Initial roadmap discussion"],
+    checkpoints: [
+      "Business needs analysis",
+      "Goal identification",
+      "Initial roadmap discussion",
+    ],
   },
   {
     number: "02",
@@ -48,7 +54,11 @@ const STEPS = [
     duration: "1–2 Days",
     color: "#60a5fa",
     glow: "rgba(96,165,250,0.2)",
-    checkpoints: ["Document checklist shared", "KYC & verification", "Custom plan created"],
+    checkpoints: [
+      "Document checklist shared",
+      "KYC & verification",
+      "Custom plan created",
+    ],
   },
   {
     number: "03",
@@ -60,7 +70,11 @@ const STEPS = [
     duration: "2–3 Days",
     color: "#34d399",
     glow: "rgba(52,211,153,0.2)",
-    checkpoints: ["Legal compliance check", "Document verification", "Expert sign-off"],
+    checkpoints: [
+      "Legal compliance check",
+      "Document verification",
+      "Expert sign-off",
+    ],
   },
   {
     number: "04",
@@ -72,7 +86,11 @@ const STEPS = [
     duration: "3–7 Days",
     color: "#f472b6",
     glow: "rgba(244,114,182,0.2)",
-    checkpoints: ["Government portal filing", "Real-time status updates", "Follow-up & tracking"],
+    checkpoints: [
+      "Government portal filing",
+      "Real-time status updates",
+      "Follow-up & tracking",
+    ],
   },
   {
     number: "05",
@@ -84,7 +102,11 @@ const STEPS = [
     duration: "Same Day",
     color: "#a78bfa",
     glow: "rgba(167,139,250,0.2)",
-    checkpoints: ["Certificates delivered", "Complete documentation", "Onboarding walkthrough"],
+    checkpoints: [
+      "Certificates delivered",
+      "Complete documentation",
+      "Onboarding walkthrough",
+    ],
   },
   {
     number: "06",
@@ -96,13 +118,21 @@ const STEPS = [
     duration: "Always On",
     color: "#fb923c",
     glow: "rgba(251,146,60,0.2)",
-    checkpoints: ["Dedicated account manager", "Compliance reminders", "24/7 support access"],
+    checkpoints: [
+      "Dedicated account manager",
+      "Compliance reminders",
+      "24/7 support access",
+    ],
   },
 ];
 
 const STATS = [
   { icon: Users, value: "26,000+", label: "Businesses supported" },
-  { icon: BadgeCheck, value: "14,000+", label: "Registrations & certifications" },
+  {
+    icon: BadgeCheck,
+    value: "14,000+",
+    label: "Registrations & certifications",
+  },
   { icon: MapPin, value: "Pan-India", label: "Delivery model" },
   { icon: Star, value: "4.9 / 5", label: "Client rating" },
 ];
@@ -119,10 +149,18 @@ function Orb({ x, y, size, color, delay }) {
   return (
     <motion.div
       animate={{ y: [0, -18, 0], x: [0, 7, 0] }}
-      transition={{ duration: 9 + delay, repeat: Infinity, ease: "easeInOut", delay }}
+      transition={{
+        duration: 9 + delay,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay,
+      }}
       className="absolute pointer-events-none rounded-full"
       style={{
-        left: x, top: y, width: size, height: size,
+        left: x,
+        top: y,
+        width: size,
+        height: size,
         background: `radial-gradient(circle, ${color}, transparent 70%)`,
         filter: "blur(2px)",
       }}
@@ -151,14 +189,16 @@ function StepCard({ step, index, total }) {
       {/* Left: number + connector */}
       <div className="flex flex-col items-center w-14 sm:w-16 shrink-0">
         <motion.div
-          animate={hovered
-            ? { scale: 1.15, boxShadow: `0 0 28px ${step.glow}` }
-            : { scale: 1, boxShadow: "none" }
+          animate={
+            hovered
+              ? { scale: 1.15, boxShadow: `0 0 28px ${step.glow}` }
+              : { scale: 1, boxShadow: "none" }
           }
           transition={{ type: "spring", stiffness: 350, damping: 20 }}
           className="rounded-full flex items-center justify-center text-xs font-bold shrink-0 z-10 relative"
           style={{
-            width: 50, height: 50,
+            width: 50,
+            height: 50,
             background: hovered ? step.color : "#1a1a1a",
             border: `2px solid ${hovered ? step.color : "rgba(255,255,255,0.1)"}`,
             color: hovered ? "#0B0B0B" : step.color,
@@ -171,7 +211,10 @@ function StepCard({ step, index, total }) {
         </motion.div>
 
         {!isLast && (
-          <div className="flex-1 w-0.5 mt-1.5 mb-1.5 relative" style={{ background: "rgba(255,255,255,0.06)" }}>
+          <div
+            className="flex-1 w-0.5 mt-1.5 mb-1.5 relative"
+            style={{ background: "rgba(255,255,255,0.06)" }}
+          >
             <motion.div
               initial={{ scaleY: 0 }}
               animate={inView ? { scaleY: 1 } : {}}
@@ -207,7 +250,9 @@ function StepCard({ step, index, total }) {
           animate={{ opacity: hovered ? 1 : 0 }}
           transition={{ duration: 0.3 }}
           className="absolute inset-0 pointer-events-none"
-          style={{ background: `radial-gradient(ellipse at 20% 0%, ${step.glow}, transparent 60%)` }}
+          style={{
+            background: `radial-gradient(ellipse at 20% 0%, ${step.glow}, transparent 60%)`,
+          }}
         />
 
         {/* Step label + duration */}
@@ -234,7 +279,9 @@ function StepCard({ step, index, total }) {
         {/* Icon + Title */}
         <div className="flex items-center gap-3 mb-2">
           <motion.div
-            animate={hovered ? { scale: 1.12, rotate: -8 } : { scale: 1, rotate: 0 }}
+            animate={
+              hovered ? { scale: 1.12, rotate: -8 } : { scale: 1, rotate: 0 }
+            }
             transition={{ type: "spring", stiffness: 300, damping: 16 }}
             className="rounded-xl p-2.5 flex items-center justify-center shrink-0"
             style={{
@@ -245,10 +292,16 @@ function StepCard({ step, index, total }) {
             <Icon size={22} color={step.color} strokeWidth={1.8} />
           </motion.div>
           <div>
-            <p className="text-xs font-semibold mb-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>
+            <p
+              className="text-xs font-semibold mb-0.5"
+              style={{ color: "rgba(255,255,255,0.4)" }}
+            >
               {step.subtitle}
             </p>
-            <h3 className="text-lg sm:text-xl font-extrabold leading-tight" style={{ color: "#f0f0f0" }}>
+            <h3
+              className="text-lg sm:text-xl font-extrabold leading-tight"
+              style={{ color: "#f0f0f0" }}
+            >
               {step.title}
             </h3>
           </div>
@@ -281,7 +334,12 @@ function StepCard({ step, index, total }) {
               className="flex items-start gap-2 text-xs sm:text-sm"
               style={{ color: "#aaa" }}
             >
-              <CheckCircle2 size={13} color={step.color} strokeWidth={2.5} className="shrink-0 mt-0.5" />
+              <CheckCircle2
+                size={13}
+                color={step.color}
+                strokeWidth={2.5}
+                className="shrink-0 mt-0.5"
+              />
               {cp}
             </motion.div>
           ))}
@@ -293,6 +351,7 @@ function StepCard({ step, index, total }) {
 
 /* ─── MAIN ─── */
 export default function Process() {
+  const stepsRef = useRef(null);
   return (
     <div
       className="min-h-screen relative overflow-hidden"
@@ -308,13 +367,20 @@ export default function Process() {
       <Orb x="0%" y="4%" size={340} color="rgba(250,204,21,0.07)" delay={0} />
       <Orb x="68%" y="18%" size={280} color="rgba(96,165,250,0.06)" delay={2} />
       <Orb x="25%" y="58%" size={320} color="rgba(52,211,153,0.05)" delay={1} />
-      <Orb x="78%" y="74%" size={240} color="rgba(167,139,250,0.05)" delay={3} />
+      <Orb
+        x="78%"
+        y="74%"
+        size={240}
+        color="rgba(167,139,250,0.05)"
+        delay={3}
+      />
 
       {/* Dot grid */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
+          backgroundImage:
+            "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
@@ -323,13 +389,15 @@ export default function Process() {
       <div
         className="absolute top-0 pointer-events-none"
         style={{
-          right: "22%", width: 1, height: "100%",
-          background: "linear-gradient(to bottom, transparent, rgba(250,204,21,0.05) 40%, transparent)",
+          right: "22%",
+          width: 1,
+          height: "100%",
+          background:
+            "linear-gradient(to bottom, transparent, rgba(250,204,21,0.05) 40%, transparent)",
         }}
       />
 
       <div className="max-w-3xl mx-auto px-5 sm:px-6 relative">
-
         {/* ─── HERO ─── */}
         <div className="text-center mb-16">
           {/* Badge */}
@@ -354,10 +422,18 @@ export default function Process() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="font-black leading-none mb-4 tracking-tight"
-            style={{ fontSize: "clamp(2rem, 6vw, 3.6rem)", letterSpacing: "-0.02em" }}
+            style={{
+              fontSize: "clamp(2rem, 6vw, 3.6rem)",
+              letterSpacing: "-0.02em",
+            }}
           >
             Six simple steps,{" "}
-            <span style={{ color: "#facc15", textShadow: "0 0 48px rgba(250,204,21,0.3)" }}>
+            <span
+              style={{
+                color: "#facc15",
+                textShadow: "0 0 48px rgba(250,204,21,0.3)",
+              }}
+            >
               zero black boxes
             </span>
           </motion.h1>
@@ -370,7 +446,10 @@ export default function Process() {
             className="text-sm sm:text-base leading-relaxed mb-8 mx-auto max-w-lg"
             style={{ color: "#777" }}
           >
-            Built for Indian startups and MSMEs: know what happens before filings, during execution, and after handover — with documentation you can show to a bank, auditor, or investor without rewriting the story.
+            Built for Indian startups and MSMEs: know what happens before
+            filings, during execution, and after handover — with documentation
+            you can show to a bank, auditor, or investor without rewriting the
+            story.
           </motion.p>
 
           {/* CTA buttons */}
@@ -380,21 +459,33 @@ export default function Process() {
             transition={{ delay: 0.4 }}
             className="flex flex-wrap justify-center gap-3 mb-10"
           >
+            <Link href="/contact">
+              <motion.button
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 8px 36px rgba(250,204,21,0.4)",
+                }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm cursor-pointer border-none"
+                style={{
+                  background: "linear-gradient(135deg, #facc15, #f59e0b)",
+                  color: "#0B0B0B",
+                  boxShadow: "0 4px 20px rgba(250,204,21,0.22)",
+                }}
+              >
+                Start with a call
+                <ArrowRight size={14} />
+              </motion.button>
+            </Link>
             <motion.button
-              whileHover={{ scale: 1.05, boxShadow: "0 8px 36px rgba(250,204,21,0.4)" }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm cursor-pointer border-none"
-              style={{
-                background: "linear-gradient(135deg, #facc15, #f59e0b)",
-                color: "#0B0B0B",
-                boxShadow: "0 4px 20px rgba(250,204,21,0.22)",
+              onClick={() => {
+                stepsRef.current?.scrollIntoView({ behavior: "smooth" });
               }}
-            >
-              Start with a diagnostic call
-              <ArrowRight size={14} />
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.04, borderColor: "rgba(250,204,21,0.4)", color: "#facc15" }}
+              whileHover={{
+                scale: 1.04,
+                borderColor: "rgba(250,204,21,0.4)",
+                color: "#facc15",
+              }}
               whileTap={{ scale: 0.97 }}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm cursor-pointer"
               style={{
@@ -404,7 +495,7 @@ export default function Process() {
                 transition: "all 0.2s",
               }}
             >
-              Review the five pillars
+              Review your journey
               <ChevronRight size={14} />
             </motion.button>
           </motion.div>
@@ -430,8 +521,15 @@ export default function Process() {
                   }}
                 >
                   <Icon size={13} color="#facc15" strokeWidth={2} />
-                  <span className="text-xs" style={{ color: "#aaa" }}>{p.label}</span>
-                  <span className="text-xs font-bold" style={{ color: "#facc15" }}>{p.value}</span>
+                  <span className="text-xs" style={{ color: "#aaa" }}>
+                    {p.label}
+                  </span>
+                  <span
+                    className="text-xs font-bold"
+                    style={{ color: "#facc15" }}
+                  >
+                    {p.value}
+                  </span>
                 </motion.div>
               );
             })}
@@ -445,11 +543,20 @@ export default function Process() {
           viewport={{ once: true }}
           className="flex items-center gap-3 mb-8"
         >
-          <div className="h-px flex-1" style={{ background: "rgba(255,255,255,0.07)" }} />
-          <span className="text-xs font-bold tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.3)" }}>
+          <div
+            className="h-px flex-1"
+            style={{ background: "rgba(255,255,255,0.07)" }}
+          />
+          <span
+            className="text-xs font-bold tracking-widest uppercase"
+            style={{ color: "rgba(255,255,255,0.3)" }}
+          >
             The flow
           </span>
-          <div className="h-px flex-1" style={{ background: "rgba(255,255,255,0.07)" }} />
+          <div
+            className="h-px flex-1"
+            style={{ background: "rgba(255,255,255,0.07)" }}
+          />
         </motion.div>
 
         <motion.p
@@ -463,9 +570,21 @@ export default function Process() {
         </motion.p>
 
         {/* ─── STEPS ─── */}
-        <div className="mb-16">
+        <div ref={stepsRef} className="mb-16">
           {STEPS.map((step, i) => (
-            <StepCard key={i} step={step} index={i} total={STEPS.length} />
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                delay: i * 0.15,
+                duration: 0.6,
+                ease: "easeOut",
+              }}
+            >
+              <StepCard step={step} index={i} total={STEPS.length} />
+            </motion.div>
           ))}
         </div>
 
@@ -490,11 +609,22 @@ export default function Process() {
                   transition: "border-color 0.2s, transform 0.2s",
                 }}
               >
-                <Icon size={16} color="#facc15" className="mx-auto mb-2" strokeWidth={2} />
-                <div className="text-lg sm:text-2xl font-black mb-0.5" style={{ color: "#facc15" }}>
+                <Icon
+                  size={16}
+                  color="#facc15"
+                  className="mx-auto mb-2"
+                  strokeWidth={2}
+                />
+                <div
+                  className="text-lg sm:text-2xl font-black mb-0.5"
+                  style={{ color: "#facc15" }}
+                >
                   {s.value}
                 </div>
-                <div className="text-xs leading-tight" style={{ color: "#666" }}>
+                <div
+                  className="text-xs leading-tight"
+                  style={{ color: "#666" }}
+                >
                   {s.label}
                 </div>
               </motion.div>
@@ -510,7 +640,8 @@ export default function Process() {
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="relative overflow-hidden rounded-3xl text-center"
           style={{
-            background: "linear-gradient(135deg, rgba(250,204,21,0.09), rgba(250,204,21,0.02) 60%, transparent)",
+            background:
+              "linear-gradient(135deg, rgba(250,204,21,0.09), rgba(250,204,21,0.02) 60%, transparent)",
             border: "1px solid rgba(250,204,21,0.2)",
             padding: "clamp(1.75rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2.5rem)",
           }}
@@ -520,11 +651,17 @@ export default function Process() {
             <motion.div
               key={i}
               animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
-              transition={{ duration: 20 + i * 10, repeat: Infinity, ease: "linear" }}
+              transition={{
+                duration: 20 + i * 10,
+                repeat: Infinity,
+                ease: "linear",
+              }}
               className="absolute pointer-events-none rounded-full"
               style={{
-                top: -(size / 2), right: -(size / 2),
-                width: size, height: size,
+                top: -(size / 2),
+                right: -(size / 2),
+                width: size,
+                height: size,
                 border: "1px solid rgba(250,204,21,0.08)",
               }}
             />
@@ -552,42 +689,57 @@ export default function Process() {
           >
             Tell us where you are stuck
           </h2>
-          <p className="text-sm leading-relaxed max-w-md mx-auto mb-7" style={{ color: "#888" }}>
-            Portal errors, branch returns, DPIIT RTR, thin DPR — we have seen the patterns. One diagnostic call to align the right phase and pillar.
+          <p
+            className="text-sm leading-relaxed max-w-md mx-auto mb-7"
+            style={{ color: "#888" }}
+          >
+            Portal errors, branch returns, DPIIT RTR, thin DPR — we have seen
+            the patterns. One diagnostic call to align the right phase and
+            pillar.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
-            <motion.button
-              whileHover={{ scale: 1.05, boxShadow: "0 8px 36px rgba(250,204,21,0.4)" }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm border-none cursor-pointer"
-              style={{
-                background: "linear-gradient(135deg, #facc15, #f59e0b)",
-                color: "#0B0B0B",
-                boxShadow: "0 4px 20px rgba(250,204,21,0.22)",
-              }}
-            >
-              Schedule your call
-              <ArrowRight size={14} />
-            </motion.button>
+            <Link href={"/contact"}>
+              <motion.button
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 8px 36px rgba(250,204,21,0.4)",
+                }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm border-none cursor-pointer"
+                style={{
+                  background: "linear-gradient(135deg, #facc15, #f59e0b)",
+                  color: "#0B0B0B",
+                  boxShadow: "0 4px 20px rgba(250,204,21,0.22)",
+                }}
+              >
+                Schedule your call
+                <ArrowRight size={14} />
+              </motion.button>
+            </Link>
 
-            <motion.button
-              whileHover={{ scale: 1.04, borderColor: "rgba(250,204,21,0.4)", color: "#facc15" }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-sm cursor-pointer"
-              style={{
-                background: "transparent",
-                color: "#999",
-                border: "1px solid rgba(255,255,255,0.14)",
-                transition: "all 0.2s",
-              }}
-            >
-              Scheme & process FAQs
-              <ChevronRight size={14} />
-            </motion.button>
+            <Link href={"/faq"}>
+              <motion.button
+                whileHover={{
+                  scale: 1.04,
+                  borderColor: "rgba(250,204,21,0.4)",
+                  color: "#facc15",
+                }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-sm cursor-pointer"
+                style={{
+                  background: "transparent",
+                  color: "#999",
+                  border: "1px solid rgba(255,255,255,0.14)",
+                  transition: "all 0.2s",
+                }}
+              >
+                Scheme & process FAQs
+                <ChevronRight size={14} />
+              </motion.button>
+            </Link>
           </div>
         </motion.div>
-
       </div>
     </div>
   );

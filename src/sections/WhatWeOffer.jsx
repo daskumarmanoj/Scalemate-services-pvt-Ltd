@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   TrendingUp,
   FileText,
@@ -19,6 +20,7 @@ const GOLD = "#F5C518";
 
 const SERVICES = [
   {
+    slug: "growth-strategy",
     title: "Growth Strategy",
     icon: TrendingUp,
     tag: "Strategic",
@@ -27,54 +29,103 @@ const SERVICES = [
       "Strategic planning for business expansion, market entry, and digital transformation.",
     features: [
       "Business Plan Development",
-      "Market Research",
-      "Digital Marketing",
+      "Market Research & Analysis",
+      "Competitor Benchmarking",
+      "Revenue Growth Planning",
+      "Digital Transformation Strategy",
+      "Brand Positioning",
+      "Scalability Planning",
     ],
   },
   {
+    slug: "legal-registration",
     title: "Legal Registration",
     icon: FileText,
     tag: "Most Popular",
     color: "#F5C518",
     description:
       "Complete company registration with MCA compliance and documentation.",
-    features: ["Pvt Ltd", "LLP & OPC", "Startup India"],
+    features: [
+      "Private Limited Company",
+      "LLP Registration",
+      "One Person Company",
+      "Startup India Registration",
+      "GST Registration",
+      "PAN & TAN Setup",
+      "Compliance Filing Support",
+    ],
   },
   {
+    slug: "fund-raising",
     title: "Fund Raising",
     icon: DollarSign,
     tag: "High Demand",
     color: "#60a5fa",
     description:
       "End-to-end support for grants, loans, and investor funding.",
-    features: ["Grants", "Angel Funding", "MSME Loans"],
+    features: [
+      "Startup Funding Guidance",
+      "Angel Investor Connect",
+      "Venture Capital Support",
+      "MSME Loans Assistance",
+      "Government Grants",
+      "Pitch Deck Creation",
+      "Financial Modeling",
+    ],
   },
   {
+    slug: "certifications",
     title: "Certifications",
     icon: BadgeCheck,
     tag: "Trust",
     color: "#34d399",
     description:
       "Government-backed certifications like ISO, MSME, Trademark.",
-    features: ["ISO", "MSME", "Trademark"],
+    features: [
+      "ISO Certification",
+      "MSME Registration",
+      "Trademark Filing",
+      "FSSAI License",
+      "Import Export Code",
+      "Startup Recognition",
+      "Compliance Certification",
+    ],
   },
   {
+    slug: "digital-marketing",
     title: "Digital Marketing",
     icon: Globe,
     tag: "Grow Online",
     color: "#e879f9",
     description:
       "SEO, social media, website development & lead generation.",
-    features: ["SEO", "Social Media", "Website Dev"],
+    features: [
+      "Search Engine Optimization",
+      "Social Media Marketing",
+      "Google Ads Campaign",
+      "Website Development",
+      "Lead Generation Funnels",
+      "Content Marketing",
+      "Performance Analytics",
+    ],
   },
   {
+    slug: "company-profiling",
     title: "Company Profiling",
     icon: BookOpen,
     tag: "Brand Identity",
     color: "#fb923c",
     description:
       "Pitch decks, DPR, branding & financial projections.",
-    features: ["Pitch Deck", "DPR", "Logo Design"],
+    features: [
+      "Professional Pitch Deck",
+      "Detailed Project Report",
+      "Brand Identity Design",
+      "Logo & Visual Kit",
+      "Financial Forecasting",
+      "Business Presentation",
+      "Investor Documentation",
+    ],
   },
 ];
 
@@ -143,39 +194,48 @@ const WhatWeOffer = () => {
               <motion.div
                 key={i}
                 whileHover={{ y: -8 }}
-                className="bg-white/5 border border-white/10 rounded-3xl p-6 hover:border-yellow-400/40 transition"
+                className="bg-white/5 border border-white/10 rounded-3xl p-6 hover:border-yellow-400/40 transition flex flex-col justify-between"
               >
-                <div
-                  className="w-14 h-14 flex items-center justify-center rounded-xl mb-4"
-                  style={{
-                    background: `${item.color}20`,
-                    color: item.color,
-                  }}
-                >
-                  <Icon size={26} />
+                <div>
+                  <div
+                    className="w-14 h-14 flex items-center justify-center rounded-xl mb-4"
+                    style={{
+                      background: `${item.color}20`,
+                      color: item.color,
+                    }}
+                  >
+                    <Icon size={26} />
+                  </div>
+
+                  <h3 className="text-lg font-semibold hover:text-yellow-400">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-xs text-gray-400">{item.tag}</p>
+
+                  <p className="text-sm text-gray-400 mt-3">
+                    {item.description}
+                  </p>
+
+                  <ul className="mt-4 space-y-1">
+                    {item.features.map((f, idx) => (
+                      <li
+                        key={idx}
+                        className="text-xs flex items-center gap-2"
+                      >
+                        <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                <h3 className="text-lg font-semibold hover:text-yellow-400">
-                  {item.title}
-                </h3>
-
-                <p className="text-xs text-gray-400">{item.tag}</p>
-
-                <p className="text-sm text-gray-400 mt-3">
-                  {item.description}
-                </p>
-
-                <ul className="mt-4 space-y-1">
-                  {item.features.map((f, idx) => (
-                    <li
-                      key={idx}
-                      className="text-xs flex items-center gap-2"
-                    >
-                      <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
+                {/* Learn More Button */}
+                <Link href={"/service"}>
+                  <button className="mt-6 w-full py-2 rounded-full text-sm font-semibold border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black transition">
+                    Learn More →
+                  </button>
+                </Link>
               </motion.div>
             );
           })}
