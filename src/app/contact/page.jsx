@@ -524,7 +524,7 @@ export default function Contact() {
           transition={{ duration: 0.55 }}
           className="mt-10 sm:mt-12 flex flex-wrap justify-center gap-4 sm:gap-8"
         >
-          {["No spam, ever", "Free first consultation", "Reply in 30 mins", "1000+ businesses served"].map((t, i) => (
+          {["No spam, ever", "Free first consultation", "Reply in 30 mins", "20000+ businesses served"].map((t, i) => (
             <div key={i} className="flex items-center gap-1.5 text-[12px] sm:text-[12.5px] text-neutral-600">
               <CheckCircle2 size={13} className="text-yellow-400 flex-shrink-0" />
               {t}

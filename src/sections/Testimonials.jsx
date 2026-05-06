@@ -20,6 +20,7 @@ import {
   Truck,
   HeartPulse,
 } from "lucide-react";
+import Link from "next/link";
 
 /* ─── TESTIMONIALS DATA ─── */
 const TESTIMONIALS = [
@@ -335,7 +336,7 @@ function MarqueeCard({ t }) {
         </div>
       </div>
       <p style={{ color: "#999", fontSize: 12.5, lineHeight: 1.65, marginBottom: 12, fontStyle: "italic" }}>
-"{t.review.slice(0, 110)}…"
+        "{t.review.slice(0, 110)}…"
       </p>
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
         <Avatar initials={t.avatar} bg={t.avatarBg} textColor={t.avatarText} size={32} />
@@ -693,37 +694,39 @@ export default function Testimonials() {
           </p>
 
           <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
-            <motion.button
-              whileHover={{ scale: 1.05, boxShadow: "0 8px 36px rgba(250,204,21,0.4)" }}
-              whileTap={{ scale: 0.97 }}
-              style={{
-                display: "inline-flex", alignItems: "center", gap: 8,
-                padding: "13px 30px",
-                background: "linear-gradient(135deg, #facc15, #f59e0b)",
-                color: "#0B0B0B", borderRadius: 99,
-                fontWeight: 800, fontSize: 14, border: "none", cursor: "pointer",
-                boxShadow: "0 4px 20px rgba(250,204,21,0.22)",
-              }}
-            >
-              Get Free Consultation
-              <ArrowRight size={15} />
-            </motion.button>
+            <Link href={"/contact"}>
+              <motion.button
+                whileHover={{ scale: 1.05, boxShadow: "0 8px 36px rgba(250,204,21,0.4)" }}
+                whileTap={{ scale: 0.97 }}
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: 8,
+                  padding: "13px 30px",
+                  background: "linear-gradient(135deg, #facc15, #f59e0b)",
+                  color: "#0B0B0B", borderRadius: 99,
+                  fontWeight: 800, fontSize: 14, border: "none", cursor: "pointer",
+                  boxShadow: "0 4px 20px rgba(250,204,21,0.22)",
+                }}
+              >
+                Get Free Consultationnnn
+                <ArrowRight size={15} />
+              </motion.button></Link>
 
-            <motion.button
-              whileHover={{ scale: 1.04, borderColor: "rgba(250,204,21,0.4)", color: "#facc15" }}
-              whileTap={{ scale: 0.97 }}
-              style={{
-                display: "inline-flex", alignItems: "center", gap: 7,
-                padding: "13px 26px",
-                background: "transparent", color: "#999",
-                borderRadius: 99, fontSize: 14, fontWeight: 600,
-                border: "1px solid rgba(255,255,255,0.14)", cursor: "pointer",
-                transition: "all 0.2s",
-              }}
-            >
-              <Shield size={14} />
-              View All Services
-            </motion.button>
+            <Link href={"/service"}>
+              <motion.button
+                whileHover={{ scale: 1.04, borderColor: "rgba(250,204,21,0.4)", color: "#facc15" }}
+                whileTap={{ scale: 0.97 }}
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: 7,
+                  padding: "13px 26px",
+                  background: "transparent", color: "#999",
+                  borderRadius: 99, fontSize: 14, fontWeight: 600,
+                  border: "1px solid rgba(255,255,255,0.14)", cursor: "pointer",
+                  transition: "all 0.2s",
+                }}
+              >
+                <Shield size={14} />
+                View All Services
+              </motion.button></Link>
           </div>
         </motion.div>
       </div>

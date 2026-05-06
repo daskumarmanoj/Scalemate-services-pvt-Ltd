@@ -163,7 +163,7 @@ const WHY_US = [
 ];
 
 const STATS = [
-  { value: "1000+", label: "Businesses Served" },
+  { value: "20000+", label: "Businesses Served" },
   { value: "6+", label: "Years Experience" },
   { value: "98%", label: "Satisfaction Rate" },
   { value: "24/7", label: "Support" },

@@ -47,17 +47,7 @@ export default function FundingBenifits() {
           entity, numbers, and narrative to the route that actually matches your stage.
         </p>
 
-        {/* Disclaimer */}
-        <div className="mt-10 border border-yellow-500/30 bg-[#111] rounded-xl p-6 max-w-3xl mx-auto text-left">
-          <h4 className="text-yellow-400 font-semibold">
-            Disclosure we do not sanction schemes
-          </h4>
-          <p className="text-gray-400 text-sm mt-2">
-            Interest rates, subsidies, guarantees, and timelines are decided only
-            by banks, NBFCs, and government authorities. We only provide documentation
-            and strategy support.
-          </p>
-        </div>
+
 
         {/* Ribbon */}
         <div className="mt-8">
@@ -92,9 +82,11 @@ export default function FundingBenifits() {
                 {card.value}
               </p>
 
-              <button className="mt-4 text-sm text-yellow-400 hover:underline">
-                Check eligibility →
-              </button>
+              <Link href={"/contact"}>
+                <button className="mt-4 text-sm text-yellow-400 hover:underline">
+                  Check eligibility →
+                </button>
+                </Link>
             </div>
           ))}
 

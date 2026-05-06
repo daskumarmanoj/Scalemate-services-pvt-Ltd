@@ -399,7 +399,7 @@ export default function Process() {
 
       <div className="max-w-3xl mx-auto px-5 sm:px-6 relative">
         {/* ─── HERO ─── */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 py-25">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.85, y: -10 }}

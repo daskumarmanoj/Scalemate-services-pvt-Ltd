@@ -496,7 +496,7 @@ const AboutUs = ({ onClose }) => {
                 desc: "Early-stage seed funding for innovative new ventures.",
               },
               {
-                amount: "₹2 cr",
+                amount: "₹25 cr",
                 label: "PMEGP",
                 icon: (
                   <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="currentColor" strokeWidth={1.8}>

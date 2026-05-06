@@ -83,12 +83,12 @@ const LINKS = [
   {
     heading: "Grow",
     items: [
-      { name: "Startup India (DPIIT)", path: "/grow/startup-india" },
-      { name: "MSME Registration", path: "/grow/msme" },
-      { name: "GST Filing", path: "/grow/gst" },
-      { name: "ISO Certification", path: "/grow/iso" },
-      { name: "Trademark Registration", path: "/grow/trademark" },
-      { name: "Pitch Deck & DPR", path: "/grow/pitch-deck" },
+      { name: "Startup India (DPIIT)", path: "/service" },
+      { name: "MSME Registration", path: "/service" },
+      { name: "GST Filing", path: "/service" },
+      { name: "ISO Certification", path: "/service" },
+      { name: "Trademark Registration", path: "/service" },
+      { name: "Pitch Deck & DPR", path: "/service" },
     ],
   },
   {
@@ -139,7 +139,7 @@ const SOCIALS = [
   },
 ];
 const STATS = [
-  { value: "1000+", label: "Businesses Served" },
+  { value: "20000+", label: "Businesses Served" },
   { value: "6+", label: "Years Experience" },
   { value: "98%", label: "Client Satisfaction" },
   { value: "24/7", label: "Support Available" },

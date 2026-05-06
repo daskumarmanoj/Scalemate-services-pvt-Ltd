@@ -141,14 +141,11 @@ export default function Faq() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <section className="bg-[#0a0a0a] text-white py-35 px-6">
+    <section className="bg-[#0a0a0a] text-white py-40 px-6">
       <div className="max-w-4xl mx-auto">
 
         {/* Heading */}
         <div className="text-center mb-14">
-          <p className="text-xs tracking-[3px] text-yellow-500 uppercase mb-4">
-            FAQ
-          </p>
 
           <h2 className="text-4xl md:text-5xl font-black">
             Frequently Asked <span className="text-yellow-400">Questions</span>

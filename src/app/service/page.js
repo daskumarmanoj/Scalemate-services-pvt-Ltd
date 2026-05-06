@@ -31,13 +31,14 @@ import {
   X,
 } from "lucide-react";
 import Modal from "@/Components/Ui/Modal";
+import Link from "next/link";
 
-const YELLOW = "lab(78_12.63_63.5)";
+const YELLOW = "#fbbf24"; // Changed from lab color to hex
 
 const SERVICES = [
   {
     id: "growth",
-    icon: TrendingUp, // lucide-react icon (import karna padega)
+    icon: TrendingUp,
     title: "Growth Strategy",
     tag: "Strategic",
     color: "#f472b6",
@@ -97,10 +98,10 @@ const SERVICES = [
     title: "Legal Compliances & Registration",
     tag: "Most Popular",
     color: YELLOW,
-    twColor: "text-[lab(78_12.63_63.5)]",
-    twBg: "bg-[lab(78_12.63_63.5)]",
-    twBorder: "border-[lab(78_12.63_63.5)]",
-    twRing: "ring-[lab(78_12.63_63.5)]",
+    twColor: "text-yellow-400",
+    twBg: "bg-yellow-400",
+    twBorder: "border-yellow-400",
+    twRing: "ring-yellow-400",
     description:
       "End-to-end business registration for Pvt Ltd, LLP, OPC, Partnership & more with complete MCA compliance.",
     features: [
@@ -212,7 +213,7 @@ const SERVICES = [
         "NAIFF Loans (₹2 Cr)",
         "Collateral Free Loans (₹5 Cr)",
         "Startup Seed Support (₹1 Cr)",
-        "PMEGP (₹2 Cr)",
+        "PMEGP (₹25 Cr)",
         "Seed Fund (₹20L)",
         "Investor Pitch Deck",
       ],
@@ -679,7 +680,7 @@ function WhyCard({ item, index }) {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={inView ? { opacity: 1, scale: 1 } : {}}
       transition={{ duration: 0.45, delay: index * 0.1, ease: "backOut" }}
-      className="group bg-[#131313] border border-white/[0.07] rounded-2xl p-6 transition-all duration-300 hover:border-[lab(78_12.63_63.5)]/40 hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(250,204,21,0.1)]"
+      className="group bg-[#131313] border border-white/[0.07] rounded-2xl p-6 transition-all duration-300 hover:border-yellow-400/40 hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(251,191,36,0.1)]"
     >
       <h3 className="text-[#e5e5e5] text-[15px] font-bold mb-1.5">
         {item.title}
@@ -693,6 +694,10 @@ function WhyCard({ item, index }) {
 
 /* ─── Detail Page ─── */
 function DetailPage({ service, onClose }) {
+  const [scrolled, setScrolled] = useState(false);
+
+  const marqueeTop = scrolled ? "75px" : "85px";
+
   const { detail, color, tag } = service;
   const Icon = service.icon;
   const isThreeCol = detail.tableHead.length === 3;
@@ -726,14 +731,59 @@ function DetailPage({ service, onClose }) {
         }}
       />
 
-      <div className="max-w-[920px] mx-auto px-5 pt-8 pb-20 relative z-10">
+      <div className="max-w-[920px] mx-auto px-5 pb-20 relative z-10">
+        {/* 🔁 Marquee */}
+        <div
+          className="fixed left-0 w-full z-40 pointer-events-none"
+        >
+          <div className="bg-gradient-to-r from-yellow-500/10 via-yellow-500/5 to-yellow-500/10 backdrop-blur-sm py-2 border-y border-yellow-500/30">
+            <div className="overflow-hidden whitespace-nowrap">
+              <div className="inline-block animate-marquee text-yellow-300 text-sm font-medium tracking-wide">
+                <span className="mx-8">
+                  🚀 Idea se scale tak | <b className="text-white">Scalemate</b>{" "}
+                  har step par aapke saath.
+                </span>
+                <span className="mx-8">✦</span>
+                <span className="mx-8">
+                  💡 Idea se scale tak | <b className="text-white">Scalemate</b>{" "}
+                  har step par aapke saath.
+                </span>
+                <span className="mx-8">✦</span>
+                <span className="mx-8">
+                  💡 Idea se scale tak | <b className="text-white">Scalemate</b>{" "}
+                  har step par aapke saath.
+                </span>
+                <span className="mx-8">✦</span>
+                <span className="mx-8">
+                  💡 Idea se scale tak | <b className="text-white">Scalemate</b>{" "}
+                  har step par aapke saath.
+                </span>{" "}
+                <span className="mx-8">✦</span>
+                <span className="mx-8">
+                  💡 Idea se scale tak | <b className="text-white">Scalemate</b>{" "}
+                  har step par aapke saath.
+                </span>{" "}
+                <span className="mx-8">✦</span>
+                <span className="mx-8">
+                  💡 Idea se scale tak | <b className="text-white">Scalemate</b>{" "}
+                  har step par aapke saath.
+                </span>{" "}
+                <span className="mx-8">✦</span>
+                <span className="mx-8">
+                  💡 Idea se scale tak | <b className="text-white">Scalemate</b>{" "}
+                  har step par aapke saath.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* Back Button */}
         <motion.button
           initial={{ opacity: 0, x: -12 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.1 }}
           onClick={onClose}
-          className="inline-flex items-center gap-2 text-[#888] text-[13px] cursor-pointer mb-8 px-4 py-2 border border-white/10 rounded-full bg-transparent transition-all duration-200 hover:text-[lab(78_12.63_63.5)] hover:border-[lab(78_12.63_63.5)]/40"
+          className="inline-flex items-center gap-2 text-[#888] text-[13px] mt-15 cursor-pointer mb-8 px-4 py-2 border border-white/10 rounded-full bg-transparent transition-all duration-200 hover:text-yellow-400 hover:border-yellow-400/40"
         >
           <ArrowRight size={13} className="rotate-180" />
           Back to Services
@@ -858,6 +908,7 @@ function DetailPage({ service, onClose }) {
         )}
 
         {/* CTA Strip */}
+        {/* CTA Strip */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -875,7 +926,9 @@ function DetailPage({ service, onClose }) {
             Our experts will guide you through every step. Book a free
             consultation today.
           </p>
+
           <div className="flex gap-3 justify-center flex-wrap">
+            {/* Book Consultation */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
@@ -889,13 +942,27 @@ function DetailPage({ service, onClose }) {
               {detail.ctaLabel}
               <ArrowRight size={15} />
             </motion.button>
+
+            {/* Apply Now (Next.js Link) */}
+            <Link href="/contact">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.96 }}
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-transparent text-[#bbb] rounded-full font-semibold text-[13.5px] border border-white/[0.14] cursor-pointer transition-all duration-200 hover:border-yellow-400/50 hover:text-yellow-400"
+              >
+                Apply Now
+                <ArrowRight size={14} />
+              </motion.button>
+            </Link>
+
+            {/* WhatsApp */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
               onClick={() =>
                 window.open("https://wa.me/+919898408689", "_blank")
               }
-              className="inline-flex items-center gap-2 px-6 py-3.5 bg-transparent text-[#bbb] rounded-full font-semibold text-[13.5px] border border-white/[0.14] cursor-pointer transition-all duration-200 hover:border-[lab(78_12.63_63.5)]/50 hover:text-[lab(78_12.63_63.5)]"
+              className="inline-flex items-center gap-2 px-6 py-3.5 bg-transparent text-[#bbb] rounded-full font-semibold text-[13.5px] border border-white/[0.14] cursor-pointer transition-all duration-200 hover:border-yellow-400/50 hover:text-yellow-400"
             >
               <Phone size={14} />
               WhatsApp: +91 98984 08689
@@ -926,7 +993,7 @@ export default function Services() {
     >
       {/* Background orbs */}
       <Orb
-        className="left-[5%] top-[8%] w-80 h-80 bg-[lab(78_12.63_63.5)]/[0.07]"
+        className="left-[5%] top-[8%] w-80 h-80 bg-yellow-400/[0.07]"
         delay={0}
       />
       <Orb
@@ -965,7 +1032,7 @@ export default function Services() {
             initial={{ opacity: 0, y: -16, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.6, ease: "backOut" }}
-            className="inline-flex items-center gap-1.5 bg-[lab(78_12.63_63.5)]/10 border border-[lab(78_12.63_63.5)]/30 rounded-full px-4 py-1.5 mb-6 text-[12px] font-semibold tracking-widest text-[lab(78_12.63_63.5)] uppercase"
+            className="inline-flex items-center gap-1.5 bg-yellow-400/10 border border-yellow-400/30 rounded-full px-4 py-1.5 mb-6 text-[12px] font-semibold tracking-widest text-yellow-400 uppercase"
           >
             <Sparkles size={13} color={YELLOW} />
             India's Leading Startup & Business Consultant
@@ -978,7 +1045,7 @@ export default function Services() {
             className="text-[clamp(2.2rem,5.5vw,4rem)] font-extrabold leading-[1.1] mb-5"
           >
             Our{" "}
-            <span className="text-[lab(78_12.63_63.5)] [text-shadow:0_0_40px_lab(78_12.63_63.5)]">
+            <span className="text-yellow-400 [text-shadow:0_0_40px_rgb(251_191_36)]">
               Services
             </span>
           </motion.h1>
@@ -1004,10 +1071,10 @@ export default function Services() {
             {STATS.map((s, i) => (
               <motion.div
                 key={i}
-                whileHover={{ y: -3, borderColor: "rgba(250,204,21,0.45)" }}
+                whileHover={{ y: -3, borderColor: "rgba(251,191,36,0.45)" }}
                 className="bg-[#161616] border border-white/10 rounded-xl px-5 py-2.5 text-center transition-colors duration-200"
               >
-                <div className="text-xl font-extrabold text-[lab(78_12.63_63.5)]">
+                <div className="text-xl font-extrabold text-yellow-400">
                   <Counter value={s.value} />
                 </div>
                 <div className="text-[11.5px] text-[#666] mt-0.5">
@@ -1027,7 +1094,7 @@ export default function Services() {
             className="text-center mb-10"
           >
             <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-extrabold mb-2">
-              What We <span className="text-[lab(78_12.63_63.5)]">Offer</span>
+              What We <span className="text-yellow-400">Offer</span>
             </h2>
             <p className="text-[#666] text-[14px]">
               5 comprehensive service categories — click any card to explore
@@ -1056,8 +1123,7 @@ export default function Services() {
             className="text-center mb-8"
           >
             <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-extrabold mb-2">
-              Why Choose{" "}
-              <span className="text-[lab(78_12.63_63.5)]">LeoStarts</span>?
+              Why Choose <span className="text-yellow-400">LeoStarts</span>?
             </h2>
             <p className="text-[#666] text-[14px]">
               Your trusted partner for startup success across India
@@ -1077,18 +1143,18 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          className="relative overflow-hidden bg-gradient-to-br from-[lab(78_12.63_63.5)]/10 via-[lab(78_12.63_63.5)]/[0.03] to-transparent border border-[lab(78_12.63_63.5)]/[0.22] rounded-[28px] p-[clamp(2rem,5vw,4rem)] text-center"
+          className="relative overflow-hidden bg-gradient-to-br from-yellow-400/10 via-yellow-400/[0.03] to-transparent border border-yellow-400/[0.22] rounded-[28px] p-[clamp(2rem,5vw,4rem)] text-center"
         >
           {/* Rotating rings */}
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute -top-[60px] -right-[60px] w-[200px] h-[200px] rounded-full border border-[lab(78_12.63_63.5)]/10 pointer-events-none"
+            className="absolute -top-[60px] -right-[60px] w-[200px] h-[200px] rounded-full border border-yellow-400/10 pointer-events-none"
           />
           <motion.div
             animate={{ rotate: -360 }}
             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-            className="absolute -top-[30px] -right-[30px] w-[120px] h-[120px] rounded-full border border-[lab(78_12.63_63.5)]/[0.08] pointer-events-none"
+            className="absolute -top-[30px] -right-[30px] w-[120px] h-[120px] rounded-full border border-yellow-400/[0.08] pointer-events-none"
           />
 
           <motion.div
@@ -1096,7 +1162,7 @@ export default function Services() {
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[lab(78_12.63_63.5)]/[0.12] border border-[lab(78_12.63_63.5)]/30 text-[lab(78_12.63_63.5)] text-[12px] font-bold tracking-widest uppercase mb-5"
+            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-yellow-400/[0.12] border border-yellow-400/30 text-yellow-400 text-[12px] font-bold tracking-widest uppercase mb-5"
           >
             <Star size={12} color={YELLOW} fill={YELLOW} />
             Free Consultation Available
@@ -1114,11 +1180,11 @@ export default function Services() {
             <motion.button
               whileHover={{
                 scale: 1.05,
-                boxShadow: "0 8px 40px rgba(250,204,21,0.45)",
+                boxShadow: "0 8px 40px rgba(251,191,36,0.45)",
               }}
               whileTap={{ scale: 0.96 }}
               onClick={() => setIsOpen(true)}
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-linear-to-r from-[lab(78_12.63_63.5)] to-amber-400 text-[#0B0B0B] rounded-full font-bold text-[14px] border-none cursor-pointer shadow-[0_4px_20px_rgba(250,204,21,0.25)] transition-shadow duration-300"
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-linear-to-r from-yellow-400 to-amber-400 text-[#0B0B0B] rounded-full font-bold text-[14px] border-none cursor-pointer shadow-[0_4px_20px_rgba(251,191,36,0.25)] transition-shadow duration-300"
             >
               Book Free Consultation
               <ArrowRight size={16} />
@@ -1130,7 +1196,7 @@ export default function Services() {
               onClick={() =>
                 window.open("https://wa.me/+919898408689", "_blank")
               }
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-transparent text-[#bbb] rounded-full font-semibold text-[14px] border border-white/15 cursor-pointer transition-all duration-200 hover:border-[lab(78_12.63_63.5)]/50 hover:text-[lab(78_12.63_63.5)]"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-transparent text-[#bbb] rounded-full font-semibold text-[14px] border border-white/15 cursor-pointer transition-all duration-200 hover:border-yellow-400/50 hover:text-yellow-400"
             >
               <Phone size={15} />
               Talk to an Expert
