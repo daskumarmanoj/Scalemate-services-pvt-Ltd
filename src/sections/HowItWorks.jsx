@@ -1,6 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const steps = [
   {
@@ -68,39 +70,40 @@ const HowItWorks = () => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-16"
         >
           {steps.map((step, i) => (
-            <motion.div
-              key={step.id}
-              variants={card}
-              whileHover={{ y: -12, rotate: 1.5, scale: 1.03 }}
-              className="group bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-4 shadow-lg hover:border-yellow-400/40 transition-all duration-300 relative"
-            >
-              {/* Image */}
-              <div className="relative w-full h-[200px] rounded-xl overflow-hidden">
-                <img
-                  src={step.img}
-                  alt={step.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                />
+            <Link key={step.id} href={"/contact"}>
+              <motion.div
+                variants={card}
+                whileHover={{ y: -12, rotate: 1.5, scale: 1.03 }}
+                className="group bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-4 shadow-lg hover:border-yellow-400/40 transition-all duration-300 relative cursor-pointer"
+              >
+                {/* Image */}
+                <div className="relative w-full h-[200px] rounded-xl overflow-hidden">
+                  <img
+                    src={step.img}
+                    alt={step.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                  />
 
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-              </div>
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                </div>
 
-              {/* Title */}
-              <h3 className="mt-4 text-sm font-semibold text-gray-200 group-hover:text-yellow-400 transition">
-                {step.title}
-              </h3>
+                {/* Title */}
+                <h3 className="mt-4 text-sm font-semibold text-gray-200 group-hover:text-yellow-400 transition">
+                  {step.title}
+                </h3>
 
-              {/* Step Number */}
-              <div className="absolute top-3 left-3 w-8 h-8 rounded-full bg-yellow-400 text-black flex items-center justify-center text-sm font-bold shadow-md">
-                {i + 1}
-              </div>
+                {/* Step Number */}
+                <div className="absolute top-3 left-3 w-8 h-8 rounded-full bg-yellow-400 text-black flex items-center justify-center text-sm font-bold shadow-md">
+                  {i + 1}
+                </div>
 
-              {/* Arrow */}
-              <div className="absolute bottom-4 right-4 w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-sm group-hover:bg-yellow-400 group-hover:text-black transition">
-                →
-              </div>
-            </motion.div>
+                {/* Arrow */}
+                <div className="absolute bottom-4 right-4 w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-sm group-hover:bg-yellow-400 group-hover:text-black transition">
+                  →
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </motion.div>
 

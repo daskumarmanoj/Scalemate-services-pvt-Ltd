@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 
 // ✅ Replace with your WhatsApp number (digits only, no + or spaces)
-const WHATSAPP_NUMBER = "917064232409";
+const WHATSAPP_NUMBER = "919777915737";
 
 const INITIAL_FORM = {
   fullName: "",

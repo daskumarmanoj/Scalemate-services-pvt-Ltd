@@ -60,8 +60,8 @@ const CallIcon = ({ size = 16, color = "currentColor" }) => (
    DATA — Scalemate  Branded
 ─────────────────────────────────────────────*/
 const COMPANY = {
-  whatsapp: "917064232409",
-  phone: "+91 70642 32409",
+  whatsapp: "919777915737",
+  phone: "+91 97779 15737",
   email: "info@Scalemate services.com",
   address: "Pan-India — Maharashtra, Gujarat, Delhi, Karnataka",
   description:
@@ -108,7 +108,7 @@ const SOCIALS = [
   {
     Icon: IGIcon,
     label: "Instagram",
-    link: "https://instagram.com/your_username",
+    link: "https://www.instagram.com/scalemateservices?igsh=MWcyMml0cHVxZ252ag%3D%3D",
     color: "#e1306c",
     hoverBg: "rgba(225,48,108,0.15)",
     hoverBorder: "#e1306c55",
@@ -124,7 +124,7 @@ const SOCIALS = [
   {
     Icon: WAIcon,
     label: "WhatsApp",
-    link: "https://wa.me/917064232409?text=Hello%20I%20want%20to%20know%20more",
+    link: "https://wa.me/919777915737?text=Hello%20I%20want%20to%20know%20more",
     color: "#25D366",
     hoverBg: "rgba(37,211,102,0.15)",
     hoverBorder: "#25D36655",
@@ -132,7 +132,7 @@ const SOCIALS = [
   {
     Icon: CallIcon,
     label: "Call",
-    link: "tel:+917064232409",
+    link: "tel:+919777915737",
     color: "#facc15",
     hoverBg: "rgba(250,204,21,0.15)",
     hoverBorder: "#facc1555",
@@ -304,7 +304,7 @@ export default function Footer() {
 
             {/* WhatsApp pill */}
             <motion.a
-              href={`https://wa.me/917064232409?text=${encodeURIComponent(
+              href={`https://wa.me/919777915737?text=${encodeURIComponent(
                 "Hello! I want to know more about your services."
               )}`}
               target="_blank"
@@ -394,7 +394,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Scalemate  Services Pvt. Ltd. All rights reserved.
             <br />
             <span className="text-[#2e2e2e]">
-              Website: Scalemate services.com · WhatsApp: +91 70642 32409
+              Website: Scalemate services.com · WhatsApp: +91 97779 15737
             </span>
           </div>
 

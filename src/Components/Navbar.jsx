@@ -22,14 +22,14 @@ const NavItems = [
 const SocialLinks = [
   {
     name: "Instagram",
-    href: "https://instagram.com/yourhandle",
+    href: "https://www.instagram.com/scalemateservices?igsh=MWcyMml0cHVxZ252ag==",
     icon: <FaInstagram size={14} />,
   },
-  {
-    name: "Facebook",
-    href: "https://facebook.com/yourpage",
-    icon: <FaFacebookF size={14} />,
-  },
+  // {
+  //   name: "Facebook",
+  //   href: "https://facebook.com/yourpage",
+  //   icon: <FaFacebookF size={14} />,
+  // },
   {
     name: "LinkedIn",
     href: "https://linkedin.com/company/yourpage",
@@ -37,7 +37,7 @@ const SocialLinks = [
   },
   {
     name: "WhatsApp",
-    href: "https://wa.me/919XXXXXXXXX",
+    href: "https://wa.me/919777915737",
     icon: <FaWhatsapp size={14} />,
   },
 ];
@@ -159,7 +159,7 @@ const Navbar = () => {
                     Call Us
                   </span>
                   <span className="text-[13px] font-medium text-gray-300 group-hover:text-yellow-400">
-                    +91 70642 32409
+                    +91 97779 15737
                   </span>
                 </div>
               </a>

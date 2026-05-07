@@ -168,6 +168,9 @@ const STATS = [
   { value: "98%", label: "Satisfaction Rate" },
   { value: "24/7", label: "Support" },
   { value: "100Cr+", label: "Funding Secured" },
+  { value: "10000+", label: "Business Registered" },
+  { value: "50+", label: "Industry Serveed" },
+  { value: "100Cr+", label: "Funding Secured" },
   { value: "500+", label: "Registrations" },
 ];
 
@@ -283,9 +286,10 @@ const WhatWeOffer = () => {
 
         {/* CTA */}
         <div className="mt-24 text-center">
-          <h3 className="text-2xl font-bold">
-            Ready to Grow Your Business?
-          </h3>
+          <Link href={"/contact"}>
+            <h3 className="text-2xl font-bold">
+              Ready to Grow Your Business?
+            </h3></Link>
           <button
             className="mt-6 px-8 py-3 rounded-full font-semibold text-black"
             style={{

@@ -213,7 +213,7 @@ const SERVICES = [
         "NAIFF Loans (₹2 Cr)",
         "Collateral Free Loans (₹5 Cr)",
         "Startup Seed Support (₹1 Cr)",
-        "PMEGP (₹25 Cr)",
+        "Debt Funding (₹25 Cr)",
         "Seed Fund (₹20L)",
         "Investor Pitch Deck",
       ],
@@ -512,19 +512,37 @@ function Counter({ value }) {
 
   useEffect(() => {
     if (!inView) return;
-    const numeric = parseInt(value.replace(/\D/g, ""), 10);
-    if (isNaN(numeric)) {
+
+    // Match first number only
+    const match = value.match(/\d+/);
+
+    // If no number (rare case)
+    if (!match) {
       setDisplay(value);
       return;
     }
-    const suffix = value.replace(/\d/g, "");
+
+    const numeric = parseInt(match[0], 10);
+
+    // Extract suffix safely
+    const suffix = value.replace(match[0], "");
+
     let start = 0;
     const step = Math.ceil(numeric / 40);
+
     const timer = setInterval(() => {
       start = Math.min(start + step, numeric);
-      setDisplay(start + suffix);
+
+      // Special handling for formats like 24/7
+      if (value.includes("/")) {
+        setDisplay(value); // don't animate, just show static
+      } else {
+        setDisplay(start + suffix);
+      }
+
       if (start >= numeric) clearInterval(timer);
     }, 35);
+
     return () => clearInterval(timer);
   }, [inView, value]);
 
@@ -733,9 +751,7 @@ function DetailPage({ service, onClose }) {
 
       <div className="max-w-[920px] mx-auto px-5 pb-20 relative z-10">
         {/* 🔁 Marquee */}
-        <div
-          className="fixed left-0 w-full z-40 pointer-events-none"
-        >
+        <div className="fixed left-0 w-full z-40 pointer-events-none">
           <div className="bg-gradient-to-r from-yellow-500/10 via-yellow-500/5 to-yellow-500/10 backdrop-blur-sm py-2 border-y border-yellow-500/30">
             <div className="overflow-hidden whitespace-nowrap">
               <div className="inline-block animate-marquee text-yellow-300 text-sm font-medium tracking-wide">

@@ -5,7 +5,7 @@ import { X, Target, TrendingUp, Award, MapPin, Lightbulb, BarChart2, Handshake, 
 import Modal from "@/Components/Ui/Modal";
 
 const stats = [
-  { value: "5+", label: "Years of Experience" },
+  { value: "6+", label: "Years of Experience" },
   { value: "100%", label: "Growth-Focused" },
   { value: "360°", label: "End-to-End Solutions" },
   { value: "∞", label: "Scalable Potential" },
@@ -264,7 +264,7 @@ const AboutUs = ({ onClose }) => {
               </p>
               <p>
                 At the heart of Scalemate is a founder driven by strong vision, determination,
-                and over 5 years of hands-on experience in business consulting, funding strategies,
+                and over 6 years of hands-on experience in business consulting, funding strategies,
                 and growth planning. With deep industry knowledge, the founder has consistently
                 helped businesses transform ideas into successful ventures and unlock new growth opportunities.
               </p>
@@ -497,7 +497,7 @@ const AboutUs = ({ onClose }) => {
               },
               {
                 amount: "₹25 cr",
-                label: "PMEGP",
+                label: "Debit funding",
                 icon: (
                   <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="currentColor" strokeWidth={1.8}>
                     <rect x="2" y="5" width="20" height="14" rx="2" />
