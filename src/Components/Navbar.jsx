@@ -105,8 +105,8 @@ const Navbar = () => {
               <Link key={index} href={item.path}>
                 <span
                   className={`text-sm font-medium transition-colors duration-200 relative cursor-pointer pb-1 ${pathname === item.path
-                      ? "text-yellow-400"
-                      : "text-gray-300 hover:text-yellow-400"
+                    ? "text-yellow-400"
+                    : "text-gray-300 hover:text-yellow-400"
                     }`}
                 >
                   {item.name}
@@ -247,8 +247,8 @@ const Navbar = () => {
                 <Link key={index} href={item.path}>
                   <span
                     className={`flex items-center gap-3 py-3 px-3 rounded-lg text-base font-medium transition-colors duration-200 ${pathname === item.path
-                        ? "text-yellow-400 bg-yellow-500/10"
-                        : "text-gray-300 hover:text-yellow-400 hover:bg-yellow-500/5"
+                      ? "text-yellow-400 bg-yellow-500/10"
+                      : "text-gray-300 hover:text-yellow-400 hover:bg-yellow-500/5"
                       }`}
                   >
                     {pathname === item.path && (
@@ -268,11 +268,11 @@ const Navbar = () => {
               {/* Phone & Hours row */}
               <div className="flex items-center gap-4">
                 <a
-                  href="tel:+919XXXXXXXXX"
+                  href="tel:+919777915737"
                   className="flex items-center gap-2 text-gray-400"
                 >
                   <Phone size={13} className="text-yellow-500" />
-                  <span className="text-sm">+91 98XXX-XXXXX</span>
+                  <span className="text-sm">+91 97779-15737</span>
                 </a>
                 <span className="text-gray-700">|</span>
                 <span className="flex items-center gap-2 text-gray-400 text-sm">
