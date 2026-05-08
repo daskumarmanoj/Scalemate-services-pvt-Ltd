@@ -24,7 +24,7 @@ import {
 /* ─────────────────────────────────────────────
    🔧 CONFIGURATION — update these two values
 ──────────────────────────────────────────────*/
-const WHATSAPP_NUMBER = "916371287364"; // Your WhatsApp number with country code (no +)
+const WHATSAPP_NUMBER = "919777915737"; // Your WhatsApp number with country code (no +)
 const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"; // Your Apps Script Web App URL
 
 /* ─── OPTIONS ─── */
