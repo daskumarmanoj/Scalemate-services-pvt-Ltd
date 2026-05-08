@@ -8,7 +8,7 @@ const FloatingButtons = () => {
     "Hello! I'd like to know more about your services."
   );
 
-  const phone = "919876543210";
+  const phone = "919777915737";
 
   const sendWhatsApp = () => {
     const url = `https://wa.me/${phone}${
@@ -71,7 +71,7 @@ const FloatingButtons = () => {
             </div>
 
             {/* Phone Number */}
-            <p className="text-xs text-gray-400 mb-3">To: +91 98765 43210</p>
+            <p className="text-xs text-gray-400 mb-3">To: +91 97779 15737</p>
 
             {/* Message Input */}
             <textarea

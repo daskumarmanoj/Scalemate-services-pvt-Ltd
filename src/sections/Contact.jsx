@@ -53,14 +53,14 @@ const INFO_CARDS = [
   {
     icon: Phone,
     label: "Call Us",
-    value: "+91 98765 43210",
+    value: "+91 97779 15737",
     sub: "Mon–Sat, 9am–7pm",
     color: "#facc15",
   },
   {
     icon: Mail,
     label: "Email Us",
-    value: "hello@scalemate.in",
+    value: "scalemateservices25@gmail.com",
     sub: "Reply within 2 hours",
     color: "#60a5fa",
   },
@@ -355,7 +355,7 @@ export default function Contact() {
                     onChange={(e) => set("phone")(e.target.value)}
                     onFocus={() => setFocused("phone")}
                     onBlur={() => setFocused("")}
-                    placeholder="+91 98765 43210"
+                    placeholder="+91 97779 15737"
                     style={inputStyle(focused === "phone", errors.phone)}
                   />
                 </Field>

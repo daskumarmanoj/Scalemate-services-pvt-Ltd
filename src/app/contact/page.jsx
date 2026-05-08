@@ -49,8 +49,8 @@ const BUDGETS = [
 ];
 
 const INFO_CARDS = [
-  { icon: Phone,  label: "Call Us",  value: "+91 98765 43210",    sub: "Mon–Sat, 9am–7pm",         color: "text-yellow-400",  bg: "bg-yellow-400/10",  border: "hover:border-yellow-400/40" },
-  { icon: Mail,   label: "Email Us", value: "hello@scalemate.in", sub: "Reply within 2 hours",      color: "text-blue-400",    bg: "bg-blue-400/10",    border: "hover:border-blue-400/40"   },
+  { icon: Phone,  label: "Call Us",  value: "+91 9777915737",    sub: "Mon–Sat, 9am–7pm",         color: "text-yellow-400",  bg: "bg-yellow-400/10",  border: "hover:border-yellow-400/40" },
+  { icon: Mail,   label: "Email Us", value: "scalemateservices25@gmail.com", sub: "Reply within 2 hours",      color: "text-blue-400",    bg: "bg-blue-400/10",    border: "hover:border-blue-400/40"   },
   { icon: MapPin, label: "Office",   value: "Bengaluru, KA",      sub: "Pan India services",        color: "text-emerald-400", bg: "bg-emerald-400/10", border: "hover:border-emerald-400/40"},
   { icon: Clock,  label: "Support",  value: "24/7 Available",     sub: "Always here for you",       color: "text-pink-400",    bg: "bg-pink-400/10",    border: "hover:border-pink-400/40"  },
 ];
@@ -268,7 +268,7 @@ export default function Contact() {
                     onChange={(e) => set("phone")(e.target.value)}
                     onFocus={() => setFocused("phone")}
                     onBlur={() => setFocused("")}
-                    placeholder="+91 98765 43210"
+                    placeholder="+91 97779 15737"
                     className={inputCls("phone")}
                     inputMode="tel"
                   />
