@@ -24,7 +24,7 @@ import {
 /* ─────────────────────────────────────────────
    🔧 CONFIGURATION — update these two values
 ──────────────────────────────────────────────*/
-const WHATSAPP_NUMBER = "916371287364";
+const WHATSAPP_NUMBER = "919777915737";
 const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
 
 const SERVICES = [
