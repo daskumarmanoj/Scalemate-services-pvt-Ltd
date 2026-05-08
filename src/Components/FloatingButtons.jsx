@@ -24,7 +24,7 @@ const FloatingButtons = () => {
       <div className="fixed bottom-5 right-5 flex flex-col gap-4 z-50">
 
         {/* Call Button */}
-        <div className="relative group flex items-center">
+        {/* <div className="relative group flex items-center">
           <span className="absolute right-14 bg-white text-gray-800 text-xs px-2 py-1 rounded shadow opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
             Call us
           </span>
@@ -34,7 +34,7 @@ const FloatingButtons = () => {
           >
             <Phone size={20} />
           </a>
-        </div>
+        </div> */}
 
         {/* WhatsApp Button */}
         <div className="relative group flex items-center">

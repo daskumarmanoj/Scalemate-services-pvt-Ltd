@@ -89,7 +89,6 @@ const SERVICES = [
       ],
 
       ctaLabel: "Learn More",
-      ctaUrl: "https://leostartsservices.com/contacts/",
     },
   },
   {
@@ -157,7 +156,6 @@ const SERVICES = [
         "MCA Compliance",
       ],
       ctaLabel: "Start Your Registration",
-      ctaUrl: "https://leostartsservices.com/contacts/",
     },
   },
   {
@@ -218,7 +216,6 @@ const SERVICES = [
         "Investor Pitch Deck",
       ],
       ctaLabel: "Apply for Funding",
-      ctaUrl: "https://leostartsservices.com/contacts/",
     },
   },
   {
@@ -294,7 +291,6 @@ const SERVICES = [
         "Professional Tax Registration",
       ],
       ctaLabel: "Apply for Certification",
-      ctaUrl: "https://leostartsservices.com/contacts/",
     },
   },
   {
@@ -378,7 +374,6 @@ const SERVICES = [
         "WhatsApp Marketing",
       ],
       ctaLabel: "Start Your Campaign",
-      ctaUrl: "https://leostartsservices.com/contacts/",
     },
   },
   {
@@ -450,7 +445,6 @@ const SERVICES = [
         "Corporate Presentations",
       ],
       ctaLabel: "Consult Our Experts",
-      ctaUrl: "https://leostartsservices.com/contacts/",
     },
   },
 ];
@@ -976,12 +970,12 @@ function DetailPage({ service, onClose }) {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
               onClick={() =>
-                window.open("https://wa.me/+919898408689", "_blank")
+                window.open("https://wa.me/+9197779 15737", "_blank")
               }
               className="inline-flex items-center gap-2 px-6 py-3.5 bg-transparent text-[#bbb] rounded-full font-semibold text-[13.5px] border border-white/[0.14] cursor-pointer transition-all duration-200 hover:border-yellow-400/50 hover:text-yellow-400"
             >
               <Phone size={14} />
-              WhatsApp: +91 98984 08689
+              WhatsApp: +91 97779 15737
             </motion.button>
           </div>
         </motion.div>
@@ -1130,7 +1124,7 @@ export default function Services() {
           </div>
         </div>
 
-        {/* ─── WHY LEOSTARTS ─── */}
+        {/* ─── WHY Scalemate ─── */}
         <div className="mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1139,7 +1133,7 @@ export default function Services() {
             className="text-center mb-8"
           >
             <h2 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-extrabold mb-2">
-              Why Choose <span className="text-yellow-400">LeoStarts</span>?
+              Why Choose <span className="text-yellow-400">Scalemate</span>?
             </h2>
             <p className="text-[#666] text-[14px]">
               Your trusted partner for startup success across India
@@ -1188,7 +1182,7 @@ export default function Services() {
             Ready to Scale Your Business?
           </h2>
           <p className="text-[#999] text-[15px] max-w-[480px] mx-auto mb-8 leading-relaxed">
-            Book a free consultation with our experts and discover how LeoStarts
+            Book a free consultation with our experts and discover how Scalemate
             can help you achieve your business goals faster.
           </p>
 
@@ -1210,7 +1204,7 @@ export default function Services() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
               onClick={() =>
-                window.open("https://wa.me/+919898408689", "_blank")
+                window.open("https://wa.me/+919777915737", "_blank")
               }
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-transparent text-[#bbb] rounded-full font-semibold text-[14px] border border-white/15 cursor-pointer transition-all duration-200 hover:border-yellow-400/50 hover:text-yellow-400"
             >

@@ -147,7 +147,7 @@ const Navbar = () => {
             {/* Left: Phone + Office Timing */}
             <div className="flex items-center gap-6">
               {/* Phone */}
-              <a
+              {/* <a
                 href="tel:+919XXXXXXXXX"
                 className="flex items-center gap-2 text-gray-400 hover:text-yellow-400 transition-colors duration-200 group"
               >
@@ -162,7 +162,7 @@ const Navbar = () => {
                     +91 97779 15737
                   </span>
                 </div>
-              </a>
+              </a> */}
 
               {/* Divider */}
               <div className="hidden sm:block w-px h-7 bg-yellow-500/20" />
@@ -267,13 +267,13 @@ const Navbar = () => {
             <div className="px-6 py-4 flex flex-col gap-3">
               {/* Phone & Hours row */}
               <div className="flex items-center gap-4">
-                <a
+                {/* <a
                   href="tel:+919777915737"
                   className="flex items-center gap-2 text-gray-400"
                 >
                   <Phone size={13} className="text-yellow-500" />
                   <span className="text-sm">+91 97779-15737</span>
-                </a>
+                </a> */}
                 <span className="text-gray-700">|</span>
                 <span className="flex items-center gap-2 text-gray-400 text-sm">
                   <Clock size={13} className="text-yellow-500" />

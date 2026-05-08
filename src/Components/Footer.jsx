@@ -61,8 +61,8 @@ const CallIcon = ({ size = 16, color = "currentColor" }) => (
 ─────────────────────────────────────────────*/
 const COMPANY = {
   whatsapp: "919777915737",
-  phone: "+91 97779 15737",
-  email: "info@Scalemate services.com",
+  // phone: "+91 97779 15737",
+  email: "scalemateservices25@gmail.com",
   address: "Pan-India — Maharashtra, Gujarat, Delhi, Karnataka",
   description:
     "India's trusted startup & business growth partner. From incorporation to funding — we handle the complexity so you can focus on building.",
@@ -129,14 +129,14 @@ const SOCIALS = [
     hoverBg: "rgba(37,211,102,0.15)",
     hoverBorder: "#25D36655",
   },
-  {
-    Icon: CallIcon,
-    label: "Call",
-    link: "tel:+919777915737",
-    color: "#facc15",
-    hoverBg: "rgba(250,204,21,0.15)",
-    hoverBorder: "#facc1555",
-  },
+  // {
+  //   Icon: CallIcon,
+  //   label: "Call",
+  //   link: "tel:+919777915737",
+  //   color: "#facc15",
+  //   hoverBg: "rgba(250,204,21,0.15)",
+  //   hoverBorder: "#facc1555",
+  // },
 ];
 const STATS = [
   { value: "20000+", label: "Businesses Served" },

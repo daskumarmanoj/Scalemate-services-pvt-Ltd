@@ -474,7 +474,7 @@ const AboutUs = ({ onClose }) => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
               {
-                amount: "₹10 cr",
+                amount: "Upto ₹10 cr",
                 label: "Grant Fund",
                 icon: (
                   <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="currentColor" strokeWidth={1.8}>
@@ -496,7 +496,7 @@ const AboutUs = ({ onClose }) => {
                 desc: "Early-stage seed funding for innovative new ventures.",
               },
               {
-                amount: "₹25 cr",
+                amount: "Upto ₹25 cr",
                 label: "Debit funding",
                 icon: (
                   <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="currentColor" strokeWidth={1.8}>
