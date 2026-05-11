@@ -129,14 +129,14 @@ const SOCIALS = [
     hoverBg: "rgba(37,211,102,0.15)",
     hoverBorder: "#25D36655",
   },
-  // {
-  //   Icon: CallIcon,
-  //   label: "Call",
-  //   link: "tel:+919777915737",
-  //   color: "#facc15",
-  //   hoverBg: "rgba(250,204,21,0.15)",
-  //   hoverBorder: "#facc1555",
-  // },
+  {
+    Icon: CallIcon,
+    label: "Call",
+    link: "tel:+919777915737",
+    color: "#facc15",
+    hoverBg: "rgba(250,204,21,0.15)",
+    hoverBorder: "#facc1555",
+  },
 ];
 const STATS = [
   { value: "20000+", label: "Businesses Served" },
@@ -296,14 +296,14 @@ export default function Footer() {
               {COMPANY.description}
             </p>
 
-            <div className="flex flex-col gap-2.5 mb-6">
+            {/* <div className="flex flex-col gap-2.5 mb-6">
               <ContactRow icon={Phone} value={COMPANY.phone} href={`tel:${COMPANY.phone}`} />
               <ContactRow icon={Mail} value={COMPANY.email} href={`mailto:${COMPANY.email}`} />
               <ContactRow icon={MapPin} value={COMPANY.address} href="#" />
-            </div>
+            </div> */}
 
             {/* WhatsApp pill */}
-            <motion.a
+            {/* <motion.a
               href={`https://wa.me/919777915737?text=${encodeURIComponent(
                 "Hello! I want to know more about your services."
               )}`}
@@ -315,10 +315,10 @@ export default function Footer() {
             >
               <WAIcon size={15} />
               Chat on WhatsApp
-            </motion.a>
+            </motion.a> */}
 
             {/* Social icons */}
-            <div className="flex gap-2 flex-wrap">
+            {/* <div className="flex gap-2 flex-wrap">
               {SOCIALS.map(({ Icon, label, link, color, hoverBg, hoverBorder }, i) => (
                 <motion.a
                   key={i}
@@ -341,7 +341,7 @@ export default function Footer() {
                   <Icon size={15} color={color} />
                 </motion.a>
               ))}
-            </div>
+            </div> */}
           </motion.div>
 
           {/* Desktop nav columns */}
@@ -393,9 +393,9 @@ export default function Footer() {
           <div className="text-xs text-[#3a3a3a] leading-relaxed">
             © {new Date().getFullYear()} Scalemate  Services Pvt. Ltd. All rights reserved.
             <br />
-            <span className="text-[#2e2e2e]">
+            {/* <span className="text-[#2e2e2e]">
               Website: Scalemate services.com · WhatsApp: +91 97779 15737
-            </span>
+            </span> */}
           </div>
 
           <div className="flex flex-wrap justify-center gap-4 sm:gap-5">

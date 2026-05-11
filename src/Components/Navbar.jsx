@@ -184,7 +184,7 @@ const Navbar = () => {
             </div>
 
             {/* Right: Social Icons */}
-            <div className="flex items-center gap-2">
+            {/* <div className="flex items-center gap-2">
               <span className="hidden sm:block text-[11px] text-white mr-1 uppercase tracking-wider">
                 Follow Us:
               </span>
@@ -200,7 +200,7 @@ const Navbar = () => {
                   {social.icon}
                 </a>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -282,7 +282,7 @@ const Navbar = () => {
               </div>
 
               {/* Social Icons */}
-              <div className="flex items-center gap-2">
+              {/* <div className="flex items-center gap-2">
                 <span className="text-xs text-gray-600 mr-1">Follow:</span>
                 {SocialLinks.map((social) => (
                   <a
@@ -296,7 +296,7 @@ const Navbar = () => {
                     {social.icon}
                   </a>
                 ))}
-              </div>
+              </div> */}
 
               {/* CTA Button */}
               <button

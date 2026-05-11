@@ -286,19 +286,20 @@ const WhatWeOffer = () => {
 
         {/* CTA */}
         <div className="mt-24 text-center">
+          <h3 className="text-2xl font-bold">
+            Ready to Grow Your Business?
+          </h3>
           <Link href={"/contact"}>
-            <h3 className="text-2xl font-bold">
-              Ready to Grow Your Business?
-            </h3></Link>
-          <button
-            className="mt-6 px-8 py-3 rounded-full font-semibold text-black"
-            style={{
-              backgroundColor: GOLD,
-              boxShadow: `0 10px 30px ${GOLD}55`,
-            }}
-          >
-            Get Started
-          </button>
+            <button
+              className="mt-6 px-8 py-3 rounded-full font-semibold text-black"
+              style={{
+                backgroundColor: GOLD,
+                boxShadow: `0 10px 30px ${GOLD}55`,
+              }}
+            >
+              Get Started
+            </button>
+          </Link>
         </div>
 
       </div>

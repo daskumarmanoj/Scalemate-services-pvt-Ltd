@@ -966,7 +966,7 @@ function DetailPage({ service, onClose }) {
             </Link>
 
             {/* WhatsApp */}
-            <motion.button
+            {/* <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
               onClick={() =>
@@ -976,7 +976,7 @@ function DetailPage({ service, onClose }) {
             >
               <Phone size={14} />
               WhatsApp: +91 97779 15737
-            </motion.button>
+            </motion.button> */}
           </div>
         </motion.div>
       </div>
@@ -1200,7 +1200,7 @@ export default function Services() {
               <ArrowRight size={16} />
             </motion.button>
 
-            <motion.button
+            {/* <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
               onClick={() =>
@@ -1210,7 +1210,7 @@ export default function Services() {
             >
               <Phone size={15} />
               Talk to an Expert
-            </motion.button>
+            </motion.button> */}
           </div>
 
           <motion.div
